@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Algorithmic_Problems_Sharp"
 EndProject
 Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "Algorithmic_Problems_Python", "Algorithmic_Problems_Python\Algorithmic_Problems_Python.pyproj", "{1A8A01AD-5DAD-4DA8-B07D-6A4EC60224A0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests_Sharp", "Tests_Sharp\Tests_Sharp.csproj", "{477CC7A5-FEA6-4978-8B70-33C62DAE5FE3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,6 +21,10 @@ Global
 		{2A4B96EE-DF09-482D-A247-1A2384A6153B}.Release|Any CPU.Build.0 = Release|Any CPU
 		{1A8A01AD-5DAD-4DA8-B07D-6A4EC60224A0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{1A8A01AD-5DAD-4DA8-B07D-6A4EC60224A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{477CC7A5-FEA6-4978-8B70-33C62DAE5FE3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{477CC7A5-FEA6-4978-8B70-33C62DAE5FE3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{477CC7A5-FEA6-4978-8B70-33C62DAE5FE3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{477CC7A5-FEA6-4978-8B70-33C62DAE5FE3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

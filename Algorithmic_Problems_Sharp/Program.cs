@@ -16,7 +16,8 @@ namespace Algorithmic_Problems_Sharp
 			// Хорошее решение:
 
 
-
+			//======================================================================
+			//======================================================================
 			// Задача: Установить, является ли вторая строка окончанием первой строки
 
 			//// Мое решение:
@@ -55,41 +56,41 @@ namespace Algorithmic_Problems_Sharp
 			//Console.WriteLine(Solution("abc", "d")); // returns false
 			//Console.WriteLine(Solution("ninja", "j")); //  returns true
 
-
+			//======================================================================
+			//======================================================================
 			// Задача: во входящей строке заменить каждую букву на ее позицию в алфавите
+
 			// Мое решение:
-			
+			//static string AlphabetPosition(string text)
+			//{
+			//	var preString = text.ToLower().Split(" ");
+			//	var charsPre = string.Join("", preString);
 
-			static string AlphabetPosition(string text)
-			{
-				var preString = text.ToLower().Split(" ");
-				var charsPre = string.Join("", preString);
+			//	var cleanString = new string(charsPre.Where(Char.IsLetter).ToArray());
 
-				var cleanString = new string(charsPre.Where(Char.IsLetter).ToArray());
+			//	var inputLetters = cleanString.ToCharArray();
 
-				var inputLetters = cleanString.ToCharArray();
+			//	var alphabetLetters = new char[26];
+			//	for (int i = 0, j = 97;  i < alphabetLetters.Length && j <= 122; i++, j++)
+			//	{
+			//		alphabetLetters[i] = Convert.ToChar(j);
+			//	}
 
-				var alphabetLetters = new char[26];
-				for (int i = 0, j = 97;  i < alphabetLetters.Length && j <= 122; i++, j++)
-				{
-					alphabetLetters[i] = Convert.ToChar(j);
-				}
+			//	var sequentialNumbers = new int[inputLetters.Length];
+			//	for (int i = 0; i < inputLetters.Length; i++)
+			//	{
+			//		for (int j = 0; j < alphabetLetters.Length; j++)
+			//		{
+			//			if (inputLetters[i] == alphabetLetters[j])
+			//				sequentialNumbers[i] = j + 1;
+			//		}
+			//	}
 
-				var sequentialNumbers = new int[inputLetters.Length];
-				for (int i = 0; i < inputLetters.Length; i++)
-				{
-					for (int j = 0; j < alphabetLetters.Length; j++)
-					{
-						if (inputLetters[i] == alphabetLetters[j])
-							sequentialNumbers[i] = j + 1;
-					}
-				}
+			//	sequentialNumbers = sequentialNumbers.Where(i => i != 0).ToArray();
 
-				sequentialNumbers = sequentialNumbers.Where(i => i != 0).ToArray();
-
-				string result = string.Join(" ", sequentialNumbers);
-				return result;
-			}
+			//	string result = string.Join(" ", sequentialNumbers);
+			//	return result;
+			//}
 
 
 			// Хорошее решение: ПРЕОБРАЗОВАТЬ ОДНО В ДРУГОЕ МОЖНО С ПОМОЩЬЮ SELECT, НЕ НАДО НИЧЕГО ВЫДУМЫВАТЬ;
@@ -99,6 +100,9 @@ namespace Algorithmic_Problems_Sharp
 				return string.Join(" ", text.ToLower().Where(c => char.IsLetter(c))
 													  .Select(c => "abcdefghijklmnopqrstuvwxyz".IndexOf(c) + 1)
 													  .ToArray());
+				//или
+				return string.Join(" ", text.ToLower().Where(c => char.IsLetter(c)).Select(c => c - 'a' + 1));
+
 			}
 
 			Assert.AreEqual("20 8 5 19 21 14 19 5 20 19 5 20 19 1 20 20 23 5 12 22 5 15 3 12 15 3 11", 
