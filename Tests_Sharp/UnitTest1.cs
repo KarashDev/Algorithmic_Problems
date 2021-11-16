@@ -154,6 +154,9 @@ namespace Tests_Sharp
 
                 // ’орошее решение:
                 return arr.OrderBy(x => x == 0).ToArray();
+
+                // ѕримечание: если бы нужно было вставить нули в начало List,
+                // нужно было бы использовать List.Insert(0, num)
             }
 
             Assert.AreEqual(new int[] { 1, 2, 1, 1, 3, 1, 0, 0, 0, 0 }, MoveZeroes(new int[] { 1, 2, 0, 1, 0, 1, 0, 3, 0, 1 }));
