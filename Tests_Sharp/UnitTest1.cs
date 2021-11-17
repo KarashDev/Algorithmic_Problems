@@ -17,7 +17,6 @@ namespace Tests_Sharp
                 //.ToArray());
                 //или
                 return string.Join(" ", text.ToLower().Where(c => char.IsLetter(c)).Select(c => c - 'a' + 1));
-
             }
 
             Assert.AreEqual("20 8 5 19 21 14 19 5 20 19 5 20 19 1 20 20 23 5 12 22 5 15 3 12 15 3 11",
@@ -160,6 +159,91 @@ namespace Tests_Sharp
             }
 
             Assert.AreEqual(new int[] { 1, 2, 1, 1, 3, 1, 0, 0, 0, 0 }, MoveZeroes(new int[] { 1, 2, 0, 1, 0, 1, 0, 3, 0, 1 }));
+        }
+
+
+        [Test]
+        public void MakeDeadFishSwim()
+        {
+            int[] Parse(string data)
+            {
+                List<int> digitsForOutput = new List<int>();
+                double digitForOperations = 0;
+
+                for (int i = 0; i < data.Length; i++)
+                {
+                    switch (data[i])
+                    {
+                        case 'i': digitForOperations++; break;
+                        case 'd': digitForOperations--; break;
+                        case 's': digitForOperations = Math.Pow(digitForOperations, 2); break;
+                        case 'o': digitsForOutput.Add((int)digitForOperations); break;
+                    }
+                }
+
+                return digitsForOutput.ToArray();
+            }
+
+            Assert.AreEqual(new int[] { 8, 64 }, Parse("iiisdoso"));
+            Assert.AreEqual(new int[] { 8, 64, 3600 }, Parse("iiisdosodddddiso"));
+        }
+
+
+
+        //[Test]
+        //public void Xxxxx()
+        //{
+        //    void(string data)
+        //    {
+
+        //    }
+
+        //    Assert.AreEqual(new int[] { 8, 64 }, Parse("iiisdoso"));
+        //    Assert.AreEqual(new int[] { 8, 64, 3600 }, Parse("iiisdosodddddiso"));
+        //}
+
+        [Test]
+        public void ChangeWordCases()
+        {
+            string TitleCase(string title, string minorWords = "")
+            {
+                var words = title.ToLower().Split(' ');
+                if (!String.IsNullOrEmpty(minorWords))
+                {
+                    var minors = minorWords.Split(' ');
+                    words[0] = Char.ToUpper(words[0][0]) + words[0].Substring(1);
+
+                    for (int i = 1; i < words.Length; i++)
+                    {
+                        words[i] = Char.ToUpper(words[i][0]) + words[i].Substring(1);
+
+                        for (int j = 0; j < minors.Length; j++)
+                        {
+                            if (words[i].ToLower() == minors[j].ToLower())
+                            {
+                                words[i] = minors[j].ToLower();
+                            }
+                        }
+                    }
+
+                    return string.Join(" ", words);
+                }
+                else if (title != "")
+                {
+                    for (int i = 0; i < words.Length; i++)
+                    {
+                        words[i] = Char.ToUpper(words[i][0]) + words[i].Substring(1);
+                    }
+                    return string.Join(" ", words);
+                }
+                else return string.Empty;
+            }
+
+            Assert.AreEqual("A Clash of Kings", TitleCase("a clash of KINGS", "a an the of"));
+            Assert.AreEqual("The Wind in the Willows", TitleCase("THE WIND IN THE WILLOWS", "The In"));
+            Assert.AreEqual("The Quick Brown Fox", TitleCase("the quick brown fox"));
+            Assert.AreEqual(string.Empty, TitleCase("", null));
+            Assert.AreEqual(string.Empty, TitleCase("", ""));
         }
 
 

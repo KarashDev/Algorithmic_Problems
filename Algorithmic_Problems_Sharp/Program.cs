@@ -129,38 +129,132 @@ namespace Algorithmic_Problems_Sharp
 
             //         Console.WriteLine(BreakCamelCase("CamelCaseZaz"));
 
+            ////======================================================================
+            ////======================================================================
+            //// Задача: Все нули в массиве перебросить в правую часть, сохраняя порядок остальных элементов
+            //int[] MoveZeroes(int[] arr)
+            //{
+            //    // Мое решение:
+            //    List<int> newList = new List<int>();
+            //    int howMuchZeroes = 0;
+            //    for (int i = 0; i < arr.Length; i++)
+            //    {
+            //        if (arr[i] != 0)
+            //            newList.Add(arr[i]);
+            //        else howMuchZeroes++;
+            //    }
 
-            // Задача: Все нули в массиве перебросить в правую часть, сохраняя порядок остальных элементов
-           
-            
-           
-            int[] MoveZeroes(int[] arr)
+            //    for (int i = 0; i < howMuchZeroes; i++)
+            //    {
+            //        newList.Add(0);
+            //    }
+            //    return newList.ToArray();
+
+            //    // Хорошее решение:
+            //    return arr.OrderBy(x => x == 0).ToArray();
+            //}
+
+            //var arr = MoveZeroes(new int[] { 1, 2, 0, 1, 0, 1, 0, 3, 0, 1 });
+            //foreach (var item in arr)
+            //{
+            //    Console.Write(item + " ");
+            //}
+
+
+            ////======================================================================
+            ////======================================================================
+            //// Задача: входящая строка состоит из набора букв, всего есть только 4 типа букв;
+            //// В зависимости от команд, "вшитых" во входную строку, нужно вывести соответствующий массив целых чисел
+
+            ////i increments the value(initially 0)
+            ////d decrements the value
+            ////s squares the value
+            ////o outputs the value into the return array
+
+            //// Мое решение:
+            //// Хорошее решение:
+            //int[] Parse(string data)
+            //{
+            //    List<int> digitsForOutput = new List<int>();
+            //    double digitForOperations = 0;
+
+            //    for (int i = 0; i < data.Length; i++)
+            //    {
+            //        switch(data[i])
+            //        {
+            //            case 'i': digitForOperations++; break;
+            //            case 'd': digitForOperations--; break;
+            //            case 's': digitForOperations = Math.Pow(digitForOperations, 2); break;
+            //            case 'o': digitsForOutput.Add((int)digitForOperations); break;
+            //        }
+            //    }
+
+            //    return digitsForOutput.ToArray();
+            //}
+
+            //var x = Parse("iiisdoso");
+            //var y = Parse("iiisdosodddddiso");
+
+            //foreach (int item in y)
+            //{
+            //    Console.Write(item + " ");
+            //}
+
+
+            ////======================================================================
+            ////======================================================================
+            //// Задача: на вход две строки, при нахождении в первой строке слов из второй строки, эти
+            //// слова должны быть прописаны в нижнем регистре (кроме самого первого слова в строке); 
+            //// все остальные слова должны начинаться с большой буквы и продолжаться маленькими буквами
+            //// Мое решение:
+            string TitleCase(string title, string minorWords = "")
             {
-                // Мое решение:
-                List<int> newList = new List<int>();
-                int howMuchZeroes = 0;
-                for (int i = 0; i < arr.Length; i++)
+                var words = title.ToLower().Split(' ');
+                if (!String.IsNullOrEmpty(minorWords))
                 {
-                    if (arr[i] != 0)
-                        newList.Add(arr[i]);
-                    else howMuchZeroes++;
-                }
+                    var minors = minorWords.Split(' ');
+                    words[0] = Char.ToUpper(words[0][0]) + words[0].Substring(1);
 
-                for (int i = 0; i < howMuchZeroes; i++)
-                {
-                    newList.Add(0);
+                    for (int i = 1; i < words.Length; i++)
+                    {
+                        words[i] = Char.ToUpper(words[i][0]) + words[i].Substring(1);
+
+                        for (int j = 0; j < minors.Length; j++)
+                        {
+                            if (words[i].ToLower() == minors[j].ToLower())
+                            {
+                                words[i] = minors[j].ToLower();
+                            }
+                        }
+                    }
+                    
+                    return string.Join(" ", words);
                 }
-                return newList.ToArray();
-                
-                // Хорошее решение:
-                return arr.OrderBy(x => x == 0).ToArray();
+                else if (title != "")
+                {
+                    for (int i = 0; i < words.Length; i++)
+                    {
+                        words[i] = Char.ToUpper(words[i][0]) + words[i].Substring(1);
+                    }
+                    return string.Join(" ", words);
+                }
+                else return string.Empty;
             }
 
-            var arr = MoveZeroes(new int[] { 1, 2, 0, 1, 0, 1, 0, 3, 0, 1 });
-            foreach (var item in arr)
-            {
-                Console.Write(item + " ");
-            }
+            Console.WriteLine(TitleCase("a clash of KINGS", "a an the of"));
+            Console.WriteLine(TitleCase("THE WIND IN THE WILLOWS", "The In"));
+            Console.WriteLine(TitleCase("the quick brown fox"));
+            Console.WriteLine(TitleCase("", null));
+            Console.WriteLine(TitleCase("", ""));
+
+
+
+
+
+
+
+
+
 
         }
     }
