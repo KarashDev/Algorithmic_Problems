@@ -189,19 +189,6 @@ namespace Tests_Sharp
         }
 
 
-
-        //[Test]
-        //public void Xxxxx()
-        //{
-        //    void(string data)
-        //    {
-
-        //    }
-
-        //    Assert.AreEqual(new int[] { 8, 64 }, Parse("iiisdoso"));
-        //    Assert.AreEqual(new int[] { 8, 64, 3600 }, Parse("iiisdosodddddiso"));
-        //}
-
         [Test]
         public void ChangeWordCases()
         {
@@ -246,10 +233,78 @@ namespace Tests_Sharp
             Assert.AreEqual(string.Empty, TitleCase("", ""));
         }
 
+        
+        // Задача на оптимизацию: установить, является ли входящее число простым. Сложность алгоритма 
+        // должна быть меньше чем O(n) и меньше чем O(n/2)
+        [Test]
+        public void IsNumberPrime()
+        {
+            bool IsPrime(int n)
+            {
+                //// Оптимизация №1: увеличиваем шаг перечисления в 2 раза, разделив вход на два цикла 
+                //// в зависимости от четности/нечетности входящего числа
+                //if (n <= 0 || n == 1)
+                //    return false;
+                //else if (n % 2 == 0)
+                //{
+                //    for (int i = 2; i < n / 2; i += 2)
+                //    {
+                //        if (n % i == 0)
+                //        {
+                //            return false;
+                //        }
+                //    }
+                //}
+                //else if (n % 2 != 0)
+                //{
+                //    for (int i = 3; i < n / 2; i += 2)
+                //    {
+                //        if (n % i == 0)
+                //        {
+                //            return false;
+                //        }
+                //    }
+                //}
+                //return false;
 
 
+                // Оптимизация №2: пересчет ведем не до самого числа, а до корня этого числа; так мы
+                // сильно уменьшаем число (и количество итераций), но при этом его проверяемые свойства 
+                // не меняются; в догонку можно округлить это число в меньшую сторону, уменьшив его еще 
+                // сильнее без потери его проверяемых свойств
+                if (n <= 0 || n == 1 || n % 2 == 0 && n != 2)
+                    return false;
 
+                var boundary = (int)Math.Floor(Math.Sqrt(n));
+                for (int i = 3; i < boundary; i += 2)
+                {
+                    if (n % i == 0)
+                    {
+                        return false;
+                    }
+                }
+                return true;
+            }
+            Assert.AreEqual(false, IsPrime(1));
+            Assert.AreEqual(true, IsPrime(2));
+            Assert.AreEqual(false, IsPrime(-1));
+            Assert.AreEqual(true, IsPrime(11));
+            Assert.AreEqual(false, IsPrime(123032905));
+            Assert.AreEqual(false, IsPrime(12536));
+            Assert.AreEqual(true, IsPrime(7419161));
+        }
 
+        //[Test]
+        //public void Xxxxx()
+        //{
+        //    void(string data)
+        //    {
+
+        //    }
+
+        //    Assert.AreEqual(new int[] { 8, 64 }, Parse("iiisdoso"));
+        //    Assert.AreEqual(new int[] { 8, 64, 3600 }, Parse("iiisdosodddddiso"));
+        //}
 
 
 

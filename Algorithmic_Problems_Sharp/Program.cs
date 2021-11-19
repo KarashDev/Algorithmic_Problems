@@ -207,53 +207,109 @@ namespace Algorithmic_Problems_Sharp
             //// слова должны быть прописаны в нижнем регистре (кроме самого первого слова в строке); 
             //// все остальные слова должны начинаться с большой буквы и продолжаться маленькими буквами
             //// Мое решение:
-            string TitleCase(string title, string minorWords = "")
+            //string TitleCase(string title, string minorWords = "")
+            //{
+            //    var words = title.ToLower().Split(' ');
+            //    if (!String.IsNullOrEmpty(minorWords))
+            //    {
+            //        var minors = minorWords.Split(' ');
+            //        words[0] = Char.ToUpper(words[0][0]) + words[0].Substring(1);
+
+            //        for (int i = 1; i < words.Length; i++)
+            //        {
+            //            words[i] = Char.ToUpper(words[i][0]) + words[i].Substring(1);
+
+            //            for (int j = 0; j < minors.Length; j++)
+            //            {
+            //                if (words[i].ToLower() == minors[j].ToLower())
+            //                {
+            //                    words[i] = minors[j].ToLower();
+            //                }
+            //            }
+            //        }
+                    
+            //        return string.Join(" ", words);
+            //    }
+            //    else if (title != "")
+            //    {
+            //        for (int i = 0; i < words.Length; i++)
+            //        {
+            //            words[i] = Char.ToUpper(words[i][0]) + words[i].Substring(1);
+            //        }
+            //        return string.Join(" ", words);
+            //    }
+            //    else return string.Empty;
+            //}
+
+            //Console.WriteLine(TitleCase("a clash of KINGS", "a an the of"));
+            //Console.WriteLine(TitleCase("THE WIND IN THE WILLOWS", "The In"));
+            //Console.WriteLine(TitleCase("the quick brown fox"));
+            //Console.WriteLine(TitleCase("", null));
+            //Console.WriteLine(TitleCase("", ""));
+
+
+
+            // Задача на оптимизацию: установить, является ли входящее число простым. Сложность алгоритма 
+            // должна быть меньше чем O(n) и меньше чем O(n/2)
+            bool IsNumberPrime(long n)
             {
-                var words = title.ToLower().Split(' ');
-                if (!String.IsNullOrEmpty(minorWords))
+                //bool isDigitPrime(int digit)
+                //{
+                //    if (n <= 0 || n == 1)
+                //        return false;
+
+                //    for (int i = 2; i < digit; i++)
+                //    {
+                //        if (digit % i == 0)
+                //            return false;
+                //    }
+                //    return true;
+                //}
+
+                //if (n <= 0 || n == 1)
+                //    return false;
+
+                //var rightDigit = 0;
+                //rightDigit = n % 10;
+
+                //while(rightDigit != 0)
+                //{
+                //    if (isDigitPrime(rightDigit))
+                //        return true;
+
+                //}
+
+
+                // Оптимизация №1: увеличиваем шаг перечисления в 2 раза, разделив вход на два цикла 
+                // в зависимости от четности/нечетности входящего числа
+                if (n <= 0 || n == 1)
+                    return false;
+                else if (n % 2 == 0)
                 {
-                    var minors = minorWords.Split(' ');
-                    words[0] = Char.ToUpper(words[0][0]) + words[0].Substring(1);
-
-                    for (int i = 1; i < words.Length; i++)
+                    for (int i = 2; i < n / 2; i += 2)
                     {
-                        words[i] = Char.ToUpper(words[i][0]) + words[i].Substring(1);
-
-                        for (int j = 0; j < minors.Length; j++)
+                        if (n % i == 0)
                         {
-                            if (words[i].ToLower() == minors[j].ToLower())
-                            {
-                                words[i] = minors[j].ToLower();
-                            }
+                            return false;
                         }
                     }
-                    
-                    return string.Join(" ", words);
                 }
-                else if (title != "")
+                else if (n % 2 != 0)
                 {
-                    for (int i = 0; i < words.Length; i++)
+                    for (int i = 3; i < n / 2; i += 2)
                     {
-                        words[i] = Char.ToUpper(words[i][0]) + words[i].Substring(1);
+                        if (n % i == 0)
+                        {
+                            return false;
+                        }
                     }
-                    return string.Join(" ", words);
                 }
-                else return string.Empty;
+                
+                return false;
             }
 
-            Console.WriteLine(TitleCase("a clash of KINGS", "a an the of"));
-            Console.WriteLine(TitleCase("THE WIND IN THE WILLOWS", "The In"));
-            Console.WriteLine(TitleCase("the quick brown fox"));
-            Console.WriteLine(TitleCase("", null));
-            Console.WriteLine(TitleCase("", ""));
 
-
-
-
-
-
-
-
+            Console.WriteLine((int)Math.Floor(Math.Sqrt(2123)));
 
 
         }
