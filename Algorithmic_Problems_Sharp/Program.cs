@@ -312,44 +312,107 @@ namespace Algorithmic_Problems_Sharp
 			//Console.WriteLine((int)Math.Floor(Math.Sqrt(2123)));
 
 
-			IEnumerable<T> UniqueInOrder<T>(IEnumerable<T> iterable)
-			{
-				List<T> inputCollection = new List<T>();
-				foreach (var item in iterable)
-				{
-					inputCollection.Add(item);
-				}
+			//IEnumerable<T> UniqueInOrder<T>(IEnumerable<T> iterable)
+			//{
+			//	List<T> inputCollection = new List<T>();
+			//	foreach (var item in iterable)
+			//	{
+			//		inputCollection.Add(item);
+			//	}
 
-				for (int i = 0; i < inputCollection.Count - 1; i++)
+			//	for (int i = 0; i < inputCollection.Count - 1; i++)
+			//	{
+			//		if (inputCollection[i + 1].Equals(inputCollection[i]))
+			//		{
+			//			inputCollection.RemoveAt(i + 1);
+			//			i--;
+			//		}
+			//	}
+			//	return inputCollection;
+			//}
+
+			////Assert.AreEqual("ABCDAB", UniqueInOrder("AAAABBBCCDAABBB"));
+			////Assert.AreEqual("ABBCcAD", UniqueInOrder("ABBCcAD"));
+			////Assert.AreEqual("ABCDAB", UniqueInOrder("AAAABBBCCDAABBB"));
+			////Assert.AreEqual(new int[] { 1, 2, 3 }, UniqueInOrder(new int[] { 1, 2, 2, 3, 3 }));
+
+			//var x = UniqueInOrder("ABBCcAD");
+			//foreach (var item in x)
+			//{
+			//	Console.Write(item + " ");
+			//}
+
+
+
+
+			string Encrypt(string inputStr, int n)
+			{
+				if (String.IsNullOrEmpty(inputStr) || n <= 0)
+					return inputStr;
+
+				string encryptedStr = "";
+
+				for (int repeats = 0; repeats < n; repeats++)
 				{
-					if (inputCollection[i + 1].Equals(inputCollection[i]))
+					if (repeats >= 1)
 					{
-						inputCollection.RemoveAt(i + 1);
-						i--;
+						inputStr = encryptedStr;
+						encryptedStr = "";
+					}
+
+					for (int i = 1; i < inputStr.Length; i += 2)
+					{
+						encryptedStr += inputStr[i];
+					}
+
+					for (int i = 0; i < inputStr.Length; i += 2)
+					{
+						encryptedStr += inputStr[i];
 					}
 				}
-				return inputCollection;
+
+				return encryptedStr;
 			}
 
-			//Assert.AreEqual("ABCDAB", UniqueInOrder("AAAABBBCCDAABBB"));
-			//Assert.AreEqual("ABBCcAD", UniqueInOrder("ABBCcAD"));
-			//Assert.AreEqual("ABCDAB", UniqueInOrder("AAAABBBCCDAABBB"));
-			//Assert.AreEqual(new int[] { 1, 2, 3 }, UniqueInOrder(new int[] { 1, 2, 2, 3, 3 }));
-
-			var x = UniqueInOrder("ABBCcAD");
-			foreach (var item in x)
+			string Decrypt(string encryptedText, int n)
 			{
-				Console.Write(item + " ");
+				if (String.IsNullOrEmpty(encryptedText) || n <= 0)
+					return encryptedText;
+
+				string decryptedStr = "";
+
+				for (int repeats = 0; repeats < n; repeats++)
+				{
+					if (repeats >= 1)
+					{
+						encryptedText = decryptedStr;
+						decryptedStr = "";
+					}
+
+					//for (int i = encryptedText.Length - 1; i > 0; i += 2)
+					//{
+					//	decryptedStr += encryptedText[i];
+					//}
+					
+					//for (int i = encryptedText.Length - 2; i > 0; i += 2)
+					//{
+					//	decryptedStr += encryptedText[i];
+					//}
+
+				}
+
+				return decryptedStr;
 			}
 
-
-
-
-
-
-
-
-
+			Console.WriteLine(Encrypt("This is a test!", 0));
+			Console.WriteLine(Encrypt("This is a test!", 1));
+			Console.WriteLine(Encrypt("This is a test!", 2));
+			Console.WriteLine(Encrypt("This is a test!", 3));
+			Console.WriteLine();
+			Console.WriteLine(Decrypt("This is a test!", 0));
+			Console.WriteLine(Decrypt("hsi  etTi sats!", 1));
+			Console.WriteLine(Decrypt("s eT ashi tist!", 2));
+			Console.WriteLine(Decrypt(" Tah itse sits!", 3));
 
 
 

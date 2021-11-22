@@ -347,6 +347,43 @@ namespace Tests_Sharp
 		//}
 
 
+		[Test]
+		public void SimpleEncryption()
+		{
+			string Encrypt(string text, int n)
+			{
+			}
+
+			string Decrypt(string encryptedText, int n)
+			{
+			}
+
+			Assert.AreEqual("This is a test!", Encrypt("This is a test!", 0));
+			Assert.AreEqual("hsi  etTi sats!", Encrypt("This is a test!", 1));
+			Assert.AreEqual("s eT ashi tist!", Encrypt("This is a test!", 2));
+			Assert.AreEqual(" Tah itse sits!", Encrypt("This is a test!", 3));
+			Assert.AreEqual("This is a test!", Encrypt("This is a test!", 4));
+			Assert.AreEqual("This is a test!", Encrypt("This is a test!", -1));
+			Assert.AreEqual("hskt svr neetn!Ti aai eyitrsig", Encrypt("This kata is very interesting!", 1));
+
+			Assert.AreEqual("This is a test!", Decrypt("This is a test!", 0));
+			Assert.AreEqual("This is a test!", Decrypt("hsi  etTi sats!", 1));
+			Assert.AreEqual("This is a test!", Decrypt("s eT ashi tist!", 2));
+			Assert.AreEqual("This is a test!", Decrypt(" Tah itse sits!", 3));
+			Assert.AreEqual("This is a test!", Decrypt("This is a test!", 4));
+			Assert.AreEqual("This is a test!", Decrypt("This is a test!", -1));
+			Assert.AreEqual("This kata is very interesting!", Decrypt("hskt svr neetn!Ti aai eyitrsig", 1));
+		}
+
+
+
+
+
+
+
+
+
+
 
 
 
