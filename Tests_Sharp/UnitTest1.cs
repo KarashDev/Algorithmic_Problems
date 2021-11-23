@@ -352,10 +352,95 @@ namespace Tests_Sharp
 		{
 			string Encrypt(string text, int n)
 			{
+				if (String.IsNullOrEmpty(text) || n <= 0)
+					return text;
+
+				string encryptedStr = "";
+
+				for (int repeats = 0; repeats < n; repeats++)
+				{
+					if (repeats >= 1)
+					{
+						text = encryptedStr;
+						encryptedStr = "";
+					}
+
+					for (int i = 1; i < text.Length; i += 2)
+					{
+						encryptedStr += text[i];
+					}
+
+					for (int i = 0; i < text.Length; i += 2)
+					{
+						encryptedStr += text[i];
+					}
+				}
+
+				return encryptedStr;
+				
+				// онкегмн:
+				//while (n != 0)
+				//{
+				//	text = string.Concat(text.Where((c, i) => i % 2 == 1).Concat(text.Where((c, i) => i % 2 == 0)));
+
+				//	n--;
+				//}
 			}
 
 			string Decrypt(string encryptedText, int n)
 			{
+				if (String.IsNullOrEmpty(encryptedText) || n <= 0)
+					return encryptedText;
+
+				List<char> finalSymbols = new List<char>();
+
+				for (int repeats = 0; repeats < n; repeats++)
+				{
+					if (repeats >= 1)
+					{
+						encryptedText = String.Join("", finalSymbols.ToArray());
+						finalSymbols.Clear();
+					}
+
+					string oddIndexedChars = "";
+					string evenIndexedChars = "";
+
+					for (int i = 0; i < encryptedText.Length/2; i++)
+					{
+						oddIndexedChars += encryptedText[i];
+					}
+					for (int i = encryptedText.Length/2; i < encryptedText.Length; i++)
+					{
+						evenIndexedChars += encryptedText[i];
+					}
+
+					int totalCharsToIterate;
+
+					if (oddIndexedChars.Length >= evenIndexedChars.Length)
+						totalCharsToIterate = oddIndexedChars.Length;
+					else totalCharsToIterate = evenIndexedChars.Length;
+
+					for (int i = 0; i < totalCharsToIterate; i++)
+					{
+						if (i < evenIndexedChars.Length)
+							finalSymbols.Add(evenIndexedChars[i]);
+						if (i < oddIndexedChars.Length)
+							finalSymbols.Add(oddIndexedChars[i]);
+					}
+				}
+
+				return String.Join("", finalSymbols.ToArray());
+
+				// онкегмн:
+				//while (n != 0)
+				//{
+				//	string leftPart = string.Concat(text.Take(text.Length/2));
+				//	string rightPart = string.Concat(text.Skip(text.Length/2));
+
+				//	text = string.Concat(Enumerable.Range(0, text.Length).Select(i => i % 2 == 0 ? rightPart[i/2] : leftPart[i/2]));
+
+				//	n--;
+				//}
 			}
 
 			Assert.AreEqual("This is a test!", Encrypt("This is a test!", 0));
