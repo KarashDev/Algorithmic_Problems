@@ -1,7 +1,10 @@
 ﻿using NUnit.Framework;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
+using System.Numerics;
+using System.Text;
 using System.Text.RegularExpressions;
 
 namespace Algorithmic_Problems_Sharp
@@ -345,96 +348,107 @@ namespace Algorithmic_Problems_Sharp
 
 
 
-            string Encrypt(string inputStr, int n)
+            //string Encrypt(string inputStr, int n)
+            //{
+            //    if (String.IsNullOrEmpty(inputStr) || n <= 0)
+            //        return inputStr;
+
+            //    string encryptedStr = "";
+
+            //    for (int repeats = 0; repeats < n; repeats++)
+            //    {
+            //        if (repeats >= 1)
+            //        {
+            //            inputStr = encryptedStr;
+            //            encryptedStr = "";
+            //        }
+
+            //        for (int i = 1; i < inputStr.Length; i += 2)
+            //        {
+            //            encryptedStr += inputStr[i];
+            //        }
+
+            //        for (int i = 0; i < inputStr.Length; i += 2)
+            //        {
+            //            encryptedStr += inputStr[i];
+            //        }
+            //    }
+
+            //    return encryptedStr;
+            //}
+
+            //string Decrypt(string encryptedText, int n)
+            //{
+            //    if (String.IsNullOrEmpty(encryptedText) || n <= 0)
+            //        return encryptedText;
+
+            //    List<char> finalSymbols = new List<char>();
+
+            //    for (int repeats = 0; repeats < n; repeats++)
+            //    {
+            //        if (repeats >= 1)
+            //        {
+            //            encryptedText = String.Join("", finalSymbols.ToArray());
+            //            finalSymbols.Clear();
+            //        }
+
+            //        string oddIndexedChars = "";
+            //        string evenIndexedChars = "";
+
+            //        for (int i = 0; i < encryptedText.Length/2; i++)
+            //        {
+            //            oddIndexedChars += encryptedText[i];
+            //        }
+            //        for (int i = encryptedText.Length/2; i < encryptedText.Length; i++)
+            //        {
+            //            evenIndexedChars += encryptedText[i];
+            //        }
+
+            //        int totalCharsToIterate;
+
+            //        if (oddIndexedChars.Length >= evenIndexedChars.Length)
+            //            totalCharsToIterate = oddIndexedChars.Length;
+            //        else totalCharsToIterate = evenIndexedChars.Length;
+
+            //        for (int i = 0; i < totalCharsToIterate; i++)
+            //        {
+            //            if (i < evenIndexedChars.Length)
+            //                finalSymbols.Add(evenIndexedChars[i]);
+            //            if (i < oddIndexedChars.Length)
+            //                finalSymbols.Add(oddIndexedChars[i]);
+            //        }
+            //    }
+
+            //    return String.Join("", finalSymbols.ToArray());
+            //}
+
+            ////Console.WriteLine(Encrypt("This is a test!", 0));
+            ////Console.WriteLine(Encrypt("This is a test!", 1));
+            ////Console.WriteLine(Encrypt("This is a test!", 2));
+            ////Console.WriteLine(Encrypt("This is a test!", 3));
+            ////Console.WriteLine();
+            ////Console.WriteLine(Decrypt("This is a test!", 0));
+            //Console.WriteLine(Decrypt("hsi  etTi sats!", 1));
+            //Console.WriteLine(Decrypt("s eT ashi tist!", 2));
+            //Console.WriteLine(Decrypt(" Tah itse sits!", 3));
+            //Console.WriteLine(Decrypt("hskt svr neetn!Ti aai eyitrsig", 1));
+
+
+
+            string Add(string a, string b)
             {
-                if (String.IsNullOrEmpty(inputStr) || n <= 0)
-                    return inputStr;
+                var bigA = BigInteger.Parse(a, CultureInfo.InvariantCulture); 
+                var bigB = BigInteger.Parse(b, CultureInfo.InvariantCulture); 
+                
+                var output = BigInteger.Add(bigA, bigB);
 
-                string encryptedStr = "";
-
-                for (int repeats = 0; repeats < n; repeats++)
-                {
-                    if (repeats >= 1)
-                    {
-                        inputStr = encryptedStr;
-                        encryptedStr = "";
-                    }
-
-                    for (int i = 1; i < inputStr.Length; i += 2)
-                    {
-                        encryptedStr += inputStr[i];
-                    }
-
-                    for (int i = 0; i < inputStr.Length; i += 2)
-                    {
-                        encryptedStr += inputStr[i];
-                    }
-                }
-
-                return encryptedStr;
+                return Convert.ToString(output);
             }
 
-            string Decrypt(string encryptedText, int n)
-            {
-                if (String.IsNullOrEmpty(encryptedText) || n <= 0)
-                    return encryptedText;
-
-                List<char> finalSymbols = new List<char>();
-
-                for (int repeats = 0; repeats < n; repeats++)
-                {
-                    if (repeats >= 1)
-                    {
-                        encryptedText = String.Join("", finalSymbols.ToArray());
-                        finalSymbols.Clear();
-                    }
-
-                    string oddIndexedChars = "";
-                    string evenIndexedChars = "";
-
-                    for (int i = 0; i < encryptedText.Length/2; i++)
-                    {
-                        oddIndexedChars += encryptedText[i];
-                    }
-                    for (int i = encryptedText.Length/2; i < encryptedText.Length; i++)
-                    {
-                        evenIndexedChars += encryptedText[i];
-                    }
-
-                    int totalCharsToIterate;
-
-                    if (oddIndexedChars.Length >= evenIndexedChars.Length)
-                        totalCharsToIterate = oddIndexedChars.Length;
-                    else totalCharsToIterate = evenIndexedChars.Length;
-
-                    for (int i = 0; i < totalCharsToIterate; i++)
-                    {
-                        if (i < evenIndexedChars.Length)
-                            finalSymbols.Add(evenIndexedChars[i]);
-                        if (i < oddIndexedChars.Length)
-                            finalSymbols.Add(oddIndexedChars[i]);
-                    }
-                }
-
-                return String.Join("", finalSymbols.ToArray());
-            }
-
-            //Console.WriteLine(Encrypt("This is a test!", 0));
-            //Console.WriteLine(Encrypt("This is a test!", 1));
-            //Console.WriteLine(Encrypt("This is a test!", 2));
-            //Console.WriteLine(Encrypt("This is a test!", 3));
-            //Console.WriteLine();
-            //Console.WriteLine(Decrypt("This is a test!", 0));
-            Console.WriteLine(Decrypt("hsi  etTi sats!", 1));
-            Console.WriteLine(Decrypt("s eT ashi tist!", 2));
-            Console.WriteLine(Decrypt(" Tah itse sits!", 3));
-            Console.WriteLine(Decrypt("hskt svr neetn!Ti aai eyitrsig", 1));
-
-
-
-
-
-
+            Console.WriteLine(Add("123456789", "987654322"));
+            Console.WriteLine(Add("999999999", "1"));
+            Console.WriteLine(Add("1000000000000000000000000", "1")); 
+            //9223372036854775807
 
 
 

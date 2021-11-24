@@ -1,7 +1,9 @@
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
+using System.Numerics;
 
 namespace Tests_Sharp
 {
@@ -334,19 +336,6 @@ namespace Tests_Sharp
 		}
 
 
-		//[Test]
-		//public void Xxxxx()
-		//{
-		//    void(string data)
-		//    {
-
-		//    }
-
-		//    Assert.AreEqual(new int[] { 8, 64 }, Parse("iiisdoso"));
-		//    Assert.AreEqual(new int[] { 8, 64, 3600 }, Parse("iiisdosodddddiso"));
-		//}
-
-
 		[Test]
 		public void SimpleEncryption()
 		{
@@ -461,6 +450,35 @@ namespace Tests_Sharp
 		}
 
 
+        //[Test]
+        //public void Xxxxx()
+        //{
+        //    void(string data)
+        //    {
+
+        //    }
+
+        //    Assert.AreEqual(new int[] { 8, 64 }, Parse("iiisdoso"));
+        //    Assert.AreEqual(new int[] { 8, 64, 3600 }, Parse("iiisdosodddddiso"));
+        //}
+
+        [Test]
+        public void AddTooBigNumbers()
+        {
+			string Add(string a, string b)
+			{
+				var bigA = BigInteger.Parse(a, CultureInfo.InvariantCulture);
+				var bigB = BigInteger.Parse(b, CultureInfo.InvariantCulture);
+
+				var output = BigInteger.Add(bigA, bigB);
+
+				return Convert.ToString(output);
+			}
+
+			Assert.AreEqual("1111111111", Add("123456789", "987654322"));
+			Assert.AreEqual("1000000000", Add("999999999", "1"));
+			Assert.AreEqual("1000000000000000000000001", Add("1000000000000000000000000", "1"));
+		}
 
 
 
@@ -474,5 +492,7 @@ namespace Tests_Sharp
 
 
 
-	}
+
+
+    }
 }
