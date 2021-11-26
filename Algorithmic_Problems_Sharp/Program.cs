@@ -435,20 +435,63 @@ namespace Algorithmic_Problems_Sharp
 
 
 
-            string Add(string a, string b)
-            {
-                var bigA = BigInteger.Parse(a, CultureInfo.InvariantCulture); 
-                var bigB = BigInteger.Parse(b, CultureInfo.InvariantCulture); 
-                
-                var output = BigInteger.Add(bigA, bigB);
+            //string Add(string a, string b)
+            //{
+            //    var bigA = BigInteger.Parse(a, CultureInfo.InvariantCulture); 
+            //    var bigB = BigInteger.Parse(b, CultureInfo.InvariantCulture); 
 
-                return Convert.ToString(output);
+            //    var output = BigInteger.Add(bigA, bigB);
+
+            //    return Convert.ToString(output);
+            //}
+
+            //Console.WriteLine(Add("123456789", "987654322"));
+            //Console.WriteLine(Add("999999999", "1"));
+            //Console.WriteLine(Add("1000000000000000000000000", "1"));
+            ////9223372036854775807
+
+
+
+
+
+            List<string> SinglePermutations(string s)
+            {
+
+                if (s.Length == 1)
+                    return new List<string> { s };
+               
+                char[] chars = s.ToCharArray();
+                List<string> variants = new List<string>();
+
+                char container;
+                for (int i = 0; i < chars.Length; i++)
+                {
+                    container = s[i];
+                    chars[i] = chars[i + 1];
+                    chars[i + 1] = container;
+
+                    variants.Add(String.Join("", chars));
+                }
+
+
+
+
             }
 
-            Console.WriteLine(Add("123456789", "987654322"));
-            Console.WriteLine(Add("999999999", "1"));
-            Console.WriteLine(Add("1000000000000000000000000", "1")); 
-            //9223372036854775807
+            var testListA = SinglePermutations("aabb").OrderBy(x => x).ToList();
+            //{ "aabb", "abab", "abba", "baab", "baba", "bbaa" }
+            foreach (var item in testListA)
+            {
+                Console.Write(item);
+            }
+
+            var testListB = SinglePermutations("ab").OrderBy(x => x).ToList();
+            //{ "ab", "ba" }
+            foreach (var item in testListB)
+            {
+                Console.Write(item);
+            }
+
 
 
 

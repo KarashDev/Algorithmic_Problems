@@ -450,18 +450,6 @@ namespace Tests_Sharp
 		}
 
 
-        //[Test]
-        //public void Xxxxx()
-        //{
-        //    void(string data)
-        //    {
-
-        //    }
-
-        //    Assert.AreEqual(new int[] { 8, 64 }, Parse("iiisdoso"));
-        //    Assert.AreEqual(new int[] { 8, 64, 3600 }, Parse("iiisdosodddddiso"));
-        //}
-
         [Test]
         public void AddTooBigNumbers()
         {
@@ -481,9 +469,30 @@ namespace Tests_Sharp
 		}
 
 
+        //[Test]
+        //public void Xxxxx()
+        //{
+        //    void(string data)
+        //    {
 
+        //    }
 
+        //    Assert.AreEqual(new int[] { 8, 64 }, Parse("iiisdoso"));
+        //    Assert.AreEqual(new int[] { 8, 64, 3600 }, Parse("iiisdosodddddiso"));
+        //}
 
+        [Test]
+        public void Permutations()
+        {
+			List<string> SinglePermutations(string s)
+			{
+
+			}
+
+			Assert.AreEqual(new List<string> { "a" }, SinglePermutations("a").OrderBy(x => x).ToList());
+			Assert.AreEqual(new List<string> { "aabb", "abab", "abba", "baab", "baba", "bbaa" }, SinglePermutations("aabb").OrderBy(x => x).ToList());
+			Assert.AreEqual(new List<string> { "ab", "ba" }, SinglePermutations("ab").OrderBy(x => x).ToList());
+		}
 
 
 
