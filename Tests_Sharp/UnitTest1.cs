@@ -366,7 +366,7 @@ namespace Tests_Sharp
 				}
 
 				return encryptedStr;
-				
+
 				// ПОЛЕЗНО:
 				//while (n != 0)
 				//{
@@ -394,11 +394,11 @@ namespace Tests_Sharp
 					string oddIndexedChars = "";
 					string evenIndexedChars = "";
 
-					for (int i = 0; i < encryptedText.Length/2; i++)
+					for (int i = 0; i < encryptedText.Length / 2; i++)
 					{
 						oddIndexedChars += encryptedText[i];
 					}
-					for (int i = encryptedText.Length/2; i < encryptedText.Length; i++)
+					for (int i = encryptedText.Length / 2; i < encryptedText.Length; i++)
 					{
 						evenIndexedChars += encryptedText[i];
 					}
@@ -450,9 +450,9 @@ namespace Tests_Sharp
 		}
 
 
-        [Test]
-        public void AddTooBigNumbers()
-        {
+		[Test]
+		public void AddTooBigNumbers()
+		{
 			string Add(string a, string b)
 			{
 				var bigA = BigInteger.Parse(a, CultureInfo.InvariantCulture);
@@ -469,29 +469,69 @@ namespace Tests_Sharp
 		}
 
 
-        //[Test]
-        //public void Xxxxx()
-        //{
-        //    void(string data)
-        //    {
+		// TODO не завершено
+		//      [Test]
+		//      public void Permutations()
+		//      {
+		//	List<string> SinglePermutations(string s)
+		//	{
 
-        //    }
+		//	}
 
-        //    Assert.AreEqual(new int[] { 8, 64 }, Parse("iiisdoso"));
-        //    Assert.AreEqual(new int[] { 8, 64, 3600 }, Parse("iiisdosodddddiso"));
-        //}
+		//	Assert.AreEqual(new List<string> { "a" }, SinglePermutations("a").OrderBy(x => x).ToList());
+		//	Assert.AreEqual(new List<string> { "aabb", "abab", "abba", "baab", "baba", "bbaa" }, SinglePermutations("aabb").OrderBy(x => x).ToList());
+		//	Assert.AreEqual(new List<string> { "ab", "ba" }, SinglePermutations("ab").OrderBy(x => x).ToList());
+		//}
+		//var testListA = SinglePermutations("aabb").OrderBy(x => x).ToList();
+		////{ "aabb", "abab", "abba", "baab", "baba", "bbaa" }
+		//foreach (var item in testListA)
+		//{
+		//    Console.Write(item + " ");
+		//}
 
-        [Test]
-        public void Permutations()
-        {
-			List<string> SinglePermutations(string s)
+		//Console.WriteLine();
+
+		//var testListB = SinglePermutations("ab").OrderBy(x => x).ToList();
+		////{ "ab", "ba" }
+		//foreach (var item in testListB)
+		//{
+		//    Console.Write(item + " ");
+		//}
+
+		
+		
+		
+		
+		//[Test]
+		//public void Xxxxx()
+		//{
+		//    void(string data)
+		//    {
+
+		//    }
+
+		//    Assert.AreEqual(new int[] { 8, 64 }, Parse("iiisdoso"));
+		//    Assert.AreEqual(new int[] { 8, 64, 3600 }, Parse("iiisdosodddddiso"));
+		//}
+
+
+		[Test]
+		public void TicTacToe()
+		{
+			// 0 - empty
+			// 1 - X
+			// 2 - O
+
+			// return 1 - X won
+			// return 2 - O won
+			// return 0 - draw
+			int IsSolved(int[,] board)
 			{
-
+				return 0;
 			}
 
-			Assert.AreEqual(new List<string> { "a" }, SinglePermutations("a").OrderBy(x => x).ToList());
-			Assert.AreEqual(new List<string> { "aabb", "abab", "abba", "baab", "baba", "bbaa" }, SinglePermutations("aabb").OrderBy(x => x).ToList());
-			Assert.AreEqual(new List<string> { "ab", "ba" }, SinglePermutations("ab").OrderBy(x => x).ToList());
+			int[,] board = new int[,] { { 1, 1, 1 }, { 0, 2, 2 }, { 0, 0, 0 } };
+			Assert.AreEqual(1, IsSolved(board));
 		}
 
 
@@ -503,5 +543,14 @@ namespace Tests_Sharp
 
 
 
-    }
+
+
+
+
+
+
+
+
+
+	}
 }
