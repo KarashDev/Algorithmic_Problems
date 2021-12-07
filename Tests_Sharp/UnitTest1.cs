@@ -660,7 +660,77 @@ namespace Tests_Sharp
         {
             int[] Snail(int[][] array)
             {
-                // enjoy
+                int inputTotalLength = 0;
+                foreach (var arr in array)
+                {
+                    inputTotalLength += arr.Length;
+                }
+
+                List<int> nums = new List<int>();
+
+                IterateCircle(array);
+
+                int[] IterateCircle(int[][] array)
+                {
+                    if (array.Length == 1 && array[0].Length == 1)
+                    {
+                        nums.Add(array[0][0]);
+                        return nums.ToArray();
+                    }
+                    else if (array.Length == 1 && array[0].Length == 0)
+                    {
+                        return new int[] { };
+                    }
+
+                    var upperArr = array[0];
+                    foreach (var num in upperArr)
+                    {
+                        nums.Add(num);
+                    }
+                    array = array.Where(val => val != array[0]).ToArray();
+
+                    for (int i = 0; i < array.Length - 1; i++)
+                    {
+                        var subArrLength = array[i].Length;
+                        nums.Add(array[i][subArrLength - 1]);
+
+                        array[i] = array[i].Take(subArrLength - 1).ToArray();
+                        //ÈËÈ
+                        //Array.Resize(ref array[i], subArrLength - 1);
+                    }
+
+                    var bottomArr = array[array.Length - 1];
+                    Array.Reverse(bottomArr);
+                    foreach (var num in bottomArr)
+                    {
+                        nums.Add(num);
+                    }
+                    Array.Reverse(bottomArr);
+                    array = array.Where(val => val != array[array.Length - 1]).ToArray();
+
+                    for (int i = array.Length - 1; i >= 0; i--)
+                    {
+                        nums.Add(array[i][0]);
+
+                        array[i] = array[i].Skip(1).ToArray();
+                        //ÈËÈ
+                        //array[i] = array[i].Where(val => val != array[i][0]).ToArray();
+                    }
+
+                    while (nums.Count != inputTotalLength)
+                    {
+                        var x = IterateCircle(array);
+
+                        if (nums.Count == inputTotalLength)
+                        {
+                            return nums.ToArray();
+                        }
+                        nums.AddRange(x);
+                    }
+
+                    return nums.ToArray();
+                }
+                return nums.ToArray();
             }
 
             int[][] array1 =
@@ -677,8 +747,29 @@ namespace Tests_Sharp
             new[]{7, 6, 5}
             };
 
+            int[][] array3 =
+            {
+            new[]{1, 2, 3, 9},
+            new[]{4, 5, 6, 4},
+            new[]{7, 8, 9, 1},
+            new[]{1, 2, 3, 4}
+            };
+
+            int[][] array4 =
+            {
+            new[]{1, 2, 3, 9, 1},
+            new[]{4, 5, 6, 4, 5},
+            new[]{7, 8, 9, 1, 8},
+            new[]{1, 2, 3, 4, 3},
+            new[]{1, 2, 3, 4, 2}
+            };
+
             Assert.AreEqual(new int[] { 1, 2, 3, 6, 9, 8, 7, 4, 5 }, Snail(array1));
             Assert.AreEqual(new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9 }, Snail(array2));
+            Assert.AreEqual(new int[] { 1, 2, 3, 9, 4, 1, 4, 3, 2, 1, 7, 4, 5, 6, 9, 8 }, Snail(array3));
+            Assert.AreEqual(new int[] { 1, 2, 3, 9, 1, 5, 8, 3, 2, 4, 3, 2, 1, 1, 7, 4, 5, 6, 4, 1, 4, 3, 2, 8, 9 }, Snail(array4));
+
+
         }
 
 
