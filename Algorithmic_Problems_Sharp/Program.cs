@@ -836,6 +836,88 @@ namespace Algorithmic_Problems_Sharp
             //}
 
 
+            //static string[] dirReduc(string[] arr)
+            //{
+            //    List<string> arrList = new List<string>();
+            //    arrList.AddRange(arr);
+
+            //    arrList = Reduc(arrList);
+
+            //    return arrList.ToArray();
+            //}
+
+            //static List<string> Reduc(List<string> arrList)
+            //{
+            //    bool isAnyMatchFound = false;
+
+            //    for (int i = 0; i < arrList.Count - 1; i++)
+            //    {
+            //        if (arrList[i] == "NORTH" && arrList[i + 1] == "SOUTH"
+            //            || arrList[i] == "SOUTH" && arrList[i + 1] == "NORTH")
+            //        {
+            //            arrList.Remove(arrList[i]);
+            //            i--;
+            //            arrList.Remove(arrList[i + 1]);
+
+            //            isAnyMatchFound = true;
+            //        }
+            //        else if (arrList[i] == "EAST" && arrList[i + 1] == "WEST"
+            //            || arrList[i] == "WEST" && arrList[i + 1] == "EAST")
+            //        {
+            //            arrList.Remove(arrList[i]);
+            //            i--;
+            //            arrList.Remove(arrList[i + 1]);
+
+            //            isAnyMatchFound = true;
+            //        }
+            //    }
+
+            //    if (isAnyMatchFound)
+            //        Reduc(arrList);
+
+            //    return arrList;
+            //}
+
+
+
+            //string[] a = new string[] { "NORTH", "SOUTH", "SOUTH", "EAST", "WEST", "NORTH", "WEST" };
+            //var aa = dirReduc(a);
+            //foreach (var item in aa)
+            //{
+            //    Console.Write(item + " ");
+            //}
+            //Console.WriteLine();
+
+
+            //string[] b = new string[] { "NORTH", "EAST", "WEST", "SOUTH", "WEST", "WEST" };
+            //var bb = dirReduc(b);
+            //foreach (var item in bb)
+            //{
+            //    Console.Write(item + " ");
+            //}
+            //Console.WriteLine();
+
+
+            //string[] c = new string[] { "NORTH", "WEST", "SOUTH", "EAST" };
+            //var cc = dirReduc(c);
+            //foreach (var item in cc)
+            //{
+            //    Console.Write(item + " ");
+            //}
+            //Console.WriteLine();
+
+
+            //string[] d = new string[] { "NORTH", "NORTH", "EAST", "SOUTH", "EAST", "EAST", "SOUTH", "SOUTH" };
+            //var dd = dirReduc(d);
+            //foreach (var item in dd)
+            //{
+            //    Console.Write(item + " ");
+            //}
+            //Console.WriteLine();
+
+
+
+
 
 
 

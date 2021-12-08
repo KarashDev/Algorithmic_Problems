@@ -642,19 +642,6 @@ namespace Tests_Sharp
         }
 
 
-        //[Test]
-        //public void Xxxxx()
-        //{
-        //    void(string data)
-        //    {
-
-        //    }
-
-        //    Assert.AreEqual(new int[] { 8, 64 }, Parse("iiisdoso"));
-        //    Assert.AreEqual(new int[] { 8, 64, 3600 }, Parse("iiisdosodddddiso"));
-        //}
-
-
         [Test]
         public void SnailArray()
         {
@@ -773,10 +760,78 @@ namespace Tests_Sharp
         }
 
 
+        //[Test]
+        //public void Xxxxx()
+        //{
+        //    void(string data)
+        //    {
+
+        //    }
+
+        //    Assert.AreEqual(new int[] { 8, 64 }, Parse("iiisdoso"));
+        //    Assert.AreEqual(new int[] { 8, 64, 3600 }, Parse("iiisdosodddddiso"));
+        //}
 
 
+        // TODO на сайте не проходят часть решений; тестовые кейсы неизвестны
+        [Test]
+        public void DirReduction()
+        {
+            static string[] dirReduc(string[] arr)
+            {
+                List<string> arrList = new List<string>();
+                arrList.AddRange(arr);
 
+                arrList = Reduc(arrList);
 
+                return arrList.ToArray();
+            }
+           
+            static List<string> Reduc(List<string> arrList)
+            {
+                bool isAnyMatchFound = false;
+
+                for (int i = 0; i < arrList.Count - 1; i++)
+                {
+                    if (arrList[i] == "NORTH" && arrList[i + 1] == "SOUTH"
+                        || arrList[i] == "SOUTH" && arrList[i + 1] == "NORTH")
+                    {
+                        arrList.Remove(arrList[i]);
+                        i--;
+                        arrList.Remove(arrList[i + 1]);
+
+                        isAnyMatchFound = true;
+                    }
+                    else if (arrList[i] == "EAST" && arrList[i + 1] == "WEST"
+                        || arrList[i] == "WEST" && arrList[i + 1] == "EAST")
+                    {
+                        arrList.Remove(arrList[i]);
+                        i--;
+                        arrList.Remove(arrList[i + 1]);
+
+                        isAnyMatchFound = true;
+                    }
+                }
+
+                if (isAnyMatchFound)
+                    Reduc(arrList);
+
+                return arrList;
+            }
+
+            string[] a = new string[] { "NORTH", "SOUTH", "SOUTH", "EAST", "WEST", "NORTH", "WEST" };
+            string[] b = new string[] { "WEST" };
+            Assert.AreEqual(b, dirReduc(a));
+
+            string[] c = new string[] { "NORTH", "EAST", "WEST", "SOUTH", "WEST", "WEST" };
+            string[] d = new string[] { "WEST", "WEST" };
+            Assert.AreEqual(d, dirReduc(c));
+
+            string[] e = new string[] { "NORTH", "WEST", "SOUTH", "EAST" };
+            string[] f = new string[] { "NORTH", "WEST", "SOUTH", "EAST" };
+            Assert.AreEqual(f, dirReduc(e));
+
+        }
 
 
 
