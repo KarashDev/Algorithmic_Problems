@@ -915,12 +915,102 @@ namespace Algorithmic_Problems_Sharp
             //}
             //Console.WriteLine();
 
+            List<long> GetDivisors(long num)
+            {
+                List<long> divisors = new List<long>();
+                for (int i = 1; i <= num; i++)
+                {
+                    if (num % i == 0)
+                        divisors.Add(i);
+                }
+                return divisors;
+            }
+
+
+            string listSquared(long m, long n)
+            {
+                // В рендже m-n найти каждое число, у которого сумма всех его делителей возведенных в квадрат
+                // сама является целочисленным квадратом
+                // Вывести string в виде [[x, y], [x, y]], где x - найденное число; y - сумма квадратов делителей этого числа
+
+                // Найти все делители; возвести их в квадрат; сложить их; результат проверить на целочисленный корень
+
+                //List<long> nums = new List<long>();
+                //for (long i = m; i <= n; i++)
+                //{
+                //    nums.Add(i);
+                //}
+
+                List<long> divisors = new List<long>();
+                List<double> divisorsSquared = new List<double>();
+
+
+                long[][] outputArrays = new long[0][]; 
+
+                for (long i = m; i <= n; i++)
+                {
+                    divisors = GetDivisors(i);
+
+                    if (divisors.Count != 2)
+                    {
+                        divisorsSquared = divisors.Select(d => Math.Pow(d, 2)).ToList();
+                        double sumOfDivisors = divisorsSquared.Sum();
+                        
+                        if (Math.Sqrt(sumOfDivisors) % 1 == 0)
+                        {
+                            long[] outputArr = new long[] { i, (long)sumOfDivisors };
+
+                            Array.Resize(ref outputArrays, outputArrays.Length + 1);
+                            outputArrays[outputArrays.Length - 1] = outputArr;
+                        }
+                    }
+                }
+                
+                string outputString = "[";
+
+                for(int i = 0; i < outputArrays.Length; i++)
+                {
+                    if (i != outputArrays.Length - 1)
+                    {
+                        outputString += $"[{outputArrays[0][0]}, {outputArrays[0][1]}], ";
+                    }
+                    else outputString += $"[{outputArrays[0][0]}, {outputArrays[0][1]}]";
+                }
+                outputString += "]";
+                return outputString;
+                //nums[i], sumOfDivisors
+            }
+
+
+            Console.WriteLine(listSquared(1, 250));//"[[1, 1], [42, 2500], [246, 84100]]",
+
+            Console.WriteLine(listSquared(42, 250));//"[[42, 2500], [246, 84100]]",
+
+            Console.WriteLine(listSquared(250, 500));//"[[287, 84100]]", 
 
 
 
 
 
 
+            //for (int i = 42; i <= nums.Count; i++)
+            //{
+            //    divisors = GetDivisors(nums[i]);
+
+            //    if (divisors.Count != 2)
+            //    {
+            //        divisorsSquared = divisors.Select(d => Math.Pow(d, 2)).ToList();
+            //        double sumOfDivisors = divisorsSquared.Sum();
+
+            //        if (Math.Sqrt(sumOfDivisors) % 1 == 0)
+            //        {
+            //            long[] outputArr = new long[] { nums[i], (long)sumOfDivisors };
+
+            //            Array.Resize(ref outputArrays, outputArrays.Length + 1);
+            //            outpfutArrays.Append(outputArr);
+            //        }
+            //    }
+            //}
         }
     }
 }

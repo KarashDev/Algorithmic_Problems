@@ -760,19 +760,6 @@ namespace Tests_Sharp
         }
 
 
-        //[Test]
-        //public void Xxxxx()
-        //{
-        //    void(string data)
-        //    {
-
-        //    }
-
-        //    Assert.AreEqual(new int[] { 8, 64 }, Parse("iiisdoso"));
-        //    Assert.AreEqual(new int[] { 8, 64, 3600 }, Parse("iiisdosodddddiso"));
-        //}
-
-
         // TODO на сайте не проходят часть решений; тестовые кейсы неизвестны
         [Test]
         public void DirReduction()
@@ -786,7 +773,7 @@ namespace Tests_Sharp
 
                 return arrList.ToArray();
             }
-           
+
             static List<string> Reduc(List<string> arrList)
             {
                 bool isAnyMatchFound = false;
@@ -834,9 +821,33 @@ namespace Tests_Sharp
         }
 
 
+        //[Test]
+        //public void Xxxxx()
+        //{
+        //    void(string data)
+        //    {
+
+        //    }
+
+        //    Assert.AreEqual(new int[] { 8, 64 }, Parse("iiisdoso"));
+        //    Assert.AreEqual(new int[] { 8, 64, 3600 }, Parse("iiisdosodddddiso"));
+        //}
+
+        [Test]
+        public void SumSquaredDivisors()
+        {
+            string listSquared(long m, long n)
+            {
+
+            }
 
 
+            Assert.AreEqual("[[1, 1], [42, 2500], [246, 84100]]", listSquared(1, 250));
 
+            Assert.AreEqual("[[42, 2500], [246, 84100]]", listSquared(42, 250));
+
+            Assert.AreEqual("[[287, 84100]]", listSquared(250, 500));
+        }
 
 
     }
