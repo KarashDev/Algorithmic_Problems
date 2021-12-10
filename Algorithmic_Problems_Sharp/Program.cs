@@ -972,9 +972,9 @@ namespace Algorithmic_Problems_Sharp
                 {
                     if (i != outputArrays.Length - 1)
                     {
-                        outputString += $"[{outputArrays[0][0]}, {outputArrays[0][1]}], ";
+                        outputString += $"[{outputArrays[i][0]}, {outputArrays[i][1]}], ";
                     }
-                    else outputString += $"[{outputArrays[0][0]}, {outputArrays[0][1]}]";
+                    else outputString += $"[{outputArrays[i][0]}, {outputArrays[i][1]}]";
                 }
                 outputString += "]";
                 return outputString;
