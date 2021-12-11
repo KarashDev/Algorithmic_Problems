@@ -915,102 +915,153 @@ namespace Algorithmic_Problems_Sharp
             //}
             //Console.WriteLine();
 
-            List<long> GetDivisors(long num)
+            //List<long> GetDivisors(long num)
+            //{
+            //    List<long> divisors = new List<long>();
+            //    for (int i = 1; i <= num; i++)
+            //    {
+            //        if (num % i == 0)
+            //            divisors.Add(i);
+            //    }
+            //    return divisors;
+            //}
+
+
+            //string listSquared(long m, long n)
+            //{
+            //    // В рендже m-n найти каждое число, у которого сумма всех его делителей возведенных в квадрат
+            //    // сама является целочисленным квадратом
+            //    // Вывести string в виде [[x, y], [x, y]], где x - найденное число; y - сумма квадратов делителей этого числа
+
+            //    // Найти все делители; возвести их в квадрат; сложить их; результат проверить на целочисленный корень
+
+            //    //List<long> nums = new List<long>();
+            //    //for (long i = m; i <= n; i++)
+            //    //{
+            //    //    nums.Add(i);
+            //    //}
+
+            //    List<long> divisors = new List<long>();
+            //    List<double> divisorsSquared = new List<double>();
+
+            //    long[][] outputArrays = new long[0][]; 
+
+            //    for (long i = m; i <= n; i++)
+            //    {
+            //        divisors = GetDivisors(i);
+
+            //        if (divisors.Count != 2)
+            //        {
+            //            divisorsSquared = divisors.Select(d => Math.Pow(d, 2)).ToList();
+            //            double sumOfDivisors = divisorsSquared.Sum();
+
+            //            if (Math.Sqrt(sumOfDivisors) % 1 == 0)
+            //            {
+            //                long[] outputArr = new long[] { i, (long)sumOfDivisors };
+
+            //                Array.Resize(ref outputArrays, outputArrays.Length + 1);
+            //                outputArrays[outputArrays.Length - 1] = outputArr;
+            //            }
+            //        }
+            //    }
+
+            //    string outputString = "[";
+
+            //    for(int i = 0; i < outputArrays.Length; i++)
+            //    {
+            //        if (i != outputArrays.Length - 1)
+            //        {
+            //            outputString += $"[{outputArrays[i][0]}, {outputArrays[i][1]}], ";
+            //        }
+            //        else outputString += $"[{outputArrays[i][0]}, {outputArrays[i][1]}]";
+            //    }
+            //    outputString += "]";
+            //    return outputString;
+            //}
+
+
+            //Console.WriteLine(listSquared(1, 250));//"[[1, 1], [42, 2500], [246, 84100]]",
+
+            //Console.WriteLine(listSquared(42, 250));//"[[42, 2500], [246, 84100]]",
+
+            //Console.WriteLine(listSquared(250, 500));//"[[287, 84100]]", 
+
+
+            Dictionary<string, List<int>> GetPeaks(int[] arr)
             {
-                List<long> divisors = new List<long>();
-                for (int i = 1; i <= num; i++)
-                {
-                    if (num % i == 0)
-                        divisors.Add(i);
-                }
-                return divisors;
-            }
+                // Найти в массиве каждый индекс пика  (p - это пик, если p >= (p - 1) && p >= (p + 1) и само 
+                // значение этого пика
+                // НЕ учитывать первое и последнее число в массиве
+                // В случае плато: вывести индекс первой цифры в плато
 
+                // Вывод: индексы пиков ["pos"] = p1.ToList(); Значения пиков ["peaks"] = p2.ToList()
 
-            string listSquared(long m, long n)
-            {
-                // В рендже m-n найти каждое число, у которого сумма всех его делителей возведенных в квадрат
-                // сама является целочисленным квадратом
-                // Вывести string в виде [[x, y], [x, y]], где x - найденное число; y - сумма квадратов делителей этого числа
+                List<int> poses = new List<int>();
+                List<int> peaks = new List<int>();
 
-                // Найти все делители; возвести их в квадрат; сложить их; результат проверить на целочисленный корень
+                bool isTherePeak = false;
 
-                //List<long> nums = new List<long>();
-                //for (long i = m; i <= n; i++)
-                //{
-                //    nums.Add(i);
-                //}
+                for (int i = 1; i < arr.Length - 1; i++)
+				{
+                    if (arr[i] > arr[i] - 1 && arr[i] > arr[i] + 1)
+					{
+                        poses.Add(i);
+                        peaks.Add(arr[i]);
+                        isTherePeak = true;
+                    }
 
-                List<long> divisors = new List<long>();
-                List<double> divisorsSquared = new List<double>();
-
-
-                long[][] outputArrays = new long[0][]; 
-
-                for (long i = m; i <= n; i++)
-                {
-                    divisors = GetDivisors(i);
-
-                    if (divisors.Count != 2)
+                    if (arr[i] - 1 < arr[i] && arr[i] == arr[i] + 1)
                     {
-                        divisorsSquared = divisors.Select(d => Math.Pow(d, 2)).ToList();
-                        double sumOfDivisors = divisorsSquared.Sum();
-                        
-                        if (Math.Sqrt(sumOfDivisors) % 1 == 0)
-                        {
-                            long[] outputArr = new long[] { i, (long)sumOfDivisors };
+                        int[] sequenceAfterPlato = new int[arr.Length - (i + 1)];
+                        Array.Copy(arr, i, sequenceAfterPlato, 0, arr.Length - (i + 1));
 
-                            Array.Resize(ref outputArrays, outputArrays.Length + 1);
-                            outputArrays[outputArrays.Length - 1] = outputArr;
+                        if (sequenceAfterPlato.Any(n => n < arr[i]))
+                        {
+                            poses.Add(i);
+                            peaks.Add(arr[i]);
+                            isTherePeak = true;
                         }
                     }
                 }
-                
-                string outputString = "[";
 
-                for(int i = 0; i < outputArrays.Length; i++)
-                {
-                    if (i != outputArrays.Length - 1)
+                if (!isTherePeak)
+				{
+                    return new Dictionary<string, List<int>>()
+					{
+						["pos"] = new List<int>(),
+						["peaks"] = new List<int>()
+                    };
+				}
+                else
+				{
+                    return new Dictionary<string, List<int>>()
                     {
-                        outputString += $"[{outputArrays[i][0]}, {outputArrays[i][1]}], ";
-                    }
-                    else outputString += $"[{outputArrays[i][0]}, {outputArrays[i][1]}]";
+                        ["pos"] = poses,
+                        ["peaks"] = peaks
+                    };
                 }
-                outputString += "]";
-                return outputString;
-                //nums[i], sumOfDivisors
             }
 
+            int[] arr = new int[] { 1, 2, 3, 6, 4, 1, 2, 3, 2, 1 };
 
-            Console.WriteLine(listSquared(1, 250));//"[[1, 1], [42, 2500], [246, 84100]]",
+            List<int> pos = new List<int> { 3, 7 };
+            List<int> peak = new List<int> { 6, 3 };
 
-            Console.WriteLine(listSquared(42, 250));//"[[42, 2500], [246, 84100]]",
+            var expected = new Dictionary<string, List<int>>()
+            {
+                ["pos"] = pos,
+                ["peaks"] = peak
+            };
+          
+            var actual = PickPeaks.GetPeaks(array[n]);
+            Assert.AreEqual(expected, actual, msg[n]);
 
-            Console.WriteLine(listSquared(250, 500));//"[[287, 84100]]", 
 
 
 
 
 
 
-            //for (int i = 42; i <= nums.Count; i++)
-            //{
-            //    divisors = GetDivisors(nums[i]);
-
-            //    if (divisors.Count != 2)
-            //    {
-            //        divisorsSquared = divisors.Select(d => Math.Pow(d, 2)).ToList();
-            //        double sumOfDivisors = divisorsSquared.Sum();
-
-            //        if (Math.Sqrt(sumOfDivisors) % 1 == 0)
-            //        {
-            //            long[] outputArr = new long[] { nums[i], (long)sumOfDivisors };
-
-            //            Array.Resize(ref outputArrays, outputArrays.Length + 1);
-            //            outpfutArrays.Append(outputArr);
-            //        }
-            //    }
-            //}
         }
     }
 }

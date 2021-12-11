@@ -821,24 +821,65 @@ namespace Tests_Sharp
         }
 
 
-        //[Test]
-        //public void Xxxxx()
-        //{
-        //    void(string data)
-        //    {
-
-        //    }
-
-        //    Assert.AreEqual(new int[] { 8, 64 }, Parse("iiisdoso"));
-        //    Assert.AreEqual(new int[] { 8, 64, 3600 }, Parse("iiisdosodddddiso"));
-        //}
 
         [Test]
         public void SumSquaredDivisors()
         {
+            List<long> GetDivisors(long num)
+            {
+                List<long> divisors = new List<long>();
+                for (int i = 1; i <= num; i++)
+                {
+                    if (num % i == 0)
+                        divisors.Add(i);
+                }
+                return divisors;
+            }
+
             string listSquared(long m, long n)
             {
+                // ¬ рендже m-n найти каждое число, у которого сумма всех его делителей возведенных в квадрат
+                // сама €вл€етс€ целочисленным квадратом
+                // ¬ывести string в виде [[x, y], [x, y]], где x - найденное число; y - сумма квадратов делителей этого числа
 
+                // Ќайти все делители; возвести их в квадрат; сложить их; результат проверить на целочисленный корень
+
+                List<long> divisors = new List<long>();
+                List<double> divisorsSquared = new List<double>();
+
+                long[][] outputArrays = new long[0][];
+
+                for (long i = m; i <= n; i++)
+                {
+                    divisors = GetDivisors(i);
+
+                    if (divisors.Count != 2)
+                    {
+                        divisorsSquared = divisors.Select(d => Math.Pow(d, 2)).ToList();
+                        double sumOfDivisors = divisorsSquared.Sum();
+
+                        if (Math.Sqrt(sumOfDivisors) % 1 == 0)
+                        {
+                            long[] outputArr = new long[] { i, (long)sumOfDivisors };
+
+                            Array.Resize(ref outputArrays, outputArrays.Length + 1);
+                            outputArrays[outputArrays.Length - 1] = outputArr;
+                        }
+                    }
+                }
+
+                string outputString = "[";
+
+                for (int i = 0; i < outputArrays.Length; i++)
+                {
+                    if (i != outputArrays.Length - 1)
+                    {
+                        outputString += $"[{outputArrays[i][0]}, {outputArrays[i][1]}], ";
+                    }
+                    else outputString += $"[{outputArrays[i][0]}, {outputArrays[i][1]}]";
+                }
+                outputString += "]";
+                return outputString;
             }
 
 
@@ -849,6 +890,34 @@ namespace Tests_Sharp
             Assert.AreEqual("[[287, 84100]]", listSquared(250, 500));
         }
 
+		//[Test]
+		//public void Xxxxx()
+		//{
+		//    void(string data)
+		//    {
 
-    }
+		//    }
+
+		//    Assert.AreEqual(new int[] { 8, 64 }, Parse("iiisdoso"));
+		//    Assert.AreEqual(new int[] { 8, 64, 3600 }, Parse("iiisdosodddddiso"));
+		//}
+
+		[Test]
+		public void PickPeaks()
+		{
+            Dictionary<string, List<int>> GetPeaks(int[] arr)
+            {
+                // Your code here!
+                return null;
+            }
+
+            Assert.AreEqual(new int[] { 8, 64 }, Parse("iiisdoso"));
+			Assert.AreEqual(new int[] { 8, 64, 3600 }, Parse("iiisdosodddddiso"));
+		}
+
+
+
+
+
+	}
 }
