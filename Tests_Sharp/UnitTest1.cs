@@ -890,17 +890,6 @@ namespace Tests_Sharp
 			Assert.AreEqual("[[287, 84100]]", listSquared(250, 500));
 		}
 
-		//[Test]
-		//public void Xxxxx()
-		//{
-		//    void(string data)
-		//    {
-
-		//    }
-
-		//    Assert.AreEqual(new int[] { 8, 64 }, Parse("iiisdoso"));
-		//    Assert.AreEqual(new int[] { 8, 64, 3600 }, Parse("iiisdosodddddiso"));
-		//}
 
 		[Test]
 		public void PickPeaks()
@@ -1009,6 +998,45 @@ namespace Tests_Sharp
 				Assert.AreEqual(expected, actual, msg[n]);
 			}
 		}
+
+
+		//[Test]
+		//public void Xxxxx()
+		//{
+		//    void(string data)
+		//    {
+
+		//    }
+
+		//    Assert.AreEqual(new int[] { 8, 64 }, Parse("iiisdoso"));
+		//    Assert.AreEqual(new int[] { 8, 64, 3600 }, Parse("iiisdosodddddiso"));
+		//}
+
+
+		[Test]
+		public void NextSmallerNumber()
+		{
+			long NextSmaller(long n)
+			{
+				throw new NotImplementedException(); // replace with your implementation
+			}
+
+			Assert.AreEqual(12, NextSmaller(21));
+			Assert.AreEqual(790, NextSmaller(907));
+			Assert.AreEqual(513, NextSmaller(531));
+			Assert.AreEqual(1, NextSmaller(1027));
+			Assert.AreEqual(414, NextSmaller(441));
+			Assert.AreEqual(123456798, NextSmaller(123456798));
+		}
+	}
+
+		
+
+
+
+
+
+
 
 
 

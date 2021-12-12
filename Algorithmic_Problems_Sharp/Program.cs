@@ -1067,6 +1067,39 @@ namespace Algorithmic_Problems_Sharp
 			//}
 			//Console.WriteLine();
 
+			long NextSmaller(long n)
+			{
+
+
+
+
+			}
+
+
+			Console.WriteLine(NextSmaller(21));
+			Console.WriteLine(NextSmaller(907));
+			Console.WriteLine(NextSmaller(531));
+			Console.WriteLine(NextSmaller(1027));
+			Console.WriteLine(NextSmaller(441));
+			Console.WriteLine(NextSmaller(123456798));
+
+
+			//Assert.AreEqual(12, NextSmaller(21));
+			//Assert.AreEqual(790, NextSmaller(907));
+			//Assert.AreEqual(513, NextSmaller(531));
+			//Assert.AreEqual(1, NextSmaller(1027));
+			//Assert.AreEqual(414, NextSmaller(441));
+			//Assert.AreEqual(123456798, NextSmaller(123456798));
+
+
+
+
+
+
+
+
+
+
 
 
 
