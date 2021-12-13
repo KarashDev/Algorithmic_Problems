@@ -1018,15 +1018,67 @@ namespace Tests_Sharp
 		{
 			long NextSmaller(long n)
 			{
-				throw new NotImplementedException(); // replace with your implementation
+				long nums = 0;
+				nums = n;
+
+				List<long> digits = new List<long>();
+				List<long> partToSort = new List<long>();
+
+				while (nums != 0)
+				{
+					digits.Add(nums % 10);
+					nums /= 10;
+				}
+				digits.Reverse();
+
+
+				bool isFirstObjectFound = false;
+
+				for (int i = digits.Count - 1; i >= 0; i--)
+				{
+					for (int j = digits.Count - 1; j > i && !isFirstObjectFound; j--)
+					{
+						if (digits[j] < digits[i])
+						{
+							isFirstObjectFound = true;
+
+							var temp = digits[i];
+							digits[i] = digits[j];
+							digits[j] = temp;
+
+							partToSort = digits.GetRange(i + 1, digits.Count - (i + 1));
+							digits.RemoveRange(i + 1, digits.Count - (i + 1));
+
+							partToSort.Sort((a, b) => b.CompareTo(a));
+							digits.AddRange(partToSort);
+						}
+					}
+				}
+
+				if (digits[0] == 0)
+					return -1;
+				else
+				{
+					long total = 0;
+					foreach (int entry in digits)
+					{
+						total = 10 * total + entry;
+					}
+
+					if (total == n)
+						return -1;
+					else
+						return total;
+				}
 			}
 
 			Assert.AreEqual(12, NextSmaller(21));
 			Assert.AreEqual(790, NextSmaller(907));
 			Assert.AreEqual(513, NextSmaller(531));
-			Assert.AreEqual(1, NextSmaller(1027));
+			Assert.AreEqual(-1, NextSmaller(1027));
 			Assert.AreEqual(414, NextSmaller(441));
-			Assert.AreEqual(123456798, NextSmaller(123456798));
+			Assert.AreEqual(123456789, NextSmaller(123456798));
+			Assert.AreEqual(1247632, NextSmaller(1262347));
 		}
 	}
 
@@ -1042,5 +1094,5 @@ namespace Tests_Sharp
 
 
 
-	}
+	
 }
