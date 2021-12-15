@@ -1000,19 +1000,6 @@ namespace Tests_Sharp
 		}
 
 
-		//[Test]
-		//public void Xxxxx()
-		//{
-		//    void(string data)
-		//    {
-
-		//    }
-
-		//    Assert.AreEqual(new int[] { 8, 64 }, Parse("iiisdoso"));
-		//    Assert.AreEqual(new int[] { 8, 64, 3600 }, Parse("iiisdosodddddiso"));
-		//}
-
-
 		[Test]
 		public void NextSmallerNumber()
 		{
@@ -1085,7 +1072,32 @@ namespace Tests_Sharp
 		}
 	}
 
-		
+
+    //[Test]
+    //public void Xxxxx()
+    //{
+    //    void(string data)
+    //    {
+
+    //    }
+
+    //    Assert.AreEqual(new int[] { 8, 64 }, Parse("iiisdoso"));
+    //    Assert.AreEqual(new int[] { 8, 64, 3600 }, Parse("iiisdosodddddiso"));
+    //}
+
+    [Test]
+    public void ProperFractionsSolution()
+    {
+	    long ProperFractions(long n)
+		{
+		}
+
+		Assert.AreEqual(0, ProperFractions(1));
+		Assert.AreEqual(1, ProperFractions(2));
+		Assert.AreEqual(4, ProperFractions(5));
+		Assert.AreEqual(8, ProperFractions(15));
+		Assert.AreEqual(20, ProperFractions(25));
+	}
 
 
 
@@ -1096,6 +1108,4 @@ namespace Tests_Sharp
 
 
 
-
-	
 }

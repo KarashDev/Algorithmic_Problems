@@ -1068,90 +1068,107 @@ namespace Algorithmic_Problems_Sharp
             //Console.WriteLine();
 
 
+            //long NextSmaller(long n)
+            //{
+            //    // -1 если нет такого позитивного числа И если есть но первая цифра 0
+
+            //    // каждую цифру в лист
+            //    // найти справа-налево первое число X, для которого справа есть меньшее число Y
+            //    // поменять местами X-Y
+            //    // все числа справа от Y отсортировать по убыванию
+
+            //    //1262347  // 1
+            //    //1242367  // 2
+            //    //1247632  // 3
+            //    long nums = 0;
+            //    nums = n;
+
+            //    List<long> digits = new List<long>();
+            //    List<long> partToSort = new List<long>();
+
+            //    while (nums != 0)
+            //    {
+            //        digits.Add(nums % 10);
+            //        nums /= 10;
+            //    }
+            //    digits.Reverse();
 
 
+            //    bool isFirstObjectFound = false;
 
-            long NextSmaller(long n)
+            //    for (int i = digits.Count - 1; i >= 0 ; i--)
+            //    {
+            //        for (int j = digits.Count - 1; j > i && !isFirstObjectFound; j--)
+            //        {
+            //            if (digits[j] < digits[i])
+            //            {
+            //                isFirstObjectFound = true;
+
+            //                var temp = digits[i];
+            //                digits[i] = digits[j];
+            //                digits[j] = temp;
+
+            //                partToSort = digits.GetRange(i + 1, digits.Count - (i + 1));
+            //                digits.RemoveRange(i + 1, digits.Count - (i + 1));
+
+            //                partToSort.Sort((a, b) => b.CompareTo(a));
+            //                digits.AddRange(partToSort);
+            //            }
+            //        }
+            //    }
+
+            //    if (digits[0] == 0)
+            //        return -1;
+            //    else
+            //    {
+            //        long total = 0;
+            //        foreach (int entry in digits)
+            //        {
+            //            total = 10 * total + entry;
+            //        }
+
+            //        if (total == n)
+            //            return -1;
+            //        else
+            //            return total;
+            //    }
+            //}
+
+
+            ////Console.WriteLine(NextSmaller(21));//Assert.AreEqual(12
+
+            ////Console.WriteLine(NextSmaller(907));//Assert.AreEqual(790
+            //Console.WriteLine(NextSmaller(531));//Assert.AreEqual(513
+            ////Console.WriteLine(NextSmaller(1027));//Assert.AreEqual(-1
+            ////Console.WriteLine(NextSmaller(441));//Assert.AreEqual(414
+
+            ////Console.WriteLine(NextSmaller(135));//Assert.AreEqual(-1
+            ////Console.WriteLine(NextSmaller(9));//Assert.AreEqual(-1
+            ////Console.WriteLine(NextSmaller(123456798));//Assert.AreEqual(123456789
+            ////Console.WriteLine(NextSmaller(1262347));//Assert.AreEqual(1247632
+
+
+            long ProperFractions(long n)
             {
-                // -1 если нет такого позитивного числа И если есть но первая цифра 0
+                // Входное число - знаменатель
+                // Найти все числа i от 0 до n при помещении которых в числитель (i/n) дробь
+                // не будет сокращаться. Числа могут быть большими
 
-                // каждую цифру в лист
-                // найти справа-налево первое число X, для которого справа есть меньшее число Y
-                // поменять местами X-Y
-                // все числа справа от Y отсортировать по убыванию
-
-                //1262347  // 1
-                //1242367  // 2
-                //1247632  // 3
-                long nums = 0;
-                nums = n;
-
-                List<long> digits = new List<long>();
-                List<long> partToSort = new List<long>();
-
-                while (nums != 0)
+                for (int i = 0; i <= n; i++)
                 {
-                    digits.Add(nums % 10);
-                    nums /= 10;
-                }
-                digits.Reverse();
 
 
-                bool isFirstObjectFound = false;
 
-                for (int i = digits.Count - 1; i >= 0 ; i--)
-                {
-                    for (int j = digits.Count - 1; j > i && !isFirstObjectFound; j--)
-                    {
-                        if (digits[j] < digits[i])
-                        {
-                            isFirstObjectFound = true;
-                           
-                            var temp = digits[i];
-                            digits[i] = digits[j];
-                            digits[j] = temp;
 
-                            partToSort = digits.GetRange(i + 1, digits.Count - (i + 1));
-                            digits.RemoveRange(i + 1, digits.Count - (i + 1));
 
-                            partToSort.Sort((a, b) => b.CompareTo(a));
-                            digits.AddRange(partToSort);
-                        }
-                    }
-                }
-
-                if (digits[0] == 0)
-                    return -1;
-                else
-                {
-                    long total = 0;
-                    foreach (int entry in digits)
-                    {
-                        total = 10 * total + entry;
-                    }
-
-                    if (total == n)
-                        return -1;
-                    else
-                        return total;
                 }
             }
 
-
-            //Console.WriteLine(NextSmaller(21));//Assert.AreEqual(12
-
-            //Console.WriteLine(NextSmaller(907));//Assert.AreEqual(790
-            Console.WriteLine(NextSmaller(531));//Assert.AreEqual(513
-            //Console.WriteLine(NextSmaller(1027));//Assert.AreEqual(-1
-            //Console.WriteLine(NextSmaller(441));//Assert.AreEqual(414
-
-            //Console.WriteLine(NextSmaller(135));//Assert.AreEqual(-1
-            //Console.WriteLine(NextSmaller(9));//Assert.AreEqual(-1
-            //Console.WriteLine(NextSmaller(123456798));//Assert.AreEqual(123456789
-            //Console.WriteLine(NextSmaller(1262347));//Assert.AreEqual(1247632
-
-
-
+            Console.WriteLine(ProperFractions(1));  //0
+            Console.WriteLine(ProperFractions(2));  //1
+            Console.WriteLine(ProperFractions(5));  //4
+            Console.WriteLine(ProperFractions(15)); //8
+            Console.WriteLine(ProperFractions(25)); //20
 
 
 
