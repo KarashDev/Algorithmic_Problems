@@ -1072,7 +1072,6 @@ namespace Tests_Sharp
 		}
 	}
 
-
     //[Test]
     //public void Xxxxx()
     //{
@@ -1086,17 +1085,18 @@ namespace Tests_Sharp
     //}
 
     [Test]
-    public void ProperFractionsSolution()
+    public void Xxxxx()
     {
-	    long ProperFractions(long n)
+		string Nico(string key, string message)
 		{
+			return message;
 		}
 
-		Assert.AreEqual(0, ProperFractions(1));
-		Assert.AreEqual(1, ProperFractions(2));
-		Assert.AreEqual(4, ProperFractions(5));
-		Assert.AreEqual(8, ProperFractions(15));
-		Assert.AreEqual(20, ProperFractions(25));
+		Assert.AreEqual("cseerntiofarmit on  ", Nico("crazy", "secretinformation"));
+		Assert.AreEqual("abcd  ", Nico("abc", "abcd"));
+		Assert.AreEqual("2143658709", Nico("ba", "1234567890"));
+		Assert.AreEqual("message", Nico("a", "message"));
+		Assert.AreEqual("eky", Nico("key", "key"));
 	}
 
 
