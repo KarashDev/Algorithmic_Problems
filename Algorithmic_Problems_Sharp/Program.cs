@@ -1148,71 +1148,93 @@ namespace Algorithmic_Problems_Sharp
             ////Console.WriteLine(NextSmaller(1262347));//Assert.AreEqual(1247632
 
 
+            //Dictionary<int, char> GetSerNumbersToChars(string str)
+            //{
+            //    char[] keyChars = str.ToCharArray();
+            //    char[] keyCharsSorted = new char[keyChars.Length];
+            //    Array.Copy(keyChars, 0, keyCharsSorted, 0, keyChars.Length);
+
+            //    Array.Sort(keyCharsSorted);
+
+            //    Dictionary<int, char> charsToSerNumbers = new Dictionary<int, char>();
+            //    for (int i = 0; i < keyCharsSorted.Length; i++)
+            //    {
+            //        charsToSerNumbers.Add(i + 1, keyCharsSorted[i]);
+            //    }
+
+            //    return charsToSerNumbers;
+            //}
+
+            //string Nico(string key, string message)
+            //{
+            //    char[] keyChars = key.ToCharArray();
+            //    char[] keyCharsSorted = new char[keyChars.Length];
+            //    Array.Copy(keyChars, 0, keyCharsSorted, 0, keyChars.Length);
+
+            //    Array.Sort(keyCharsSorted);
+
+            //    Dictionary<char, int> charsToSerNumbers = new Dictionary<char, int>();
+            //    for (int i = 0; i < keyCharsSorted.Length; i++)
+            //    {
+            //        charsToSerNumbers.Add(keyCharsSorted[i], i + 1);
+            //    }
+
+            //    int[] readyKey = new int[keyCharsSorted.Length];
+            //    for (int i = 0; i < charsToSerNumbers.Count; i++)
+            //    {
+            //        readyKey[i] = charsToSerNumbers[keyChars[i]];
+            //    }
 
 
-            Dictionary<int, char> GetSerNumbersToChars(string str)
-            {
-                char[] keyChars = str.ToCharArray();
-                char[] keyCharsSorted = new char[keyChars.Length];
-                Array.Copy(keyChars, 0, keyCharsSorted, 0, keyChars.Length);
+            //    string readyChunk = "";
+            //    string subStringOnKey = "";
 
-                Array.Sort(keyCharsSorted);
+            //    while (message != "")
+            //    {
+            //        if (message.Length > readyKey.Length)
+            //            subStringOnKey = message.Substring(0, readyKey.Length);
+            //        else if (message.Length <= readyKey.Length)
+            //            subStringOnKey = message;
 
-                Dictionary<int, char> charsToSerNumbers = new Dictionary<int, char>();
-                for (int i = 0; i < keyCharsSorted.Length; i++)
-                {
-                    charsToSerNumbers.Add(i + 1, keyCharsSorted[i]);
-                }
+            //        Dictionary<int, char> subStringCharsToKey = new Dictionary<int, char>();
+            //        for (int i = 0; i < subStringOnKey.Length; i++)
+            //        {
+            //            subStringCharsToKey.Add(readyKey[i], subStringOnKey[i]);
+            //        }
 
-                return charsToSerNumbers;
-            }
+            //        for (int i = 0; i < readyKey.Length; i++)
+            //        {
+            //            try
+            //            {
+            //                readyChunk += subStringCharsToKey[i + 1];
+            //            }
+            //            catch (KeyNotFoundException)
+            //            {
+            //                readyChunk += " ";
+            //            }
+            //        }
 
-            string Nico(string key, string message)
-            {
-                // создать ключ: в строке каждый символ заменить алфавитным порядковым номером (crazy === 23154)
+            //        message = message.Substring(subStringOnKey.Length, message.Length - subStringOnKey.Length);
+            //    }
 
-                char[] keyChars = key.ToCharArray();
-                char[] keyCharsSorted = new char[keyChars.Length];
-                Array.Copy(keyChars, 0, keyCharsSorted, 0, keyChars.Length);
-               
-                Array.Sort(keyCharsSorted);
+            //    return readyChunk;
+            //}
 
-                Dictionary<char, int> charsToSerNumbers = new Dictionary<char, int>();
-                for (int i = 0; i < keyCharsSorted.Length; i++)
-                {
-                    charsToSerNumbers.Add(keyCharsSorted[i], i + 1);
-                }
+            ////Assert.AreEqual("cseerntiofarmit on  ", Nico("crazy", "secretinformation"));
+            ////Assert.AreEqual("abcd  ", Nico("abc", "abcd"));
+            ////Assert.AreEqual("2143658709", Nico("ba", "1234567890"));
+            ////Assert.AreEqual("message", Nico("a", "message"));
+            ////Assert.AreEqual("eky", Nico("key", "key"));
 
-                int[] readyKey = new int[keyCharsSorted.Length];
-                for (int i = 0; i < charsToSerNumbers.Count; i++)
-                {
-                    readyKey[i] = charsToSerNumbers[keyChars[i]];
-                }
-
-                // Забираю кусок строки по длине ключа
-                // Преобразую этот кусок с помощью ключа (разбить все символы в куске по порядку
-                // с присвоением 12345, далее по ключу выстроить буквы)
-                // Либо циклом, либо через массив массивов
-
-                var x = GetSerNumbersToChars(message);
-
-
+            ////Console.WriteLine(Nico("crazy", "secretinformation"));//"cseerntiofarmit on  "
+            ////Console.WriteLine(Nico("abc", "abcd"));//"abcd  "
+            //Console.WriteLine(Nico("ba", "1234567890"));//"2143658709"
+            //Console.WriteLine(Nico("a", "message"));//"message"
+            //Console.WriteLine(Nico("key", "key"));//"eky"
 
 
-                return String.Join("", keyChars);
-            }
 
-            //Assert.AreEqual("cseerntiofarmit on  ", Nico("crazy", "secretinformation"));
-            //Assert.AreEqual("abcd  ", Nico("abc", "abcd"));
-            //Assert.AreEqual("2143658709", Nico("ba", "1234567890"));
-            //Assert.AreEqual("message", Nico("a", "message"));
-            //Assert.AreEqual("eky", Nico("key", "key"));
 
-            Console.WriteLine(Nico("crazy", "secretinformation"));//"cseerntiofarmit on  "
-            Console.WriteLine(Nico("abc", "abcd"));//"abcd  "
-            Console.WriteLine(Nico("ba", "1234567890"));//"2143658709"
-            Console.WriteLine(Nico("a", "message"));//"message"
-            Console.WriteLine(Nico("key", "key"));//"eky"
 
 
 

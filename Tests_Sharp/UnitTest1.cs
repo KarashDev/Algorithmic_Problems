@@ -1070,42 +1070,93 @@ namespace Tests_Sharp
 			Assert.AreEqual(123456789, NextSmaller(123456798));
 			Assert.AreEqual(1247632, NextSmaller(1262347));
 		}
-	}
 
-    //[Test]
-    //public void Xxxxx()
-    //{
-    //    void(string data)
-    //    {
 
-    //    }
-
-    //    Assert.AreEqual(new int[] { 8, 64 }, Parse("iiisdoso"));
-    //    Assert.AreEqual(new int[] { 8, 64, 3600 }, Parse("iiisdosodddddiso"));
-    //}
-
-    [Test]
-    public void Xxxxx()
-    {
-		string Nico(string key, string message)
+		[Test]
+		public void NicoSypher()
 		{
-			return message;
+			string Nico(string key, string message)
+			{
+				char[] keyChars = key.ToCharArray();
+				char[] keyCharsSorted = new char[keyChars.Length];
+				Array.Copy(keyChars, 0, keyCharsSorted, 0, keyChars.Length);
+
+				Array.Sort(keyCharsSorted);
+
+				Dictionary<char, int> charsToSerNumbers = new Dictionary<char, int>();
+				for (int i = 0; i < keyCharsSorted.Length; i++)
+				{
+					charsToSerNumbers.Add(keyCharsSorted[i], i + 1);
+				}
+
+				int[] readyKey = new int[keyCharsSorted.Length];
+				for (int i = 0; i < charsToSerNumbers.Count; i++)
+				{
+					readyKey[i] = charsToSerNumbers[keyChars[i]];
+				}
+
+
+				string readyChunk = "";
+				string subStringOnKey = "";
+
+				while (message != "")
+				{
+					if (message.Length > readyKey.Length)
+						subStringOnKey = message.Substring(0, readyKey.Length);
+					else if (message.Length <= readyKey.Length)
+						subStringOnKey = message;
+
+					Dictionary<int, char> subStringCharsToKey = new Dictionary<int, char>();
+					for (int i = 0; i < subStringOnKey.Length; i++)
+					{
+						subStringCharsToKey.Add(readyKey[i], subStringOnKey[i]);
+					}
+
+					for (int i = 0; i < readyKey.Length; i++)
+					{
+						try
+						{
+							readyChunk += subStringCharsToKey[i + 1];
+						}
+						catch (KeyNotFoundException)
+						{
+							readyChunk += " ";
+						}
+					}
+
+					message = message.Substring(subStringOnKey.Length, message.Length - subStringOnKey.Length);
+				}
+
+				return readyChunk;
+			}
+
+			Assert.AreEqual("cseerntiofarmit on  ", Nico("crazy", "secretinformation"));
+			Assert.AreEqual("abcd  ", Nico("abc", "abcd"));
+			Assert.AreEqual("2143658709", Nico("ba", "1234567890"));
+			Assert.AreEqual("message", Nico("a", "message"));
+			Assert.AreEqual("eky", Nico("key", "key"));
 		}
 
-		Assert.AreEqual("cseerntiofarmit on  ", Nico("crazy", "secretinformation"));
-		Assert.AreEqual("abcd  ", Nico("abc", "abcd"));
-		Assert.AreEqual("2143658709", Nico("ba", "1234567890"));
-		Assert.AreEqual("message", Nico("a", "message"));
-		Assert.AreEqual("eky", Nico("key", "key"));
+
+		//[Test]
+		//public void Xxxxx()
+		//{
+		//    void(string data)
+		//    {
+
+		//    }
+
+		//    Assert.AreEqual(new int[] { 8, 64 }, Parse("iiisdoso"));
+		//    Assert.AreEqual(new int[] { 8, 64, 3600 }, Parse("iiisdosodddddiso"));
+		//}
+
+
+
+
+
+
+
+
+
 	}
-
-
-
-
-
-
-
-
-
-
 }
