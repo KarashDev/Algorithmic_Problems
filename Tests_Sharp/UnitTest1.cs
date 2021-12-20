@@ -1176,6 +1176,9 @@ namespace Tests_Sharp
 
 				var matchedNumsCount = matchedNums.Count;
 
+				// Ближайшее число к нужному нам (X) находим путем сортировки по ключу и последующего "вынимания" самого первого числа
+				// с отсортированного списка. Сортировка производится по минимальной разнице между X (средним арифметическим) и любым 
+				// другим числом из нашей коллекции.
 				var matchedNumsMean = matchedNums.Sum() / matchedNums.Count;
 				var closestNumToMean = matchedNums.OrderBy(item => Math.Abs(matchedNumsMean - item)).First();
 				//ИЛИ
