@@ -1138,17 +1138,59 @@ namespace Tests_Sharp
 		}
 
 
-		//[Test]
-		//public void Xxxxx()
-		//{
-		//    void(string data)
-		//    {
+        //[Test]
+        //public void Xxxxx()
+        //{
+        //    void(string data)
+        //    {
 
-		//    }
+        //    }
 
-		//    Assert.AreEqual(new int[] { 8, 64 }, Parse("iiisdoso"));
-		//    Assert.AreEqual(new int[] { 8, 64, 3600 }, Parse("iiisdosodddddiso"));
-		//}
+        //    Assert.AreEqual(new int[] { 8, 64 }, Parse("iiisdoso"));
+        //    Assert.AreEqual(new int[] { 8, 64, 3600 }, Parse("iiisdosodddddiso"));
+        //}
+
+        [Test]
+        public void MaxSumDigits()
+        {
+			long GetSumOfDigits(long num)
+			{
+				long sum = 0;
+				while (num != 0)
+				{
+					sum += num % 10;
+					num /= 10;
+				}
+				return sum;
+			}
+
+			long[] MaxSumDig(long nmax, int maxsm)
+			{
+				List<long> matchedNums = new List<long>();
+
+				for (int i = 1000; i <= nmax; i++)
+				{
+					if (GetSumOfDigits(i) <= maxsm)
+						matchedNums.Add(i);
+				}
+
+				var matchedNumsCount = matchedNums.Count;
+
+				var matchedNumsMean = matchedNums.Sum() / matchedNums.Count;
+				var closestNumToMean = matchedNums.OrderBy(item => Math.Abs(matchedNumsMean - item)).First();
+				//ÈËÈ
+				//var closestNumToMean = matchedNums.Aggregate((x, y) => Math.Abs(x-matchedNumsMean) < Math.Abs(y-matchedNumsMean) ? x : y);
+
+				var matchedNumsSum = matchedNums.Sum();
+
+				return new long[] { matchedNumsCount, closestNumToMean, matchedNumsSum };
+			}
+
+			Assert.AreEqual(new long[] { 11, 1110, 12555 }, MaxSumDig(2000, 3));
+			Assert.AreEqual(new long[] { 21, 1120, 23665 }, MaxSumDig(2000, 4));
+			Assert.AreEqual(new long[] { 85, 1200, 99986 }, MaxSumDig(2000, 7));
+			Assert.AreEqual(new long[] { 141, 1600, 220756 }, MaxSumDig(3000, 7));
+		}
 
 
 
@@ -1156,7 +1198,5 @@ namespace Tests_Sharp
 
 
 
-
-
-	}
+    }
 }

@@ -1232,6 +1232,76 @@ namespace Algorithmic_Problems_Sharp
             //Console.WriteLine(Nico("a", "message"));//"message"
             //Console.WriteLine(Nico("key", "key"));//"eky"
 
+            //long GetSumOfDigits(long num)
+            //{
+            //    long sum = 0;
+            //    while (num != 0)
+            //    {
+            //        sum += num % 10;
+            //        num /= 10;
+            //    }
+            //    return sum;
+            //}
+
+            //long[] MaxSumDig(long nmax, int maxsm)
+            //{
+            //    // найти все числа <= nmax, у которых сумма цифр числа <= maxsm
+
+            //    // вывод [(1), (2), (3)], где 1 - количество найденных чисел; 2 - число из найденных, которое для 
+            //    // среднего арифметического всех чисел является самым ближним
+            //    // 3 - сумма найденных чисел
+
+            //    List<long> matchedNums = new List<long>();
+
+            //    for (int i = 1000; i <= nmax; i++)
+            //    {
+            //        if (GetSumOfDigits(i) <= maxsm)
+            //            matchedNums.Add(i);
+            //    }
+
+            //    var matchedNumsCount = matchedNums.Count;
+
+            //    var matchedNumsMean = matchedNums.Sum() / matchedNums.Count;
+               
+            //    var closestNumToMean = matchedNums.OrderBy(item => Math.Abs(matchedNumsMean - item)).First();
+            //    //ИЛИ
+            //    //var closestNumToMean = matchedNums.Aggregate((x, y) => Math.Abs(x-matchedNumsMean) < Math.Abs(y-matchedNumsMean) ? x : y);
+               
+            //    var matchedNumsSum = matchedNums.Sum();
+
+            //    return new long[] { matchedNumsCount, closestNumToMean, matchedNumsSum };
+            //}
+
+
+            //var a = MaxSumDig(2000, 3); //new long[] { 11, 1110, 12555 });
+            //var b = MaxSumDig(2000, 4); //new long[] { 21, 1120, 23665 });
+            //var c = MaxSumDig(2000, 7); //new long[] { 85, 1200, 99986 });
+            //var d = MaxSumDig(3000, 7); //new long[] { 141, 1600, 220756 });
+
+            //foreach (var item in a)
+            //{
+            //    Console.Write(item + " ");
+            //}
+            //Console.WriteLine();
+            //foreach (var item in b)
+            //{
+            //    Console.Write(item + " ");
+            //}
+            //Console.WriteLine();
+            //foreach (var item in c)
+            //{
+            //    Console.Write(item + " ");
+            //}
+            //Console.WriteLine();
+            //foreach (var item in d)
+            //{
+            //    Console.Write(item + " ");
+            //}
+            //Console.WriteLine();
+
+
+
+
 
 
 
