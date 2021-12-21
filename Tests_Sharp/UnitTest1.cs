@@ -1138,18 +1138,6 @@ namespace Tests_Sharp
 		}
 
 
-        //[Test]
-        //public void Xxxxx()
-        //{
-        //    void(string data)
-        //    {
-
-        //    }
-
-        //    Assert.AreEqual(new int[] { 8, 64 }, Parse("iiisdoso"));
-        //    Assert.AreEqual(new int[] { 8, 64, 3600 }, Parse("iiisdosodddddiso"));
-        //}
-
         [Test]
         public void MaxSumDigits()
         {
@@ -1196,10 +1184,71 @@ namespace Tests_Sharp
 		}
 
 
+        [Test]
+        public void SumOfStrings()
+        {
+			string SumStrings(string a, string b)
+			{
+				//if (string.IsNullOrEmpty(a))
+				//	return b;
+				//else if (string.IsNullOrEmpty(b))
+				//	return a;
+
+				//BigInteger numA = BigInteger.Parse(a);
+				//BigInteger numB = BigInteger.Parse(b);
+
+				//ИЛИ без проверки на пустые строки (значения останутся пустыми, если парсинг не удастся)
+				BigInteger numA;
+				BigInteger numB;
+				BigInteger.TryParse(a, out numA);
+				BigInteger.TryParse(b, out numB);
+
+				return Convert.ToString(BigInteger.Add(numA, numB));
+			}
+
+			Assert.AreEqual("579", SumStrings("123", "456"));
+			Assert.AreEqual("456", SumStrings("", "456"));
+		}
+
+
+		[Test]
+        public void BigFactorialWithRef()
+        {
+			string BigFactorial(long num, out BigInteger factorial)
+			{
+				factorial = new BigInteger(1);
+
+				for (int i = 1; i <= num; i++)
+				{
+					factorial *= i;
+					//ИЛИ
+					//factorial = BigInteger.Multiply(i, factorial);
+				}
+
+				return factorial.ToString();
+			}
+
+			BigInteger factorial;
+			BigFactorial(32, out factorial);
+			Assert.AreEqual("263130836933693530167218012160000000", factorial.ToString());
+        }
+
+		//[Test]
+		//public void Xxxxx()
+		//{
+		//    void(string data)
+		//    {
+
+		//    }
+
+		//    Assert.AreEqual(new int[] { 8, 64 }, Parse("iiisdoso"));
+		//    Assert.AreEqual(new int[] { 8, 64, 3600 }, Parse("iiisdosodddddiso"));
+		//}
 
 
 
 
 
-    }
+
+	}
 }

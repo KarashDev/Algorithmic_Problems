@@ -3,7 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Globalization;
-
 using System.Numerics;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -1262,11 +1261,11 @@ namespace Algorithmic_Problems_Sharp
             //    var matchedNumsCount = matchedNums.Count;
 
             //    var matchedNumsMean = matchedNums.Sum() / matchedNums.Count;
-               
+
             //    var closestNumToMean = matchedNums.OrderBy(item => Math.Abs(matchedNumsMean - item)).First();
             //    //ИЛИ
             //    //var closestNumToMean = matchedNums.Aggregate((x, y) => Math.Abs(x-matchedNumsMean) < Math.Abs(y-matchedNumsMean) ? x : y);
-               
+
             //    var matchedNumsSum = matchedNums.Sum();
 
             //    return new long[] { matchedNumsCount, closestNumToMean, matchedNumsSum };
@@ -1300,10 +1299,38 @@ namespace Algorithmic_Problems_Sharp
             //Console.WriteLine();
 
 
+            //string SumStrings(string a, string b)
+            //{
+            //    if (string.IsNullOrEmpty(a))
+            //        return b;
+            //    else if (string.IsNullOrEmpty(b))
+            //        return a;
+
+            //    BigInteger numA = BigInteger.Parse(a);
+            //    BigInteger numB = BigInteger.Parse(b);
+            //    return Convert.ToString(BigInteger.Add(numA, numB));
+            //}
 
 
 
+            void BigFactorial(long num, out BigInteger bigInteger)
+            {
+                bigInteger = 1;
 
+                for (int i = 1; i <= num; i++) 
+                {
+                    //factorial *= i;
+                    bigInteger = BigInteger.Multiply(i, bigInteger);
+                }
+
+                //return factorial;
+            }
+
+
+            BigInteger fact;
+            BigFactorial(5, out fact);
+           
+            Console.WriteLine(fact);
 
 
 
