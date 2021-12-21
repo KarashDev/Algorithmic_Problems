@@ -663,7 +663,6 @@ namespace Algorithmic_Problems_Sharp
 
             //int[,] board7 = new int[,] { { 2, 1, 1 }, { 0, 1, 1 }, { 2, 2, 2 } };
             //Console.WriteLine(IsSolved(board7));
-            int v = 0;
 
 
             //int[] Snail(int[][] array)
@@ -1313,30 +1312,100 @@ namespace Algorithmic_Problems_Sharp
 
 
 
-            void BigFactorial(long num, out BigInteger bigInteger)
-            {
-                bigInteger = 1;
 
-                for (int i = 1; i <= num; i++) 
+            int[] Sort(int[] array)
+            {
+                //There may be duplicates
+                //The array may be empty
+
+                // Перевести массив в строковый
+                // Разбить на отдельные слова - массив строк; сортировка по названию по возрастанию
+                // по первой букве или первым буквам если число записывается в несколько слов
+                if (array == null || array.Length == 0)
+                    return array;
+
+                string[] arr = array.Select(num => num.ToString()).ToArray();
+
+                for (int i = 0; i < array.Length; i++)
                 {
-                    //factorial *= i;
-                    bigInteger = BigInteger.Multiply(i, bigInteger);
+                    switch (arr[i])
+                    {
+                        case "0": arr[i] = "zero"; break;
+                        case "1": arr[i] = "one"; break;
+                        case "2": arr[i] = "two"; break;
+                        case "3": arr[i] = "three"; break;
+                        case "4": arr[i] = "four"; break;
+                        case "5": arr[i] = "five"; break;
+                        case "6": arr[i] = "six"; break;
+                        case "7": arr[i] = "seven"; break;
+                        case "8": arr[i] = "eight"; break;
+                        case "9": arr[i] = "nine"; break;
+                        case "10": arr[i] = "ten"; break;
+                        case "11": arr[i] = "eleven"; break;
+                        case "12": arr[i] = "twelve"; break;
+                        case "13": arr[i] = "thirteen"; break;
+                        case "14": arr[i] = "fourteen"; break;
+                        case "15": arr[i] = "fifteen"; break;
+                        case "16": arr[i] = "sixteen"; break;
+                        case "17": arr[i] = "seventeen"; break;
+                        case "18": arr[i] = "eighteen"; break;
+                        case "19": arr[i] = "nineteen"; break;
+                        case "20": arr[i] = "twenty"; break;
+                        case "30": arr[i] = "thirty"; break;
+                        case "40": arr[i] = "forty"; break;
+                        case "50": arr[i] = "fifty"; break;
+                        case "60": arr[i] = "sixty"; break;
+                        case "70": arr[i] = "seventy"; break;
+                        case "80": arr[i] = "eighty"; break;
+                        case "90": arr[i] = "ninety"; break;
+                    }
+
+                    if (arr[i].Length >= 2)
+                    {
+                        switch (arr[i][0])
+                        {
+                            case '2': arr[i] = "one"; break;
+                        }
+                        switch (arr[i].Substring(1, 1))
+                        {
+                            case "1": arr[i] = "one"; break;
+                            case "2": arr[i] = "two"; break;
+                            case "3": arr[i] = "three"; break;
+                            case "4": arr[i] = "four"; break;
+                            case "5": arr[i] = "five"; break;
+                            case "6": arr[i] = "six"; break;
+                            case "7": arr[i] = "seven"; break;
+                            case "8": arr[i] = "eight"; break;
+                            case "9": arr[i] = "nine"; break;
+                        }
+                    }
+
                 }
 
-                //return factorial;
+
+                return new[] { 5 };
+
             }
 
+            var a = Sort(new[] { 8, 8, 9, 9, 10, 10 });
+            var b = Sort(new[] { 1, 2, 3, 4 });
+            var c = Sort(new[] { 9, 99, 999 });
 
-            BigInteger fact;
-            BigFactorial(5, out fact);
-           
-            Console.WriteLine(fact);
-
-
-
-
-
-
+            foreach (var x in a)
+            {
+                Console.Write(x + " ");
+            }
+            Console.WriteLine();
+            foreach (var x in b)
+            {
+                Console.Write(x + " ");
+            }
+            Console.WriteLine();
+            foreach (var x in c)
+            {
+                Console.Write(x + " ");
+            }
+            Console.WriteLine();
 
 
 
