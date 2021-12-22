@@ -1245,19 +1245,43 @@ namespace Tests_Sharp
         //    Assert.AreEqual(new int[] { 8, 64, 3600 }, Parse("iiisdosodddddiso"));
         //}
 
+        ////TODO не знаю как решать. ссылка: https://www.codewars.com/kata/56f4ff45af5b1f8cd100067d/train/csharp
+        //[Test]
+        //public void Dinglemouse()
+        //{
+        //    int[] Sort(int[] array)
+        //    {
+        //        // Your code here
+        //        return new int[0];
+        //    }
+
+        //    Assert.AreEqual(new[] { 8, 8, 9, 9, 10, 10 }, Sort(new[] { 8, 8, 9, 9, 10, 10 }));
+        //    Assert.AreEqual(new[] { 4, 1, 3, 2 }, Sort(new[] { 1, 2, 3, 4 }));
+        //    Assert.AreEqual(new[] { 9, 999, 99 }, Sort(new[] { 9, 99, 999 }));
+        //}
+
+
         [Test]
-        public void Dinglemouse()
+        public void AlphabetShelters()
         {
-            int[] Sort(int[] array)
+            string AlphabetWar(string b)
             {
-                // Your code here
-                return new int[0];
+                return "oops";
             }
 
-            Assert.AreEqual(new[] { 8, 8, 9, 9, 10, 10 }, Sort(new[] { 8, 8, 9, 9, 10, 10 }));
-            Assert.AreEqual(new[] { 4, 1, 3, 2 }, Sort(new[] { 1, 2, 3, 4 }));
-            Assert.AreEqual(new[] { 9, 999, 99 }, Sort(new[] { 9, 99, 999 }));
+            Assert.AreEqual("abdefghijk", AlphabetWar("abde[fgh]ijk"));
+            Assert.AreEqual("fgh", AlphabetWar("ab#de[fgh]ijk"));
+            Assert.AreEqual("",AlphabetWar("ab#de[fgh]ij#k"));
+            Assert.AreEqual("", AlphabetWar("##abde[fgh]ijk"));
+            Assert.AreEqual("", AlphabetWar("##abde[fgh]"));
+            Assert.AreEqual("abdefgh", AlphabetWar("abde[fgh]"));
+            Assert.AreEqual("mn",AlphabetWar("##abde[fgh]ijk[mn]op"));
+            Assert.AreEqual("mn", AlphabetWar("#abde[fgh]i#jk[mn]op"));
+            Assert.AreEqual("abijk",AlphabetWar("[ab]adfd[dd]##[abe]dedf[ijk]d#d[h]#"));
         }
+
+
+
 
 
 

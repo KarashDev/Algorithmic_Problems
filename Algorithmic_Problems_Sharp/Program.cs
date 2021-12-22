@@ -1311,101 +1311,200 @@ namespace Algorithmic_Problems_Sharp
             //}
 
 
+            //int[] Sort(int[] array)
+            //{
+            //    //There may be duplicates
+            //    //The array may be empty
+
+            //    // Перевести массив в строковый
+            //    // Разбить на отдельные слова - массив строк; сортировка по названию по возрастанию
+            //    // по первой букве или первым буквам если число записывается в несколько слов
+            //    if (array == null || array.Length == 0)
+            //        return array;
+
+            //    string[] arr = array.Select(num => num.ToString()).ToArray();
+
+            //    for (int i = 0; i < array.Length; i++)
+            //    {
+            //        switch (arr[i])
+            //        {
+            //            case "0": arr[i] = "zero"; break;
+            //            case "1": arr[i] = "one"; break;
+            //            case "2": arr[i] = "two"; break;
+            //            case "3": arr[i] = "three"; break;
+            //            case "4": arr[i] = "four"; break;
+            //            case "5": arr[i] = "five"; break;
+            //            case "6": arr[i] = "six"; break;
+            //            case "7": arr[i] = "seven"; break;
+            //            case "8": arr[i] = "eight"; break;
+            //            case "9": arr[i] = "nine"; break;
+            //            case "10": arr[i] = "ten"; break;
+            //            case "11": arr[i] = "eleven"; break;
+            //            case "12": arr[i] = "twelve"; break;
+            //            case "13": arr[i] = "thirteen"; break;
+            //            case "14": arr[i] = "fourteen"; break;
+            //            case "15": arr[i] = "fifteen"; break;
+            //            case "16": arr[i] = "sixteen"; break;
+            //            case "17": arr[i] = "seventeen"; break;
+            //            case "18": arr[i] = "eighteen"; break;
+            //            case "19": arr[i] = "nineteen"; break;
+            //            case "20": arr[i] = "twenty"; break;
+            //            case "30": arr[i] = "thirty"; break;
+            //            case "40": arr[i] = "forty"; break;
+            //            case "50": arr[i] = "fifty"; break;
+            //            case "60": arr[i] = "sixty"; break;
+            //            case "70": arr[i] = "seventy"; break;
+            //            case "80": arr[i] = "eighty"; break;
+            //            case "90": arr[i] = "ninety"; break;
+            //        }
+
+            //        if (arr[i].Length >= 2)
+            //        {
+            //            switch (arr[i][0])
+            //            {
+            //                case '2': arr[i] = "one"; break;
+            //            }
+            //            switch (arr[i].Substring(1, 1))
+            //            {
+            //                case "1": arr[i] = "one"; break;
+            //                case "2": arr[i] = "two"; break;
+            //                case "3": arr[i] = "three"; break;
+            //                case "4": arr[i] = "four"; break;
+            //                case "5": arr[i] = "five"; break;
+            //                case "6": arr[i] = "six"; break;
+            //                case "7": arr[i] = "seven"; break;
+            //                case "8": arr[i] = "eight"; break;
+            //                case "9": arr[i] = "nine"; break;
+            //            }
+            //        }
+
+            //    }
+
+            //    return new[] { 5 };
+
+            //}
+
+            //var a = Sort(new[] { 8, 8, 9, 9, 10, 10 });
+            //var b = Sort(new[] { 1, 2, 3, 4 });
+            //var c = Sort(new[] { 9, 99, 999 });
+
+            //foreach (var x in a)
+            //{
+            //    Console.Write(x + " ");
+            //}
+            //Console.WriteLine();
+            //foreach (var x in b)
+            //{
+            //    Console.Write(x + " ");
+            //}
+            //Console.WriteLine();
+            //foreach (var x in c)
+            //{
+            //    Console.Write(x + " ");
+            //}
+            //Console.WriteLine();
 
 
-            int[] Sort(int[] array)
+
+
+            string AlphabetWar(string b)
             {
-                //There may be duplicates
-                //The array may be empty
+                // Ни одного # - вывести все символы без скобок
 
-                // Перевести массив в строковый
-                // Разбить на отдельные слова - массив строк; сортировка по названию по возрастанию
-                // по первой букве или первым буквам если число записывается в несколько слов
-                if (array == null || array.Length == 0)
-                    return array;
+                // Один # вокруг [x] : [x] остается, все остальные буквы уничтожаются: необходимо проводить
+                // проверку в зоне до следующего [x] : логика выделения зоны
+                // Два и более # вокруг [x] : [x] уничтожается вместе со всеми буквами вокруг
+                // Метки # никуда не деваются при уничтожении [x] (актуальны и для следующего [x])
 
-                string[] arr = array.Select(num => num.ToString()).ToArray();
-
-                for (int i = 0; i < array.Length; i++)
+                if (!b.Contains('#'))
                 {
-                    switch (arr[i])
+                    var fetch = b.Where(c => c != '[' && c != ']').ToArray();
+                    return String.Join("", fetch);
+                }
+
+                // Пересчет символов в строке
+                for (int i = 0; i < b.Length; i++)
+                {
+                    // найти [x] 
+
+                    // найти всю актуальную область вокруг [x] до след [x] (или до конца строки)
+                    // проверять актуальную область на # и ##
+                    // если справа больше нет [x] и один # на область - удалить все но оставить область без скобок; 
+                    // если справа есть [x] и один # на область - удалить все но оставить область без скобок, и далее
+                    //      перейти к следующему [x] и актуальной области вокруг него; 
+
+                    // Нахождение [x]
+                    string shelter = "";
+
+
+                    if (b[i] == '[')
                     {
-                        case "0": arr[i] = "zero"; break;
-                        case "1": arr[i] = "one"; break;
-                        case "2": arr[i] = "two"; break;
-                        case "3": arr[i] = "three"; break;
-                        case "4": arr[i] = "four"; break;
-                        case "5": arr[i] = "five"; break;
-                        case "6": arr[i] = "six"; break;
-                        case "7": arr[i] = "seven"; break;
-                        case "8": arr[i] = "eight"; break;
-                        case "9": arr[i] = "nine"; break;
-                        case "10": arr[i] = "ten"; break;
-                        case "11": arr[i] = "eleven"; break;
-                        case "12": arr[i] = "twelve"; break;
-                        case "13": arr[i] = "thirteen"; break;
-                        case "14": arr[i] = "fourteen"; break;
-                        case "15": arr[i] = "fifteen"; break;
-                        case "16": arr[i] = "sixteen"; break;
-                        case "17": arr[i] = "seventeen"; break;
-                        case "18": arr[i] = "eighteen"; break;
-                        case "19": arr[i] = "nineteen"; break;
-                        case "20": arr[i] = "twenty"; break;
-                        case "30": arr[i] = "thirty"; break;
-                        case "40": arr[i] = "forty"; break;
-                        case "50": arr[i] = "fifty"; break;
-                        case "60": arr[i] = "sixty"; break;
-                        case "70": arr[i] = "seventy"; break;
-                        case "80": arr[i] = "eighty"; break;
-                        case "90": arr[i] = "ninety"; break;
+                        var rawShelter = b.Substring(i);
+
+                        for (int j = 0; j < rawShelter.Length; j++)
+                        {
+                            if (rawShelter[j] == ']')
+                            {
+                                shelter = rawShelter.Substring(0, j + 1);
+
+                                b = b.Remove(i, j + 1);
+
+                                // убрать из строки shelter
+                                // область: субстринг от [ (если нету - от начала строки) до [ (если нету - до конца строки)
+
+                                for (int g = 0; g < b.Length; g++)
+                                {
+                                    if (b.Contains('[') && b.IndexOf('[') != 0)
+                                    {
+
+                                    }
+                                }
+
+
+
+                            }
+                        }
                     }
 
-                    if (arr[i].Length >= 2)
-                    {
-                        switch (arr[i][0])
-                        {
-                            case '2': arr[i] = "one"; break;
-                        }
-                        switch (arr[i].Substring(1, 1))
-                        {
-                            case "1": arr[i] = "one"; break;
-                            case "2": arr[i] = "two"; break;
-                            case "3": arr[i] = "three"; break;
-                            case "4": arr[i] = "four"; break;
-                            case "5": arr[i] = "five"; break;
-                            case "6": arr[i] = "six"; break;
-                            case "7": arr[i] = "seven"; break;
-                            case "8": arr[i] = "eight"; break;
-                            case "9": arr[i] = "nine"; break;
-                        }
-                    }
+                    // находим кусок до ] => выделяем  [x] ==>
 
                 }
 
 
-                return new[] { 5 };
+                return null;
 
             }
 
-            var a = Sort(new[] { 8, 8, 9, 9, 10, 10 });
-            var b = Sort(new[] { 1, 2, 3, 4 });
-            var c = Sort(new[] { 9, 99, 999 });
 
-            foreach (var x in a)
-            {
-                Console.Write(x + " ");
-            }
-            Console.WriteLine();
-            foreach (var x in b)
-            {
-                Console.Write(x + " ");
-            }
-            Console.WriteLine();
-            foreach (var x in c)
-            {
-                Console.Write(x + " ");
-            }
-            Console.WriteLine();
+            //Console.WriteLine(AlphabetWar("abde[fgh]ijk"));
+            //Console.WriteLine(AlphabetWar("ab#de[fgh]ijk"));
+            //Console.WriteLine(AlphabetWar("ab#de[fgh]ij#k"));
+            //Console.WriteLine(AlphabetWar("##abde[fgh]ijk"));
+            //Console.WriteLine(AlphabetWar("##abde[fgh]"));
+            //Console.WriteLine(AlphabetWar("abde[fgh]"));
+            Console.WriteLine(AlphabetWar("#abde[fgh]i#jk[mn]op"));
+
+            //##abde[fgh]ijk[mn]op => "mn" (letters from the second shelter survive, there is no # close)
+            //#ab#de[fgh]ijk[mn]op => "mn" (letters from the second shelter survive, there is no # close)
+            //#abde[fgh]i#jk[mn]op => "mn" (letters from the second shelter survive, there is only 1 # close)
+            //[a]#[b]#[c]  => "ac"
+            //[a]#b#[c][d] => "d"
+            //[a][b][c]    => "abc"
+            //##a[a]b[c]#  => "c"
+
+
+            //Assert.AreEqual("abdefghijk", AlphabetWar("abde[fgh]ijk"));
+            //Assert.AreEqual("fgh", AlphabetWar("ab#de[fgh]ijk"));
+            //Assert.AreEqual("", AlphabetWar("ab#de[fgh]ij#k"));
+            //Assert.AreEqual("", AlphabetWar("##abde[fgh]ijk"));
+            //Assert.AreEqual("", AlphabetWar("##abde[fgh]"));
+            //Assert.AreEqual("abdefgh", AlphabetWar("abde[fgh]"));
+            //Assert.AreEqual("mn", AlphabetWar("##abde[fgh]ijk[mn]op"));
+            //Assert.AreEqual("mn", AlphabetWar("#abde[fgh]i#jk[mn]op"));
+            //Assert.AreEqual("abijk", AlphabetWar("[ab]adfd[dd]##[abe]dedf[ijk]d#d[h]#"));
+
+
+
 
 
 
