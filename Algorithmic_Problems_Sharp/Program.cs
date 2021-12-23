@@ -1407,101 +1407,93 @@ namespace Algorithmic_Problems_Sharp
 
 
 
-            string AlphabetWar(string b)
-            {
-                // Ни одного # - вывести все символы без скобок
+            //string AlphabetWar(string b)
+            //{
+            //    // Ни одного # - вывести все символы без скобок
 
-                // Один # вокруг [x] : [x] остается, все остальные буквы уничтожаются: необходимо проводить
-                // проверку в зоне до следующего [x] : логика выделения зоны
-                // Два и более # вокруг [x] : [x] уничтожается вместе со всеми буквами вокруг
-                // Метки # никуда не деваются при уничтожении [x] (актуальны и для следующего [x])
+            //    // Один # вокруг [x] : [x] остается, все остальные буквы уничтожаются: необходимо проводить
+            //    // проверку в зоне до следующего [x] : логика выделения зоны
+            //    // Два и более # вокруг [x] : [x] уничтожается вместе со всеми буквами вокруг
+            //    // Метки # никуда не деваются при уничтожении [x] (актуальны и для следующего [x])
 
-                if (!b.Contains('#'))
-                {
-                    var fetch = b.Where(c => c != '[' && c != ']').ToArray();
-                    return String.Join("", fetch);
-                }
+            //    if (!b.Contains('#'))
+            //    {
+            //        var fetch = b.Where(c => c != '[' && c != ']').ToArray();
+            //        return String.Join("", fetch);
+            //    }
 
-                // Пересчет символов в строке
-                for (int i = 0; i < b.Length; i++)
-                {
-                    // найти [x] 
+            //    // Пересчет символов в строке
+            //    for (int i = 0; i < b.Length; i++)
+            //    {
+            //        // найти [x] 
 
-                    // найти всю актуальную область вокруг [x] до след [x] (или до конца строки)
-                    // проверять актуальную область на # и ##
-                    // если справа больше нет [x] и один # на область - удалить все но оставить область без скобок; 
-                    // если справа есть [x] и один # на область - удалить все но оставить область без скобок, и далее
-                    //      перейти к следующему [x] и актуальной области вокруг него; 
+            //        // найти всю актуальную область вокруг [x] до след [x] (или до конца строки)
+            //        // проверять актуальную область на # и ##
+            //        // если справа больше нет [x] и один # на область - удалить все но оставить область без скобок; 
+            //        // если справа есть [x] и один # на область - удалить все но оставить область без скобок, и далее
+            //        //      перейти к следующему [x] и актуальной области вокруг него; 
 
-                    // Нахождение [x]
-                    string shelter = "";
-
-
-                    if (b[i] == '[')
-                    {
-                        var rawShelter = b.Substring(i);
-
-                        for (int j = 0; j < rawShelter.Length; j++)
-                        {
-                            if (rawShelter[j] == ']')
-                            {
-                                shelter = rawShelter.Substring(0, j + 1);
-
-                                b = b.Remove(i, j + 1);
-
-                                // убрать из строки shelter
-                                // область: субстринг от [ (если нету - от начала строки) до [ (если нету - до конца строки)
-
-                                for (int g = 0; g < b.Length; g++)
-                                {
-                                    if (b.Contains('[') && b.IndexOf('[') != 0)
-                                    {
-
-                                    }
-                                }
+            //        // Нахождение [x]
+            //        string shelter = "";
 
 
+            //        if (b[i] == '[')
+            //        {
+            //            var rawShelter = b.Substring(i);
 
-                            }
-                        }
-                    }
+            //            for (int j = 0; j < rawShelter.Length; j++)
+            //            {
+            //                if (rawShelter[j] == ']')
+            //                {
+            //                    shelter = rawShelter.Substring(0, j + 1);
 
-                    // находим кусок до ] => выделяем  [x] ==>
+            //                    b = b.Remove(i, j + 1);
 
-                }
+            //                    // убрать из строки shelter
+            //                    // область: субстринг от начала до [ (если нету - до конца строки)
 
-
-                return null;
-
-            }
-
-
-            //Console.WriteLine(AlphabetWar("abde[fgh]ijk"));
-            //Console.WriteLine(AlphabetWar("ab#de[fgh]ijk"));
-            //Console.WriteLine(AlphabetWar("ab#de[fgh]ij#k"));
-            //Console.WriteLine(AlphabetWar("##abde[fgh]ijk"));
-            //Console.WriteLine(AlphabetWar("##abde[fgh]"));
-            //Console.WriteLine(AlphabetWar("abde[fgh]"));
-            Console.WriteLine(AlphabetWar("#abde[fgh]i#jk[mn]op"));
-
-            //##abde[fgh]ijk[mn]op => "mn" (letters from the second shelter survive, there is no # close)
-            //#ab#de[fgh]ijk[mn]op => "mn" (letters from the second shelter survive, there is no # close)
-            //#abde[fgh]i#jk[mn]op => "mn" (letters from the second shelter survive, there is only 1 # close)
-            //[a]#[b]#[c]  => "ac"
-            //[a]#b#[c][d] => "d"
-            //[a][b][c]    => "abc"
-            //##a[a]b[c]#  => "c"
+            //                    if (b.Contains('['))
+            //                    {
+            //                        var actualArea = b.Substring(0, b.IndexOf('['));
+            //                    }
 
 
-            //Assert.AreEqual("abdefghijk", AlphabetWar("abde[fgh]ijk"));
-            //Assert.AreEqual("fgh", AlphabetWar("ab#de[fgh]ijk"));
-            //Assert.AreEqual("", AlphabetWar("ab#de[fgh]ij#k"));
-            //Assert.AreEqual("", AlphabetWar("##abde[fgh]ijk"));
-            //Assert.AreEqual("", AlphabetWar("##abde[fgh]"));
-            //Assert.AreEqual("abdefgh", AlphabetWar("abde[fgh]"));
-            //Assert.AreEqual("mn", AlphabetWar("##abde[fgh]ijk[mn]op"));
-            //Assert.AreEqual("mn", AlphabetWar("#abde[fgh]i#jk[mn]op"));
-            //Assert.AreEqual("abijk", AlphabetWar("[ab]adfd[dd]##[abe]dedf[ijk]d#d[h]#"));
+            //                }
+            //            }
+            //        }
+
+            //        // находим кусок до ] => выделяем  [x] ==>
+            //    }
+
+            //    return null;
+            //}
+
+
+            ////Console.WriteLine(AlphabetWar("abde[fgh]ijk"));
+            ////Console.WriteLine(AlphabetWar("ab#de[fgh]ijk"));
+            ////Console.WriteLine(AlphabetWar("ab#de[fgh]ij#k"));
+            ////Console.WriteLine(AlphabetWar("##abde[fgh]ijk"));
+            ////Console.WriteLine(AlphabetWar("##abde[fgh]"));
+            ////Console.WriteLine(AlphabetWar("abde[fgh]"));
+            //Console.WriteLine(AlphabetWar("#abde[fgh]i#jk[mn]op"));
+
+            ////##abde[fgh]ijk[mn]op => "mn" (letters from the second shelter survive, there is no # close)
+            ////#ab#de[fgh]ijk[mn]op => "mn" (letters from the second shelter survive, there is no # close)
+            ////#abde[fgh]i#jk[mn]op => "mn" (letters from the second shelter survive, there is only 1 # close)
+            ////[a]#[b]#[c]  => "ac"
+            ////[a]#b#[c][d] => "d"
+            ////[a][b][c]    => "abc"
+            ////##a[a]b[c]#  => "c"
+
+            ////Assert.AreEqual("abdefghijk", AlphabetWar("abde[fgh]ijk"));
+            ////Assert.AreEqual("fgh", AlphabetWar("ab#de[fgh]ijk"));
+            ////Assert.AreEqual("", AlphabetWar("ab#de[fgh]ij#k"));
+            ////Assert.AreEqual("", AlphabetWar("##abde[fgh]ijk"));
+            ////Assert.AreEqual("", AlphabetWar("##abde[fgh]"));
+            ////Assert.AreEqual("abdefgh", AlphabetWar("abde[fgh]"));
+            ////Assert.AreEqual("mn", AlphabetWar("##abde[fgh]ijk[mn]op"));
+            ////Assert.AreEqual("mn", AlphabetWar("#abde[fgh]i#jk[mn]op"));
+            ////Assert.AreEqual("abijk", AlphabetWar("[ab]adfd[dd]##[abe]dedf[ijk]d#d[h]#"));
 
 
 
