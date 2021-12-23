@@ -1262,23 +1262,30 @@ namespace Tests_Sharp
 
 
         [Test]
-        public void AlphabetShelters()
+        public void FloodFillKata()
         {
-            string AlphabetWar(string b)
+            int[,] FloodFill(int[,] array, int y, int x, int newValue)
             {
-                return "oops";
+                y x = i j
+                return array;
             }
 
-            Assert.AreEqual("abdefghijk", AlphabetWar("abde[fgh]ijk"));
-            Assert.AreEqual("fgh", AlphabetWar("ab#de[fgh]ijk"));
-            Assert.AreEqual("",AlphabetWar("ab#de[fgh]ij#k"));
-            Assert.AreEqual("", AlphabetWar("##abde[fgh]ijk"));
-            Assert.AreEqual("", AlphabetWar("##abde[fgh]"));
-            Assert.AreEqual("abdefgh", AlphabetWar("abde[fgh]"));
-            Assert.AreEqual("mn",AlphabetWar("##abde[fgh]ijk[mn]op"));
-            Assert.AreEqual("mn", AlphabetWar("#abde[fgh]i#jk[mn]op"));
-            Assert.AreEqual("abijk",AlphabetWar("[ab]adfd[dd]##[abe]dedf[ijk]d#d[h]#"));
+            var expected = new int[,]
+            {{1,4,3},
+            {1,4,4},
+            {2,3,4}};
+
+            var actual = new int[,]
+            {{1,2,3},
+            {1,2,2},
+            {2,3,2}};
+
+            CollectionAssert.AreEqual(expected, FloodFill(actual, 0, 1, 4));
         }
+
+
+
+
 
 
 

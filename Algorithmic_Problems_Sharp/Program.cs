@@ -1406,7 +1406,6 @@ namespace Algorithmic_Problems_Sharp
 
 
 
-
             //string AlphabetWar(string b)
             //{
             //    // Ни одного # - вывести все символы без скобок
@@ -1456,8 +1455,6 @@ namespace Algorithmic_Problems_Sharp
             //                    {
             //                        var actualArea = b.Substring(0, b.IndexOf('['));
             //                    }
-
-
             //                }
             //            }
             //        }
@@ -1494,6 +1491,59 @@ namespace Algorithmic_Problems_Sharp
             ////Assert.AreEqual("mn", AlphabetWar("##abde[fgh]ijk[mn]op"));
             ////Assert.AreEqual("mn", AlphabetWar("#abde[fgh]i#jk[mn]op"));
             ////Assert.AreEqual("abijk", AlphabetWar("[ab]adfd[dd]##[abe]dedf[ijk]d#d[h]#"));
+
+           
+            
+            int[,] FloodFill(int[,] array, int y, int x, int newValue)
+            {
+                //число на координате которое заменяем y x = i j
+                //заменить соседнее число на newValue только если оно такое же как число
+                //по координате и смежно либо по вертикали либо по горизонтали
+
+                var height = array.GetLength(0);
+                var width = array.GetLength(1);
+
+                for (int i = 0; i < height; i++)
+                {
+                    for (int j = 0; j < width; j++)
+                    {
+                        int entryNum = default;
+                        try
+                        {
+                            entryNum = array[y, x];
+                        }
+                        catch (Exception)
+                        {
+                            return array;
+                        }
+
+                        // Отловить все "красные" зоны
+                        // Доступ наверх - только не первый i; доступ вниз - только не последний i
+                        // Доступ влево - только на первый j; доступ вправо - только на последний j
+
+
+
+
+
+
+
+
+
+
+
+
+                    }
+                }             
+
+
+
+                return array;
+            }
+
+
+
+
+
 
 
 
