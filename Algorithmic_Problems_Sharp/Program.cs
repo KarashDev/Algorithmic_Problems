@@ -1492,8 +1492,8 @@ namespace Algorithmic_Problems_Sharp
             ////Assert.AreEqual("mn", AlphabetWar("#abde[fgh]i#jk[mn]op"));
             ////Assert.AreEqual("abijk", AlphabetWar("[ab]adfd[dd]##[abe]dedf[ijk]d#d[h]#"));
 
-           
-            
+
+
             int[,] FloodFill(int[,] array, int y, int x, int newValue)
             {
                 //число на координате которое заменяем y x = i j
@@ -1522,20 +1522,8 @@ namespace Algorithmic_Problems_Sharp
                         // Доступ влево - только на первый j; доступ вправо - только на последний j
 
 
-
-
-
-
-
-
-
-
-
-
                     }
-                }             
-
-
+                }
 
                 return array;
             }
