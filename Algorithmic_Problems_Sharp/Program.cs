@@ -1533,32 +1533,106 @@ namespace Algorithmic_Problems_Sharp
 						// если первый массив и последнее место - надо чтобы или низ или лево был тоже entryNum
 
 						// если последний массив и первое место - надо чтобы или верх или право был тоже entryNum
+
 						// если последний массив и последнее место - надо чтобы или верх или лево был тоже entryNum
+						// если первый массив и не первое и не последнее - низ, право или лево
+						// если первое значение и массив любой - низ, верх или право
+						// если последний массив и не первое и не последнее - верх, право или лево
+						// если последнее значение и массив любой - низ, верх или лево
+						// оставшийся вариант: значение не является крайним
 
-						if (i == 0 && j == 0)
-						{
-							if (array[i, j] == entryNum && (array[i + 1, j] == entryNum || array[i, j + 1] == entryNum))
-								array[i, j] = newValue;
-						}
-						else if (i == 0 && j == width - 1)
-						{
-							if (array[i, j] == entryNum && (array[i + 1, j] == entryNum || array[i, j - 1] == entryNum))
-								array[i, j] = newValue;
-						}
-						else if (i == height - 1 && j == 0)
-						{
-							if (array[i, j] == entryNum && (array[i - 1, j] == entryNum || array[i, j + 1] == entryNum))
-								array[i, j] = newValue;
-						}
-						else if (i == height - 1 && j == width - 1)
-						{
-							if (array[i, j] == entryNum && (array[i - 1, j] == entryNum || array[i, j - 1] == entryNum))
-								array[i, j] = newValue;
-						}
-						else if ()
+						bool isReplaceFirst = true;
+						int replacesCount = 0;
+						int container = 0;
 
-						
+						if (array[i, j] == entryNum)
+						{
+							if (isReplaceFirst)
+							{
+								container = entryNum;
+								entryNum = newValue;
+							}
+							else
+							{
+								newValue = container;
+							}
 
+
+							if (i == 0 && j == 0)
+							{
+								if (array[i + 1, j] == newValue || array[i, j + 1] == newValue)
+								{
+									array[i, j] = newValue;
+									isReplaceFirst = false;
+								}
+							}
+							else if (i == 0 && j == width - 1)
+							{
+								if (array[i + 1, j] == newValue || array[i, j - 1] == newValue)
+								{
+									array[i, j] = newValue;
+									isReplaceFirst = false;
+								}
+							}
+							else if (i == height - 1 && j == 0)
+							{
+								if (array[i - 1, j] == newValue || array[i, j + 1] == newValue)
+								{
+									array[i, j] = newValue;
+									isReplaceFirst = false;
+								}
+							}
+							else if (i == height - 1 && j == width - 1)
+							{
+								if (array[i - 1, j] == newValue || array[i, j - 1] == newValue)
+								{
+									array[i, j] = newValue;
+									isReplaceFirst = false;
+								}
+							}
+							else if (i == 0)
+							{
+								if (array[i + 1, j] == newValue || array[i, j + 1] == newValue || array[i, j - 1] == newValue)
+								{
+									array[i, j] = newValue;
+									isReplaceFirst = false;
+								}
+							}
+							else if (j == 0)
+							{
+								if (array[i - 1, j] == newValue || array[i + 1, j] == newValue || array[i, j + 1] == newValue)
+								{
+									array[i, j] = newValue;
+									isReplaceFirst = false;
+								}
+							}
+							else if (i == height - 1)
+							{
+								if (array[i - 1, j] == newValue || array[i, j + 1] == newValue || array[i, j - 1] == newValue)
+								{
+									array[i, j] = newValue;
+									isReplaceFirst = false;
+								}
+							}
+							else if (j == width - 1)
+							{
+								if (array[i - 1, j] == newValue || array[i + 1, j] == newValue || array[i, j - 1] == newValue)
+								{
+									array[i, j] = newValue;
+									isReplaceFirst = false;
+								}
+							}
+							else
+							{
+								if (array[i - 1, j] == newValue || array[i + 1, j] == newValue || array[i, j - 1] == newValue || array[i, j + 1] == newValue)
+								{
+									array[i, j] = newValue;
+									isReplaceFirst = false;
+								}
+							}
+
+
+						}
 					}
 				}
 
