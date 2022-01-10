@@ -1261,301 +1261,399 @@ namespace Tests_Sharp
         //}
 
 
+        //[Test]
+        //public void FloodFillKata()
+        //{
+        //    void ReplaceNum(int[,] array, int i, int j, int y, int x, int entryNum, int newValue)
+        //    {
+        //        var height = array.GetLength(0);
+        //        var width = array.GetLength(1);
+
+        //        if (array[i, j] == entryNum)
+        //        {
+        //            int numToReplace = entryNum;
+        //            bool isFirstReplaceInCluster = false;
+
+        //            // Если замена самая первая - необходимо проверять окружающие числа 
+        //            // не на newValue а на самого себя (array[y, x]).
+        //            // Если замена НЕ первая - необходимо проверять окружающие числа на newValue (на уже замененное число)
+
+        //            if (i == y && j == x)
+        //            {
+        //                isFirstReplaceInCluster = true;
+        //            }
+
+        //            if (!isFirstReplaceInCluster)
+        //                numToReplace = newValue;
+
+        //            // Верхний левый угол
+        //            if (i == 0 && j == 0)
+        //            {
+        //                if (array[i + 1, j] == numToReplace || array[i, j + 1] == numToReplace || isFirstReplaceInCluster)
+        //                {
+        //                    array[i, j] = newValue;
+        //                }
+        //            }
+        //            // Верхний правый угол
+        //            else if (i == 0 && j == width - 1)
+        //            {
+        //                if (array[i + 1, j] == numToReplace || array[i, j - 1] == numToReplace || isFirstReplaceInCluster)
+        //                {
+        //                    array[i, j] = newValue;
+        //                }
+        //            }
+        //            // Нижний левый угол
+        //            else if (i == height - 1 && j == 0)
+        //            {
+        //                if (array[i - 1, j] == numToReplace || array[i, j + 1] == numToReplace || isFirstReplaceInCluster)
+        //                {
+        //                    array[i, j] = newValue;
+        //                }
+        //            }
+        //            // Нижний правый угол
+        //            else if (i == height - 1 && j == width - 1)
+        //            {
+        //                if (array[i - 1, j] == numToReplace || array[i, j - 1] == numToReplace || isFirstReplaceInCluster)
+        //                {
+        //                    array[i, j] = newValue;
+        //                }
+        //            }
+        //            // Из самого верхнего массива кроме углов
+        //            else if (i == 0)
+        //            {
+        //                if (array[i + 1, j] == numToReplace || array[i, j + 1] == numToReplace || array[i, j - 1] == numToReplace
+        //                    || isFirstReplaceInCluster)
+        //                {
+        //                    array[i, j] = newValue;
+        //                }
+        //            }
+        //            // Из самого левого массива кроме углов
+        //            else if (j == 0)
+        //            {
+        //                if (array[i - 1, j] == numToReplace || array[i + 1, j] == numToReplace || array[i, j + 1] == numToReplace
+        //                    || isFirstReplaceInCluster)
+        //                {
+        //                    array[i, j] = newValue;
+        //                }
+        //            }
+        //            // Из самого нижнего массива кроме углов
+        //            else if (i == height - 1)
+        //            {
+        //                if (array[i - 1, j] == numToReplace || array[i, j + 1] == numToReplace || array[i, j - 1] == numToReplace
+        //                    || isFirstReplaceInCluster)
+        //                {
+        //                    array[i, j] = newValue;
+        //                }
+        //            }
+        //            // Из самого правого массива кроме углов
+        //            else if (j == width - 1)
+        //            {
+        //                if (array[i - 1, j] == numToReplace || array[i + 1, j] == numToReplace || array[i, j - 1] == numToReplace
+        //                    || isFirstReplaceInCluster)
+        //                {
+        //                    array[i, j] = newValue;
+        //                }
+        //            }
+        //            // Откуда угодно кроме углов и крайних массивов
+        //            else
+        //            {
+        //                if (array[i - 1, j] == numToReplace || array[i + 1, j] == numToReplace || array[i, j - 1] == numToReplace
+        //                    || array[i, j + 1] == numToReplace || isFirstReplaceInCluster)
+        //                {
+        //                    array[i, j] = newValue;
+        //                }
+        //            }
+        //        }
+        //    }
+
+        //    int[,] FloodFill(int[,] array, int y, int x, int newValue)
+        //    {
+        //        var height = array.GetLength(0);
+        //        var width = array.GetLength(1);
+
+        //        int entryNum = default;
+
+        //        // Запись в переменную числа, которое нужно заменять
+        //        try
+        //        {
+        //            entryNum = array[y, x];
+        //        }
+        //        catch (Exception)
+        //        {
+        //            return array;
+        //        }
+
+        //        if (height == 0 || width == 0)
+        //            return array;
+        //        else if (height == 1 && width == 1)
+        //        {
+        //            if (array[0, 0] == entryNum)
+        //            {
+        //                array[0, 0] = newValue;
+        //                return array;
+        //            }
+        //            else return array;
+        //        }
+
+        //        for (int i = 0; i <= height - 1; i++)
+        //        {
+        //            for (int j = 0; j <= width - 1; j++)
+        //            {
+        //                ReplaceNum(array, i, j, y, x, entryNum, newValue);
+        //            }
+        //        }
+
+        //        for (int i = height - 1; i >= 0; i--)
+        //        {
+        //            for (int j = width - 1; j >= 0; j--)
+        //            {
+        //                ReplaceNum(array, i, j, y, x, entryNum, newValue);
+        //            }
+        //        }
+
+        //        for (int j = 0; j <= height - 1; j++)
+        //        {
+        //            for (int i = 0; i <= height - 1; i++)
+        //            {
+        //                ReplaceNum(array, i, j, y, x, entryNum, newValue);
+        //            }
+        //        }
+
+        //        for (int j = width - 1; j >= 0; j--)
+        //        {
+        //            for (int i = height - 1; i >= 0; i--)
+        //            {
+        //                ReplaceNum(array, i, j, y, x, entryNum, newValue);
+        //            }
+        //        }
+
+        //        for (int i = 0; i <= height - 1; i++)
+        //        {
+        //            for (int j = width - 1; j >= 0; j--)
+        //            {
+        //                ReplaceNum(array, i, j, y, x, entryNum, newValue);
+        //            }
+        //        }
+
+        //        for (int i = height - 1; i >= 0; i--)
+        //        {
+        //            for (int j = 0; j <= width - 1; j++)
+        //            {
+        //                ReplaceNum(array, i, j, y, x, entryNum, newValue);
+        //            }
+        //        }
+
+        //        return array;
+        //    }
+
+        //    var expected = new int[,]
+        //    {{1,4,3},
+        //    {1,4,4},
+        //    {2,3,4}};
+
+        //    var actual = new int[,]
+        //    {{1,2,3},
+        //    {1,2,2},
+        //    {2,3,2}};
+
+        //    CollectionAssert.AreEqual(expected, FloodFill(actual, 0, 1, 4));
+
+        //    //// Более правильные варианты
+        //    //public static int[,] FloodFill(int[,] array, int x, int y, int newValue)
+        //    //{
+        //    //    var areaValue = array[x, y];
+        //    //    var s = new Stack<Tuple<int, int>>();
+        //    //    s.Push(new Tuple<int, int>(x, y));
+
+        //    //    while (s.Count > 0)
+        //    //    {
+        //    //        var point = s.Pop();
+        //    //        var p_x = point.Item1;
+        //    //        var p_y = point.Item2;
+        //    //        if (array[p_x, p_y] != areaValue || array[p_x, p_y] == newValue)
+        //    //            continue;
+
+        //    //        array[p_x, p_y] = newValue;
+        //    //        if (p_x > 0)
+        //    //            s.Push(new Tuple<int, int>(p_x - 1, p_y));
+        //    //        if (p_x < array.GetUpperBound(0))
+        //    //            s.Push(new Tuple<int, int>(p_x + 1, p_y));
+        //    //        if (p_y > 0)
+        //    //            s.Push(new Tuple<int, int>(p_x, p_y - 1));
+        //    //        if (p_y < array.GetUpperBound(1))
+        //    //            s.Push(new Tuple<int, int>(p_x, p_y + 1));
+        //    //    }
+
+        //    //    return array;
+        //    //}
+
+        //    //public static int[,] FloodFill(int[,] array, int startY, int startX, int newValue)
+        //    //{
+        //    //    var stack = new Stack<(int startY, int startX)>();
+
+        //    //    var refVal = array[startY, startX];
+        //    //    var maxY = array.GetLength(0);
+        //    //    var maxX = array.GetLength(1);
+        //    //    stack.Push((startY, startX));
+
+        //    //    while (stack.Count != 0)
+        //    //    {
+        //    //        (int y, int x) = stack.Pop();
+
+        //    //        if (y >= 0 && y < maxY
+        //    //            && x >= 0 && x < maxX
+        //    //            && array[y, x] == refVal)
+        //    //        {
+        //    //            array[y, x] = newValue;
+        //    //            stack.Push((y-1, x));
+        //    //            stack.Push((y+1, x));
+        //    //            stack.Push((y, x-1));
+        //    //            stack.Push((y, x+1));
+        //    //        }
+
+        //    //    }
+
+        //    //    return array;
+        //    //}
+
+        //    //public static int[,] FloodFill(int[,] array, int y, int x, int newValue)
+        //    //{
+        //    //    if (y < 0 || x < 0 || y >= array.GetLength(0) || x >= array.GetLength(1))
+        //    //        return null;
+
+        //    //    var coords = new Stack<(int, int)>();
+        //    //    int oldValue = array[y, x];
+        //    //    coords.Push((x, y));
+
+        //    //    while (coords.Count != 0)
+        //    //    {
+        //    //        (x, y) = coords.Pop();
+
+        //    //        if (array[y, x] == oldValue)
+        //    //        {
+        //    //            array[y, x] = newValue;
+        //    //            if (x > 0)
+        //    //                coords.Push((x - 1, y));
+        //    //            if (y > 0)
+        //    //                coords.Push((x, y - 1));
+        //    //            if (x < array.GetLength(1) - 1)
+        //    //                coords.Push((x + 1, y));
+        //    //            if (y < array.GetLength(0) - 1)
+        //    //                coords.Push((x, y + 1));
+        //    //        }
+        //    //        else if (array[y, x] == newValue)
+        //    //            continue;
+        //    //        else
+        //    //            continue;
+        //    //    }
+
+        //    //    return array;
+        //    //}
+        //}
+
+        //[Test]
+        //public void Xxxxx()
+        //{
+        //    void(string data)
+        //    {
+
+        //    }
+
+        //    Assert.AreEqual(new int[] { 8, 64 }, Parse("iiisdoso"));
+        //    Assert.AreEqual(new int[] { 8, 64, 3600 }, Parse("iiisdosodddddiso"));
+        //}
+
+        // TODO решение не принимается компилятором на сайте, здесь работает нормально
         [Test]
-        public void FloodFillKata()
+        public void SamePrimeFactors()
         {
-            void ReplaceNum(int[,] array, int i, int j, int y, int x, int entryNum, int newValue)
+            int FlipNumber(int num)
             {
-                var height = array.GetLength(0);
-                var width = array.GetLength(1);
-
-                if (array[i, j] == entryNum)
+                string digits = "";
+                while (num != 0)
                 {
-                    int numToReplace = entryNum;
-                    bool isFirstReplaceInCluster = false;
-
-                    // Если замена самая первая - необходимо проверять окружающие числа 
-                    // не на newValue а на самого себя (array[y, x]).
-                    // Если замена НЕ первая - необходимо проверять окружающие числа на newValue (на уже замененное число)
-
-                    if (i == y && j == x)
-                    {
-                        isFirstReplaceInCluster = true;
-                    }
-
-                    if (!isFirstReplaceInCluster)
-                        numToReplace = newValue;
-
-                    // Верхний левый угол
-                    if (i == 0 && j == 0)
-                    {
-                        if (array[i + 1, j] == numToReplace || array[i, j + 1] == numToReplace || isFirstReplaceInCluster)
-                        {
-                            array[i, j] = newValue;
-                        }
-                    }
-                    // Верхний правый угол
-                    else if (i == 0 && j == width - 1)
-                    {
-                        if (array[i + 1, j] == numToReplace || array[i, j - 1] == numToReplace || isFirstReplaceInCluster)
-                        {
-                            array[i, j] = newValue;
-                        }
-                    }
-                    // Нижний левый угол
-                    else if (i == height - 1 && j == 0)
-                    {
-                        if (array[i - 1, j] == numToReplace || array[i, j + 1] == numToReplace || isFirstReplaceInCluster)
-                        {
-                            array[i, j] = newValue;
-                        }
-                    }
-                    // Нижний правый угол
-                    else if (i == height - 1 && j == width - 1)
-                    {
-                        if (array[i - 1, j] == numToReplace || array[i, j - 1] == numToReplace || isFirstReplaceInCluster)
-                        {
-                            array[i, j] = newValue;
-                        }
-                    }
-                    // Из самого верхнего массива кроме углов
-                    else if (i == 0)
-                    {
-                        if (array[i + 1, j] == numToReplace || array[i, j + 1] == numToReplace || array[i, j - 1] == numToReplace
-                            || isFirstReplaceInCluster)
-                        {
-                            array[i, j] = newValue;
-                        }
-                    }
-                    // Из самого левого массива кроме углов
-                    else if (j == 0)
-                    {
-                        if (array[i - 1, j] == numToReplace || array[i + 1, j] == numToReplace || array[i, j + 1] == numToReplace
-                            || isFirstReplaceInCluster)
-                        {
-                            array[i, j] = newValue;
-                        }
-                    }
-                    // Из самого нижнего массива кроме углов
-                    else if (i == height - 1)
-                    {
-                        if (array[i - 1, j] == numToReplace || array[i, j + 1] == numToReplace || array[i, j - 1] == numToReplace
-                            || isFirstReplaceInCluster)
-                        {
-                            array[i, j] = newValue;
-                        }
-                    }
-                    // Из самого правого массива кроме углов
-                    else if (j == width - 1)
-                    {
-                        if (array[i - 1, j] == numToReplace || array[i + 1, j] == numToReplace || array[i, j - 1] == numToReplace
-                            || isFirstReplaceInCluster)
-                        {
-                            array[i, j] = newValue;
-                        }
-                    }
-                    // Откуда угодно кроме углов и крайних массивов
-                    else
-                    {
-                        if (array[i - 1, j] == numToReplace || array[i + 1, j] == numToReplace || array[i, j - 1] == numToReplace
-                            || array[i, j + 1] == numToReplace || isFirstReplaceInCluster)
-                        {
-                            array[i, j] = newValue;
-                        }
-                    }
+                    digits += num % 10;
+                    num /= 10;
                 }
+
+                //return Convert.ToInt32(digits);
+                return String.IsNullOrEmpty(digits) ? 0 : int.Parse(digits);
             }
 
-            int[,] FloodFill(int[,] array, int y, int x, int newValue)
+            bool isPalindrome(int num)
             {
-                var height = array.GetLength(0);
-                var width = array.GetLength(1);
-
-                int entryNum = default;
-
-                // Запись в переменную числа, которое нужно заменять
-                try
+                List<int> digits = new List<int>();
+                while (num != 0)
                 {
-                    entryNum = array[y, x];
-                }
-                catch (Exception)
-                {
-                    return array;
+                    digits.Add(num % 10);
+                    num /= 10;
                 }
 
-                if (height == 0 || width == 0)
-                    return array;
-                else if (height == 1 && width == 1)
+                for (int i = 0; i < digits.Count/2; i++)
                 {
-                    if (array[0, 0] == entryNum)
-                    {
-                        array[0, 0] = newValue;
-                        return array;
-                    }
-                    else return array;
+                    if (digits[i] != digits[(digits.Count - 1) - i])
+                        return false;
                 }
 
-                for (int i = 0; i <= height - 1; i++)
-                {
-                    for (int j = 0; j <= width - 1; j++)
-                    {
-                        ReplaceNum(array, i, j, y, x, entryNum, newValue);
-                    }
-                }
-
-                for (int i = height - 1; i >= 0; i--)
-                {
-                    for (int j = width - 1; j >= 0; j--)
-                    {
-                        ReplaceNum(array, i, j, y, x, entryNum, newValue);
-                    }
-                }
-
-                for (int j = 0; j <= height - 1; j++)
-                {
-                    for (int i = 0; i <= height - 1; i++)
-                    {
-                        ReplaceNum(array, i, j, y, x, entryNum, newValue);
-                    }
-                }
-
-                for (int j = width - 1; j >= 0; j--)
-                {
-                    for (int i = height - 1; i >= 0; i--)
-                    {
-                        ReplaceNum(array, i, j, y, x, entryNum, newValue);
-                    }
-                }
-
-                for (int i = 0; i <= height - 1; i++)
-                {
-                    for (int j = width - 1; j >= 0; j--)
-                    {
-                        ReplaceNum(array, i, j, y, x, entryNum, newValue);
-                    }
-                }
-
-                for (int i = height - 1; i >= 0; i--)
-                {
-                    for (int j = 0; j <= width - 1; j++)
-                    {
-                        ReplaceNum(array, i, j, y, x, entryNum, newValue);
-                    }
-                }
-
-                return array;
+                return true;
             }
 
-            var expected = new int[,]
-            {{1,4,3},
-            {1,4,4},
-            {2,3,4}};
+            List<int> GetFactors(int num)
+            {
+                List<int> factors = new List<int>();
 
-            var actual = new int[,]
-            {{1,2,3},
-            {1,2,2},
-            {2,3,2}};
+                for (int i = 2; i <= num; i++)
+                {
+                    if (num % i == 0)
+                    {
+                        factors.Add(i);
+                        num /= i;
 
-            CollectionAssert.AreEqual(expected, FloodFill(actual, 0, 1, 4));
+                        i--;
+                    }
+                }
 
-            //// Более правильные варианты
-            //public static int[,] FloodFill(int[,] array, int x, int y, int newValue)
-            //{
-            //    var areaValue = array[x, y];
-            //    var s = new Stack<Tuple<int, int>>();
-            //    s.Push(new Tuple<int, int>(x, y));
+                return factors.Distinct().OrderBy(x => x).ToList();
+            }
 
-            //    while (s.Count > 0)
-            //    {
-            //        var point = s.Pop();
-            //        var p_x = point.Item1;
-            //        var p_y = point.Item2;
-            //        if (array[p_x, p_y] != areaValue || array[p_x, p_y] == newValue)
-            //            continue;
+            int[] SameFactRev(int nMax)
+            {
+                // 1. Пересчет с проверкой на палиндром: если палиндром - не рассматриваем
+                // 2. Находим для числа по факторизации; в список 1, сортируем его
+                // 3. Переворачиваем число, повторяем 2. внося в список 2 
+                // 4. Сверяем список 1 и 2, если совпал - добавляем число в финальный массив
 
-            //        array[p_x, p_y] = newValue;
-            //        if (p_x > 0)
-            //            s.Push(new Tuple<int, int>(p_x - 1, p_y));
-            //        if (p_x < array.GetUpperBound(0))
-            //            s.Push(new Tuple<int, int>(p_x + 1, p_y));
-            //        if (p_y > 0)
-            //            s.Push(new Tuple<int, int>(p_x, p_y - 1));
-            //        if (p_y < array.GetUpperBound(1))
-            //            s.Push(new Tuple<int, int>(p_x, p_y + 1));
-            //    }
+                List<int> output = new List<int>();
 
-            //    return array;
-            //}
+                for (int i = 1; i < nMax; i++)
+                {
+                    if (isPalindrome(i))
+                        continue;
 
-            //public static int[,] FloodFill(int[,] array, int startY, int startX, int newValue)
-            //{
-            //    var stack = new Stack<(int startY, int startX)>();
-
-            //    var refVal = array[startY, startX];
-            //    var maxY = array.GetLength(0);
-            //    var maxX = array.GetLength(1);
-            //    stack.Push((startY, startX));
-
-            //    while (stack.Count != 0)
-            //    {
-            //        (int y, int x) = stack.Pop();
-
-            //        if (y >= 0 && y < maxY
-            //            && x >= 0 && x < maxX
-            //            && array[y, x] == refVal)
-            //        {
-            //            array[y, x] = newValue;
-            //            stack.Push((y-1, x));
-            //            stack.Push((y+1, x));
-            //            stack.Push((y, x-1));
-            //            stack.Push((y, x+1));
-            //        }
-
-            //    }
-
-            //    return array;
-            //}
-
-            //public static int[,] FloodFill(int[,] array, int y, int x, int newValue)
-            //{
-            //    if (y < 0 || x < 0 || y >= array.GetLength(0) || x >= array.GetLength(1))
-            //        return null;
-
-            //    var coords = new Stack<(int, int)>();
-            //    int oldValue = array[y, x];
-            //    coords.Push((x, y));
-
-            //    while (coords.Count != 0)
-            //    {
-            //        (x, y) = coords.Pop();
-
-            //        if (array[y, x] == oldValue)
-            //        {
-            //            array[y, x] = newValue;
-            //            if (x > 0)
-            //                coords.Push((x - 1, y));
-            //            if (y > 0)
-            //                coords.Push((x, y - 1));
-            //            if (x < array.GetLength(1) - 1)
-            //                coords.Push((x + 1, y));
-            //            if (y < array.GetLength(0) - 1)
-            //                coords.Push((x, y + 1));
-            //        }
-            //        else if (array[y, x] == newValue)
-            //            continue;
-            //        else
-            //            continue;
-            //    }
-
-            //    return array;
-            //}
+                    List<int> factorsForStraight = GetFactors(i);
+                    int iReversed = FlipNumber(i);
+                    List<int> factorsForFlipped = GetFactors(iReversed);
 
 
+                    if (factorsForStraight.Count > 0 && Enumerable.SequenceEqual(factorsForStraight.OrderBy(x => x), factorsForFlipped.OrderBy(x => x)))
+                        output.Add(i);
+                }
 
+                return output.ToArray();
+            }
 
-
-
-
+            Assert.AreEqual(new int[] { }, SameFactRev(1000));
+            Assert.AreEqual(new int[] { 1089 }, SameFactRev(2000));
+            Assert.AreEqual(new int[] { 1089, 2178 }, SameFactRev(3000));
+            Assert.AreEqual(new int[] { 1089, 2178 }, SameFactRev(4000));
+            Assert.AreEqual(new int[] { 1089, 2178, 4356 }, SameFactRev(5000));
+            Assert.AreEqual(new int[] { 1089, 2178, 4356 }, SameFactRev(6000));
+            Assert.AreEqual(new int[] { 1089, 2178, 4356, 6534 }, SameFactRev(7000));
+            Assert.AreEqual(new int[] { 1089, 2178, 4356, 6534 }, SameFactRev(8000));
+            Assert.AreEqual(new int[] { 1089, 2178, 4356, 6534, 8712 }, SameFactRev(9000));
+            Assert.AreEqual(new int[] { 1089, 2178, 4356, 6534, 8712, 9801 }, SameFactRev(10000));
         }
+
+
     }
 }

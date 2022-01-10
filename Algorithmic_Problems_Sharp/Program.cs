@@ -1493,12 +1493,12 @@ namespace Algorithmic_Problems_Sharp
             ////Assert.AreEqual("mn", AlphabetWar("#abde[fgh]i#jk[mn]op"));
             ////Assert.AreEqual("abijk", AlphabetWar("[ab]adfd[dd]##[abe]dedf[ijk]d#d[h]#"));
 
-            
-
-            
 
 
-            
+
+
+
+
 
 
             //Console.WriteLine("Ввод:");
@@ -1521,9 +1521,125 @@ namespace Algorithmic_Problems_Sharp
             //}
 
 
+            //string a = "asdfgdg vasya qwe fd";
+            //string torem = "fg";
+            //if (a.Contains(torem))
+            //{
+            //    a = a.Remove(a.IndexOf(torem), torem.Length);
+            //}
+            //Console.WriteLine(a);
+
+            // Если на конце ноль - переворачивает убирая ноль, число выходит неправильное
+            int FlipNumber(int num)
+            {
+                string digits = "";
+                while (num != 0)
+                {
+                    digits += num % 10;
+                    num /= 10;
+                }
+
+                //return Convert.ToInt32(digits);
+                return String.IsNullOrEmpty(digits) ? 0 : int.Parse(digits);
+            }
 
 
+            bool isPalindrome(int num)
+            {
+                List<int> digits = new List<int>();
+                while (num != 0)
+                {
+                    digits.Add(num % 10);
+                    num /= 10;
+                }
 
+                for (int i = 0; i < digits.Count/2; i++)
+                {
+                    if (digits[i] != digits[(digits.Count - 1) - i])
+                        return false;
+                }
+
+                return true;
+            }
+
+
+            List<int> GetFactors(int num)
+            {
+                List<int> factors = new List<int>();
+
+                for (int i = 2; i <= num; i++)
+                {
+                    if (num % i == 0)
+                    {
+                        factors.Add(i);
+                        num /= i;
+
+                        i--;
+                    }
+                }
+
+                return factors.Distinct().OrderBy(x => x).ToList();
+            }
+
+
+            int[] SameFactRev(int nMax)
+            {
+                // 1. Пересчет с проверкой на палиндром: если палиндром - не рассматриваем
+                // 2. Находим для числа по факторизации; в список 1, сортируем его
+                // 3. Переворачиваем число, повторяем 2. внося в список 2 
+                // 4. Сверяем список 1 и 2, если совпал - добавляем число в финальный массив
+
+                List<int> output = new List<int>();
+
+                for (int i = 1; i < nMax; i++)
+                {
+                    if (isPalindrome(i))
+                        continue;
+
+                    List<int> factorsForStraight = GetFactors(i);
+                    int iReversed = FlipNumber(i);
+                    List<int> factorsForFlipped = GetFactors(iReversed);
+
+
+                    if (factorsForStraight.Count > 0 && Enumerable.SequenceEqual(factorsForStraight.OrderBy(x => x), factorsForFlipped.OrderBy(x => x)))
+                        output.Add(i);
+                }
+
+                return output.ToArray();
+            }
+
+
+            var test = SameFactRev(3000);
+            foreach (var item in test)
+            {
+                Console.WriteLine(item + " ");
+            }
+
+            var tes2 = SameFactRev(5089);
+            foreach (var item in tes2)
+            {
+                Console.Write(item + " ");
+            }
+            Console.WriteLine();
+
+            var test3 = SameFactRev(7801);
+            foreach (var item in test3)
+            {
+                Console.Write(item + " ");
+            }
+
+            Console.WriteLine();
+            var test4 = SameFactRev(9000);
+            foreach (var item in test4)
+            {
+                Console.Write(item + " ");
+            }
+
+            //Console.WriteLine();
+            //Console.WriteLine(isPalindrome(123213));
+
+            //Console.WriteLine();
+            //Console.WriteLine(FlipNumber(10));
 
 
         }
