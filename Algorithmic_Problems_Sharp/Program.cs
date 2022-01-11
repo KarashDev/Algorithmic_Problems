@@ -1529,119 +1529,202 @@ namespace Algorithmic_Problems_Sharp
             //}
             //Console.WriteLine(a);
 
-            // Если на конце ноль - переворачивает убирая ноль, число выходит неправильное
-            int FlipNumber(int num)
-            {
-                string digits = "";
-                while (num != 0)
-                {
-                    digits += num % 10;
-                    num /= 10;
-                }
+            //// Если на конце ноль - переворачивает убирая ноль, число выходит неправильное
+            //int FlipNumber(int num)
+            //{
+            //    string digits = "";
+            //    while (num != 0)
+            //    {
+            //        digits += num % 10;
+            //        num /= 10;
+            //    }
 
-                //return Convert.ToInt32(digits);
-                return String.IsNullOrEmpty(digits) ? 0 : int.Parse(digits);
-            }
-
-
-            bool isPalindrome(int num)
-            {
-                List<int> digits = new List<int>();
-                while (num != 0)
-                {
-                    digits.Add(num % 10);
-                    num /= 10;
-                }
-
-                for (int i = 0; i < digits.Count/2; i++)
-                {
-                    if (digits[i] != digits[(digits.Count - 1) - i])
-                        return false;
-                }
-
-                return true;
-            }
+            //    //return Convert.ToInt32(digits);
+            //    return String.IsNullOrEmpty(digits) ? 0 : int.Parse(digits);
+            //}
 
 
-            List<int> GetFactors(int num)
-            {
-                List<int> factors = new List<int>();
+            //bool isPalindrome(int num)
+            //{
+            //    List<int> digits = new List<int>();
+            //    while (num != 0)
+            //    {
+            //        digits.Add(num % 10);
+            //        num /= 10;
+            //    }
 
-                for (int i = 2; i <= num; i++)
-                {
-                    if (num % i == 0)
-                    {
-                        factors.Add(i);
-                        num /= i;
+            //    for (int i = 0; i < digits.Count/2; i++)
+            //    {
+            //        if (digits[i] != digits[(digits.Count - 1) - i])
+            //            return false;
+            //    }
 
-                        i--;
-                    }
-                }
-
-                return factors.Distinct().OrderBy(x => x).ToList();
-            }
-
-
-            int[] SameFactRev(int nMax)
-            {
-                // 1. Пересчет с проверкой на палиндром: если палиндром - не рассматриваем
-                // 2. Находим для числа по факторизации; в список 1, сортируем его
-                // 3. Переворачиваем число, повторяем 2. внося в список 2 
-                // 4. Сверяем список 1 и 2, если совпал - добавляем число в финальный массив
-
-                List<int> output = new List<int>();
-
-                for (int i = 1; i < nMax; i++)
-                {
-                    if (isPalindrome(i))
-                        continue;
-
-                    List<int> factorsForStraight = GetFactors(i);
-                    int iReversed = FlipNumber(i);
-                    List<int> factorsForFlipped = GetFactors(iReversed);
+            //    return true;
+            //}
 
 
-                    if (factorsForStraight.Count > 0 && Enumerable.SequenceEqual(factorsForStraight.OrderBy(x => x), factorsForFlipped.OrderBy(x => x)))
-                        output.Add(i);
-                }
+            //List<int> GetFactors(int num)
+            //{
+            //    List<int> factors = new List<int>();
 
-                return output.ToArray();
-            }
+            //    for (int i = 2; i <= num; i++)
+            //    {
+            //        if (num % i == 0)
+            //        {
+            //            factors.Add(i);
+            //            num /= i;
+
+            //            i--;
+            //        }
+            //    }
+
+            //    return factors.Distinct().OrderBy(x => x).ToList();
+            //}
 
 
-            var test = SameFactRev(3000);
-            foreach (var item in test)
-            {
-                Console.WriteLine(item + " ");
-            }
+            //int[] SameFactRev(int nMax)
+            //{
+            //    // 1. Пересчет с проверкой на палиндром: если палиндром - не рассматриваем
+            //    // 2. Находим для числа по факторизации; в список 1, сортируем его
+            //    // 3. Переворачиваем число, повторяем 2. внося в список 2 
+            //    // 4. Сверяем список 1 и 2, если совпал - добавляем число в финальный массив
 
-            var tes2 = SameFactRev(5089);
-            foreach (var item in tes2)
-            {
-                Console.Write(item + " ");
-            }
-            Console.WriteLine();
+            //    List<int> output = new List<int>();
 
-            var test3 = SameFactRev(7801);
-            foreach (var item in test3)
-            {
-                Console.Write(item + " ");
-            }
+            //    for (int i = 1; i < nMax; i++)
+            //    {
+            //        if (isPalindrome(i))
+            //            continue;
 
-            Console.WriteLine();
-            var test4 = SameFactRev(9000);
-            foreach (var item in test4)
-            {
-                Console.Write(item + " ");
-            }
+            //        List<int> factorsForStraight = GetFactors(i);
+            //        int iReversed = FlipNumber(i);
+            //        List<int> factorsForFlipped = GetFactors(iReversed);
+
+
+            //        if (factorsForStraight.Count > 0 && Enumerable.SequenceEqual(factorsForStraight.OrderBy(x => x), factorsForFlipped.OrderBy(x => x)))
+            //            output.Add(i);
+            //    }
+
+            //    return output.ToArray();
+            //}
+
+
+            //var test = SameFactRev(3000);
+            //foreach (var item in test)
+            //{
+            //    Console.WriteLine(item + " ");
+            //}
+
+            //var tes2 = SameFactRev(5089);
+            //foreach (var item in tes2)
+            //{
+            //    Console.Write(item + " ");
+            //}
+            //Console.WriteLine();
+
+            //var test3 = SameFactRev(7801);
+            //foreach (var item in test3)
+            //{
+            //    Console.Write(item + " ");
+            //}
 
             //Console.WriteLine();
-            //Console.WriteLine(isPalindrome(123213));
+            //var test4 = SameFactRev(9000);
+            //foreach (var item in test4)
+            //{
+            //    Console.Write(item + " ");
+            //}
 
-            //Console.WriteLine();
-            //Console.WriteLine(FlipNumber(10));
+            ////Console.WriteLine();
+            ////Console.WriteLine(isPalindrome(123213));
+
+            ////Console.WriteLine();
+            ////Console.WriteLine(FlipNumber(10));
+            ///
 
 
+            static string BabySharkLyrics()
+            {
+                //var doo = "doo doo doo doo doo doo";
+                //var pr = new List<string>() { "Baby", "Mommy", "Daddy", "Grandma", "Grandpa", "Let's go hunt" };
+                //var song = "";
+                //var shark = "shark";
+                //for (int i = 0; i <= 5; i++)
+                //{
+                //    for (int j = 1; j <= 3; j++)
+                //    {
+                //        if (i != 5)
+                //            song += $"{pr[i]} shark, {doo}\n";
+                //        else song += $"{pr[i]}, {doo}\n";
+                //    }
+
+                //    if (i != 5)
+                //        song += pr[i] + " shark!\n";
+                //    else
+                //        song += $"{pr[i]}!\nRun away,…";
+                //}
+
+                //return song;
+
+                var pr = new string[] { "Baby", "Mommy", "Daddy", "Grandma", "Grandpa", "Let's go hunt" };
+                var song = "";
+                for (int i = 0; i<=5; i++)
+                {
+                var doo = ", doo doo doo doo doo doo"; var s = " shark";
+                for (int j = 1; j<=4; j++)
+                {
+                if (j==4) { doo="!"; }
+                if (i==5) { s=""; if (j==4) { s="!\nRun away,…"; } }
+                song+=$"{pr[i]}{s}{doo}\n";
+                }
+                }
+                return song;
+            }
+
+
+
+            Console.WriteLine(BabySharkLyrics());
+
+
+                //Baby shark, doo doo doo doo doo doo
+                //Baby shark, doo doo doo doo doo doo
+                //Baby shark, doo doo doo doo doo doo
+                //Baby shark!
+                //Mommy shark, doo doo doo doo doo doo
+                //Mommy shark, doo doo doo doo doo doo
+                //Mommy shark, doo doo doo doo doo doo
+                //Mommy shark!
+                //Daddy shark, doo doo doo doo doo doo
+                //Daddy shark, doo doo doo doo doo doo
+                //Daddy shark, doo doo doo doo doo doo
+                //Daddy shark!
+                //Grandma shark, doo doo doo doo doo doo
+                //Grandma shark, doo doo doo doo doo doo
+                //Grandma shark, doo doo doo doo doo doo
+                //Grandma shark!
+                //Grandpa shark, doo doo doo doo doo doo
+                //Grandpa shark, doo doo doo doo doo doo
+                //Grandpa shark, doo doo doo doo doo doo
+                //Grandpa shark!
+                //Let's go hunt, doo doo doo doo doo doo
+                //Let's go hunt, doo doo doo doo doo doo
+                //Let's go hunt, doo doo doo doo doo doo
+                //Let's go hunt!
+                //Run away,…
+
+
+
+
+
+
+
+
+
+
+
+
+
+            
         }
     }
 }
