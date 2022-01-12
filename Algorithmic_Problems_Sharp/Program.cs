@@ -1643,74 +1643,78 @@ namespace Algorithmic_Problems_Sharp
             ///
 
 
-            static string BabySharkLyrics()
+            static void WaveSort(int[] arr)
             {
-                //var doo = "doo doo doo doo doo doo";
-                //var pr = new List<string>() { "Baby", "Mommy", "Daddy", "Grandma", "Grandpa", "Let's go hunt" };
-                //var song = "";
-                //var shark = "shark";
-                //for (int i = 0; i <= 5; i++)
-                //{
-                //    for (int j = 1; j <= 3; j++)
-                //    {
-                //        if (i != 5)
-                //            song += $"{pr[i]} shark, {doo}\n";
-                //        else song += $"{pr[i]}, {doo}\n";
-                //    }
+                // Перебросить влево все повторяющиеся цифры
+                // Сортировка по убыванию; пересчет каждой цифры
+                // ЕСЛИ НУЖНО БОЛЬШЕЕ ЧИСЛО: если соседнее больше или равно - i++ и ставим поиск на МЕНЬШЕЕ ЧИСЛО
+                // ЕСЛИ НУЖНО МЕНЬШЕЕ ЧИСЛО: если соседнее меньше или равно - i++ и ставим поиск на БОЛЬШЕЕ ЧИСЛО
+                // Если меньше чем нужно: ищем ближайшее бОльшее число в массиве и меняем местами с текущим, обновить i
+                // Если больше чем нужно: ищем ближайшее меньшее число в массиве и меняем местами с текущим, обновить i
+                // 
+                //
+                //резервировать уже использованные
+                //искать ближайшее по величине число и если не зарезервировано ставить, либо искать дальше
+                //
+                //
+                //
+                //
+                arr = arr.OrderByDescending(x => x).ToArray();
 
-                //    if (i != 5)
-                //        song += pr[i] + " shark!\n";
-                //    else
-                //        song += $"{pr[i]}!\nRun away,…";
-                //}
+                bool isNeedLowerNum = true;
 
-                //return song;
-
-                var pr = new string[] { "Baby", "Mommy", "Daddy", "Grandma", "Grandpa", "Let's go hunt" };
-                var song = "";
-                for (int i = 0; i<=5; i++)
+                var sortedArr = arr.OrderBy(x => x).Distinct().ToArray();
+               
+                for (int i = 0; i < arr.Length - 1; i++)
                 {
-                var doo = ", doo doo doo doo doo doo"; var s = " shark";
-                for (int j = 1; j<=4; j++)
-                {
-                if (j==4) { doo="!"; }
-                if (i==5) { s=""; if (j==4) { s="!\nRun away,…"; } }
-                song+=$"{pr[i]}{s}{doo}\n";
+                    if (!isNeedLowerNum)
+                    {
+                        if (arr[i + 1] >= arr[i])
+                        {
+                            isNeedLowerNum = true;
+                            continue;
+                        }
+                        else
+                        {
+                            // arr[i + 1] свопнуть с ближайшим по значению бОльшим числом
+                            arr[i + 1] = sortedArr[Array.IndexOf(sortedArr, arr[i + 1]) + 1];
+                            i = 0;
+                        }
+                    }
+                    else if (isNeedLowerNum)
+                    {
+                        if (arr[i + 1] <= arr[i])
+                        {
+                            isNeedLowerNum = false;
+                            continue;
+                        }
+                        else
+                        {
+                            // arr[i + 1] свопнуть сближайшим по значению меньшим числом
+                            arr[i + 1] = sortedArr[Array.IndexOf(sortedArr, arr[i + 1]) - 1];
+                            i = 0;
+                        }
+                    }
                 }
-                }
-                return song;
+
+
+
+
+            }
+
+
+            ////var arr = new int[] { 4, 1, 7, 5, 6, 2, 3 };
+            var arr = new int[] { 4, 3, 5, 7, 6, 2, 1 };
+
+            WaveSort(arr);
+            
+            foreach (int i in arr)
+            {
+                Console.Write(i + " ");
             }
 
 
 
-            Console.WriteLine(BabySharkLyrics());
-
-
-                //Baby shark, doo doo doo doo doo doo
-                //Baby shark, doo doo doo doo doo doo
-                //Baby shark, doo doo doo doo doo doo
-                //Baby shark!
-                //Mommy shark, doo doo doo doo doo doo
-                //Mommy shark, doo doo doo doo doo doo
-                //Mommy shark, doo doo doo doo doo doo
-                //Mommy shark!
-                //Daddy shark, doo doo doo doo doo doo
-                //Daddy shark, doo doo doo doo doo doo
-                //Daddy shark, doo doo doo doo doo doo
-                //Daddy shark!
-                //Grandma shark, doo doo doo doo doo doo
-                //Grandma shark, doo doo doo doo doo doo
-                //Grandma shark, doo doo doo doo doo doo
-                //Grandma shark!
-                //Grandpa shark, doo doo doo doo doo doo
-                //Grandpa shark, doo doo doo doo doo doo
-                //Grandpa shark, doo doo doo doo doo doo
-                //Grandpa shark!
-                //Let's go hunt, doo doo doo doo doo doo
-                //Let's go hunt, doo doo doo doo doo doo
-                //Let's go hunt, doo doo doo doo doo doo
-                //Let's go hunt!
-                //Run away,…
 
 
 
@@ -1721,10 +1725,6 @@ namespace Algorithmic_Problems_Sharp
 
 
 
-
-
-
-            
         }
     }
 }

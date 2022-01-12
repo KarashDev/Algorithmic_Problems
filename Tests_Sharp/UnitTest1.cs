@@ -2,6 +2,7 @@ using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Numerics;
 
@@ -1653,6 +1654,82 @@ namespace Tests_Sharp
             Assert.AreEqual(new int[] { 1089, 2178, 4356, 6534, 8712 }, SameFactRev(9000));
             Assert.AreEqual(new int[] { 1089, 2178, 4356, 6534, 8712, 9801 }, SameFactRev(10000));
         }
+
+        //[Test]
+        //public void Xxxxx()
+        //{
+        //    void(string data)
+        //    {
+
+        //    }
+
+        //    Assert.AreEqual(new int[] { 8, 64 }, Parse("iiisdoso"));
+        //    Assert.AreEqual(new int[] { 8, 64, 3600 }, Parse("iiisdosodddddiso"));
+        //}
+
+
+        //[Test]
+        //public void BabyShark()
+        //{
+        //    static string BabySharkLyrics()
+        //    {
+        //        var pr =new string[]{"Baby","Mommy","Daddy","Grandma","Grandpa","Let's go hunt"}; var song ="";
+        //        for(int i=0;i<=5;i++){var doo=", doo doo doo doo doo doo";var s=" shark";for(int j=1;j<=4;j++){
+        //        if(j==4){doo="!";}if(i==5){s="";if(j==4){s="!\nRun away,…";}}
+        //        song+=$"{pr[i]}{s}{doo}\n";}}return song;
+        //    }
+
+        //    Assert.AreEqual(string.Join("\n", new string[] {
+        //        "Baby shark, doo doo doo doo doo doo",
+        //        "Baby shark, doo doo doo doo doo doo",
+        //        "Baby shark, doo doo doo doo doo doo",
+        //        "Baby shark!",
+        //        "Mommy shark, doo doo doo doo doo doo",
+        //        "Mommy shark, doo doo doo doo doo doo",
+        //        "Mommy shark, doo doo doo doo doo doo",
+        //        "Mommy shark!",
+        //        "Daddy shark, doo doo doo doo doo doo",
+        //        "Daddy shark, doo doo doo doo doo doo",
+        //        "Daddy shark, doo doo doo doo doo doo",
+        //        "Daddy shark!",
+        //        "Grandma shark, doo doo doo doo doo doo",
+        //        "Grandma shark, doo doo doo doo doo doo",
+        //        "Grandma shark, doo doo doo doo doo doo",
+        //        "Grandma shark!",
+        //        "Grandpa shark, doo doo doo doo doo doo",
+        //        "Grandpa shark, doo doo doo doo doo doo",
+        //        "Grandpa shark, doo doo doo doo doo doo",
+        //        "Grandpa shark!",
+        //        "Let's go hunt, doo doo doo doo doo doo",
+        //        "Let's go hunt, doo doo doo doo doo doo",
+        //        "Let's go hunt, doo doo doo doo doo doo",
+        //        "Let's go hunt!",
+        //        "Run away,…",
+        //        ""
+        //    }), BabySharkLyrics());
+
+        //    var ln = File.ReadAllText(@"/workspace/solution.txt").Length;
+        //    Assert.That(ln, Is.LessThan(300));
+        //}
+
+
+        [Test]
+        public void Xxxxx()
+        {
+            static void WaveSort(int[] arr)
+            {
+                throw new NotImplementedException();
+            }
+
+            
+        }
+
+
+
+
+
+
+
 
 
     }
