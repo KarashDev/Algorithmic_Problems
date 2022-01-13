@@ -1552,17 +1552,6 @@ namespace Tests_Sharp
         //    //}
         //}
 
-        //[Test]
-        //public void Xxxxx()
-        //{
-        //    void(string data)
-        //    {
-
-        //    }
-
-        //    Assert.AreEqual(new int[] { 8, 64 }, Parse("iiisdoso"));
-        //    Assert.AreEqual(new int[] { 8, 64, 3600 }, Parse("iiisdosodddddiso"));
-        //}
 
         // TODO решение не принимаетс€ компил€тором на сайте, здесь работает нормально
         [Test]
@@ -1714,19 +1703,83 @@ namespace Tests_Sharp
 
 
         [Test]
-        public void Xxxxx()
+        public void WaveSortAlgo()
         {
             static void WaveSort(int[] arr)
             {
-                throw new NotImplementedException();
+                if (arr != null && arr.Length != 0)
+                {
+                    if (arr[0] >= arr[1])
+                    {
+                        arr = arr.OrderByDescending(x => x).ToArray();
+
+                        bool isNeedLowerNum = true;
+
+                        var sortedArr = arr.OrderBy(x => x).Distinct().ToArray();
+
+                        for (int i = 0; i < arr.Length - 1; i++)
+                        {
+                            if (!isNeedLowerNum)
+                            {
+                                if (arr[i + 1] >= arr[i])
+                                {
+                                    isNeedLowerNum = true;
+                                    continue;
+                                }
+                                else
+                                {
+                                    var nearBigger = sortedArr[Array.IndexOf(sortedArr, arr[i + 1]) + 1];
+                                    (arr[i + 1], arr[Array.IndexOf(arr, nearBigger)]) = (arr[Array.IndexOf(arr, nearBigger)], arr[i + 1]);
+
+                                    i--;
+                                }
+                            }
+                            else if (isNeedLowerNum)
+                            {
+                                if (arr[i + 1] <= arr[i])
+                                {
+                                    isNeedLowerNum = false;
+                                    continue;
+                                }
+                                else
+                                {
+                                    var nearLower = sortedArr[Array.IndexOf(sortedArr, arr[i + 1]) - 1];
+                                    (arr[i + 1], arr[Array.IndexOf(arr, nearLower)]) = (arr[Array.IndexOf(arr, nearLower)], arr[i + 1]);
+
+                                    i--;
+                                }
+                            }
+                        }
+                    }
+                }
             }
 
-            
+            //“естов нет
         }
 
+        //[Test]
+        //public void Xxxxx()
+        //{
+        //    void(string data)
+        //    {
 
+        //    }
 
+        //    Assert.AreEqual(new int[] { 8, 64 }, Parse("iiisdoso"));
+        //    Assert.AreEqual(new int[] { 8, 64, 3600 }, Parse("iiisdosodddddiso"));
+        //}
 
+        //[Test]
+        //public void Xxxxx()
+        //{
+        //    void(string data)
+        //    {
+
+        //    }
+
+        //    Assert.AreEqual(new int[] { 8, 64 }, Parse("iiisdoso"));
+        //    Assert.AreEqual(new int[] { 8, 64, 3600 }, Parse("iiisdosodddddiso"));
+        //}
 
 
 
