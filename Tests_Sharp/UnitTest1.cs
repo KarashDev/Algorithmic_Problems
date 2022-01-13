@@ -1753,22 +1753,17 @@ namespace Tests_Sharp
                     }
                 }
 
-                ////юКЭРЕПМЮРХБМНЕ ПЕЬЕМХЕ
-                //void Swap(int[] arr, int a, int b)
-                //{
-                //    int temp = arr[a];
-                //    arr[a] = arr[b];
-                //    arr[b] = temp;
-                //}
+                //юкцнпхрл бяецн 2 ьюцю:
+                //1. янпрхпнбйю он сашбюмхч
+                //2. пюгахб люяяхб он оюпюл, опнярн оепеярюбхрэ вхякю б йюфдни оюпе леярюлх: йюфдне лемэьее бярюмер оепед йюфдшл анкэьхл
 
-                //for (int i = 0; i < arr.Length; i += 2)
-                //{
-                //    if (i > 0 && arr[i - 1] > arr[i])
-                //        Swap(arr, i - 1, i);
+                //мНПЛЮКЭМНЕ ПЕЬЕМХЕ
+                Array.Sort(arr);
 
-                //    if (i < arr.Length - 1 && arr[i] < arr[i + 1])
-                //        Swap(arr, i, i + 1);
-                //}
+                for (int x = 1; x < arr.Length; x += 2)
+                {
+                    (arr[x], arr[x - 1]) = (arr[x - 1], arr[x]);
+                }
             }
 
             //рЕЯРНБ МЕР
