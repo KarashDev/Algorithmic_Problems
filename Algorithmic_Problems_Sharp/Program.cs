@@ -1640,135 +1640,36 @@ namespace Algorithmic_Problems_Sharp
 
             ////Console.WriteLine();
             ////Console.WriteLine(FlipNumber(10));
-            ///
 
 
-            static void WaveSort(ref int[] arr)
+            int PackBagpack(int[] scores, int[] weights, int capacity)
             {
-                // Сортировка по убыванию; пересчет 
-                // ЕСЛИ НУЖНО БОЛЬШЕЕ ЧИСЛО: если соседнее больше или равно - i++, continue и ставим поиск на МЕНЬШЕЕ ЧИСЛО
-                // Если меньше чем нужно: ищем ближайшее бОльшее число в массиве и меняем местами с текущим, сбросить i
-                //
-                // ЕСЛИ НУЖНО МЕНЬШЕЕ ЧИСЛО: если соседнее меньше или равно - i++, continue и ставим поиск на БОЛЬШЕЕ ЧИСЛО
-                // Если больше чем нужно: ищем ближайшее меньшее число в массиве и меняем местами с текущим, сбросить i
-
-                if (arr != null && arr.Length != 0)
-                {
-                    if (arr[0] >= arr[1])
-                    {
-                        arr = arr.OrderByDescending(x => x).ToArray();
-
-                        bool isNeedLowerNum = true;
-
-                        var sortedArr = arr.OrderBy(x => x).Distinct().ToArray();
-
-                        for (int i = 0; i < arr.Length - 1; i++)
-                        {
-                            if (!isNeedLowerNum)
-                            {
-                                if (arr[i + 1] >= arr[i])
-                                {
-                                    isNeedLowerNum = true;
-                                    continue;
-                                }
-                                else
-                                {
-                                    var nearBigger = sortedArr[Array.IndexOf(sortedArr, arr[i + 1]) + 1];
-                                    (arr[i + 1], arr[Array.IndexOf(arr, nearBigger)]) = (arr[Array.IndexOf(arr, nearBigger)], arr[i + 1]);
-                                   
-                                    i--;
-                                }
-                            }
-                            else if (isNeedLowerNum)
-                            {
-                                if (arr[i + 1] <= arr[i])
-                                {
-                                    isNeedLowerNum = false;
-                                    continue;
-                                }
-                                else
-                                {
-                                    var nearLower = sortedArr[Array.IndexOf(sortedArr, arr[i + 1]) - 1];
-                                    (arr[i + 1], arr[Array.IndexOf(arr, nearLower)]) = (arr[Array.IndexOf(arr, nearLower)], arr[i + 1]);
-
-                                    i--;
-                                }
-                            }
-                        }
-                    }
-                }
+                // Нужно заполнить capacity таким образом, чтобы получилось самая бОльшая сумма чисел из weights
             }
 
-            ////var arr = new int[] { 4, 1, 7, 5, 6, 2, 3 };
-            var arr = new int[] { 4, 3, 5, 7, 6, 2, 1 };
-            var arr2 = new[] { 1, 2, 34, 4, 5, 5, 5, 65, 6, 65, 5454, 4 };
-            var arr3 = new[] { 3, 2, 34, 4, 5, 5, 5, 65, 6, 65, 5454, 4, 77 };
 
-            WaveSort(ref arr);
 
-            foreach (int i in arr)
+            Console.WriteLine(PackBagpack(new int[] { 15, 10, 9, 5 }, new int[] { 1, 5, 3, 4 }, 8)); //29
+                                                  //{ 1,  5,  3, 4 }
+           
+            Console.WriteLine(PackBagpack(new int[] { 20, 5, 10, 40, 15, 25 }, new int[] { 1, 2, 3, 8, 7, 4 }, 10)); //60
+                                                                                                                     //{ 1,  2, 3,  8,  7,  4 }
+
+
+           
+            
+            string[] inArray(string[] array1, string[] array2)
             {
-                Console.Write(i + " ");
-            }
-
-            Console.WriteLine();
-
-            WaveSort(ref arr2);
-
-            foreach (int i in arr2)
-            {
-                Console.Write(i + " ");
-            }
-
-            Console.WriteLine();
-
-            WaveSort(ref arr3);
-
-            foreach (int i in arr3)
-            {
-                Console.Write(i + " ");
+                // your code
+                return null;
             }
 
 
 
 
 
-            if (arr != null && arr.Length != 0)
-            {
-                if (arr[0] >= arr[1])
-                {
-                    for (int i = 0; i < arr.Length; i += 2)
-                    {
-                        if (i > 0 && arr[i - 1] > arr[i])
-                            (arr[i - 1], arr[i]) = (arr[i], arr[i] - 1);
-
-                        if (i < arr.Length - 1 && arr[i] < arr[i + 1])
-                            (arr[i], arr[i + 1]) = (arr[i + 1], arr[i]);
-                    }
-                }
-            }
 
 
-            void Swap(int[] arr, int a, int b)
-            {
-                int temp = arr[a];
-                arr[a] = arr[b];
-                arr[b] = temp;
-            }
-
-            for (int i = 0; i < arr.Length; i += 2)
-            {
-
-                // If current even element is smaller
-                // than previous
-                if (i > 0 && arr[i - 1] > arr[i])
-                    Swap(arr, i - 1, i);
-
-                // If current even element is smaller
-                // than next
-                if (i < arr.Length - 1 && arr[i] < arr[i + 1])
-                    Swap(arr, i, i + 1);
-            }
 
 
         }

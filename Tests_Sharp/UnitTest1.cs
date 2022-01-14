@@ -1781,6 +1781,33 @@ namespace Tests_Sharp
         //    Assert.AreEqual(new int[] { 8, 64, 3600 }, Parse("iiisdosodddddiso"));
         //}
 
+        [Test]
+        public void FindTriangularNum()
+        {
+            int Triangular(int n)
+            {
+                if (n > 0)
+                {
+                    int triangleRows = n;
+
+                    for (int i = triangleRows; i > 0; i--)
+                    {
+                        for (int j = i - 1; j > 0; j--)
+                        {
+                            n++;
+                        }
+                    }
+
+                    return n;
+                }
+                else return 0;
+            }
+
+            Assert.AreEqual(3, Triangular(2));
+            Assert.AreEqual(10, Triangular(4));
+            Assert.AreEqual(15, Triangular(5));
+        }
+
         //[Test]
         //public void Xxxxx()
         //{
@@ -1792,6 +1819,35 @@ namespace Tests_Sharp
         //    Assert.AreEqual(new int[] { 8, 64 }, Parse("iiisdoso"));
         //    Assert.AreEqual(new int[] { 8, 64, 3600 }, Parse("iiisdosodddddiso"));
         //}
+
+        [Test]
+        public void GetBagpack()
+        {
+            int PackBagpack(int[] scores, int[] weights, int capacity)
+            {
+                return 0;
+            }
+
+            Assert.AreEqual(29, PackBagpack(new int[] { 15, 10, 9, 5 }, new int[] { 1, 5, 3, 4 }, 8));
+            Assert.AreEqual(60, PackBagpack(new int[] { 20, 5, 10, 40, 15, 25 }, new int[] { 1, 2, 3, 8, 7, 4 }, 10));
+        }
+
+        [Test]
+        public void WhichAreIn()
+        {
+            string[] inArray(string[] array1, string[] array2)
+            {
+
+            }
+
+
+            string[] a1 = new string[] { "arp", "live", "strong" };
+            string[] a2 = new string[] { "lively", "alive", "harp", "sharp", "armstrong" };
+            string[] r = new string[] { "arp", "live", "strong" };
+            Assert.AreEqual(r, inArray(a1, a2));
+        }
+
+
 
 
 
