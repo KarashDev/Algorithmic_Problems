@@ -1641,15 +1641,15 @@ namespace Algorithmic_Problems_Sharp
 			////Console.WriteLine();
 			////Console.WriteLine(FlipNumber(10));
 
-			bool IsCapacityNotFull(int currentCapacity, int fullCapacity, int[] weights)
+			bool isCapacityFull(int currentCapacity, int fullCapacity, int[] weights)
 			{
 				//пока capacity не станет равно требуемому или пока не останутся приоритеты только со слишком большим весом
 				if (currentCapacity == fullCapacity || !weights.Any())
-					return false;
-				else if (weights.All(w => (capacity + w) > capacity))
-					return false;
-				else
 					return true;
+				else if (weights.All(w => (currentCapacity + w) > fullCapacity))
+					return true;
+				else
+					return false;
 			}
 
 			int PackBagpack(int[] scores, int[] weights, int capacity)
@@ -1665,7 +1665,7 @@ namespace Algorithmic_Problems_Sharp
 				// пока capacity не станет равно требуемому или пока не останутся приоритеты только со слишком большим весом
 
 				var currentCapacity = 0;
-				var prioritiesForAdd = new List<int>();
+				var prioritiesForAdd = scores.ToList<int>();
 				var outputSum = 0;
 
 				for (int i = 0; i < scores.Length; i++)
@@ -1673,14 +1673,24 @@ namespace Algorithmic_Problems_Sharp
 					prioritiesForAdd[i] = scores[i] - weights[i];
 				}
 
-				if (IsCapacityNotFull(currentCapacity, capacity, weights))
+
+				// Суммируем capacity до тех пор
+				// пока capacity не станет равно требуемому или пока не останутся приоритеты только со слишком большим весом
+				while (!isCapacityFull(currentCapacity, capacity, weights))
 				{
 					var repeatedNumber = default(int);
 
 					// Проверка на наличие одинаковых чисел; при наличии забираем только то, где вес меньше
 					if (prioritiesForAdd.Count != prioritiesForAdd.Distinct().Count())
 					{
-						repeatedNumber = prioritiesForAdd.Except(prioritiesForAdd.Distinct()).ToList().First();
+						////repeatedNumber = prioritiesForAdd.Except(prioritiesForAdd.Distinct()).ToList().First();
+						//var x = prioritiesForAdd.Except(prioritiesForAdd.Distinct());
+						//var z = prioritiesForAdd.Except(prioritiesForAdd.Distinct()).ToList();
+
+						repeatedNumber = prioritiesForAdd.GroupBy(x => x)
+													  .Where(g => g.Count() > 1)
+													  .Select(y => y.Key)
+													  .ToList().First();
 
 						// Забираем только то, где вес меньше
 						if (repeatedNumber == prioritiesForAdd.Max())
@@ -1695,7 +1705,7 @@ namespace Algorithmic_Problems_Sharp
 									// Если это первое повторяющееся - записываем значение
 									if (minWeightValue == 0)
 										minWeightValue = weights[i];
-									// Если второе+ повторяющееся и оно больше предыдущего замеченного - записываем
+									// Если второе+ повторяющееся и оно меньше предыдущего замеченного - обновляем минимум
 									else if (weights[i] < minWeightValue)
 									{
 										minWeightValue = weights[i];
@@ -1704,31 +1714,64 @@ namespace Algorithmic_Problems_Sharp
 								}
 							}
 
-							int numberOnMinWeight = prioritiesForAdd[minWeightIndex];
-							outputSum += numberOnMinWeight;
-							capacity += weights[minWeightIndex];
+							int numberOnMinWeight = scores[minWeightIndex];
+							currentCapacity += weights[minWeightIndex];
+
+							// Если currentCapacity > Capacity && weights не пустой - пропускаем,  удаляем все записи по текущему indexOfMax, пробуем снова
+							if (currentCapacity > capacity)
+							{
+								currentCapacity -= weights[minWeightIndex];
+
+								scores = scores.Where(val => Array.IndexOf(scores, val) != minWeightIndex).ToArray();
+								weights = weights.Where(val => Array.IndexOf(weights, val) != minWeightIndex).ToArray();
+								prioritiesForAdd.RemoveAt(minWeightIndex);
+
+								if (!weights.Any())
+									break;
+								else
+									continue;
+							}
+							else
+							{
+								outputSum += scores[minWeightIndex];
+							}
 
 							// Удаление значения по индексу из всех массивов
 							scores = scores.Where(val => Array.IndexOf(scores, val) != minWeightIndex).ToArray();
 							weights = weights.Where(val => Array.IndexOf(weights, val) != minWeightIndex).ToArray();
+							prioritiesForAdd.RemoveAt(minWeightIndex);
 						}
 					}
 					else
 					{
-						// Суммируем capacity до тех пор
-						// пока capacity не станет равно требуемому или пока не останутся приоритеты только со слишком большим весом
-
 						var indexOfMax = prioritiesForAdd.IndexOf(prioritiesForAdd.Max());
-						outputSum += prioritiesForAdd.Max();
-						capacity += weights[indexOfMax];
+						currentCapacity += weights[indexOfMax];
+
+						// Если currentCapacity > Capacity && weights не пустой - пропускаем,  удаляем все записи по текущему indexOfMax, пробуем снова
+						if (currentCapacity > capacity)
+						{
+							currentCapacity -= weights[indexOfMax];
+
+							scores = scores.Where(val => Array.IndexOf(scores, val) != indexOfMax).ToArray();
+							weights = weights.Where(val => Array.IndexOf(weights, val) != indexOfMax).ToArray();
+							prioritiesForAdd.RemoveAt(indexOfMax);
+
+							if (!weights.Any())
+								break;
+							else
+								continue;
+						}
+						else
+						{
+							outputSum += scores[indexOfMax];
+						}
 
 						// Удаление значения по индексу из всех массивов
-						scores = scores.Where(val => val != prioritiesForAdd.Max()).ToArray();
-						weights = weights.Where(val => val != prioritiesForAdd.Max()).ToArray();
+						scores = scores.Where(val => Array.IndexOf(scores, val) != indexOfMax).ToArray();
+						weights = weights.Where(val => Array.IndexOf(weights, val) != indexOfMax).ToArray();
+						prioritiesForAdd.RemoveAt(indexOfMax);
 
 					}
-
-					
 
 
 				}
@@ -1740,10 +1783,10 @@ namespace Algorithmic_Problems_Sharp
 
 
 
-			Console.WriteLine(PackBagpack(new int[] { 15, 10, 9, 5 }, new int[] { 1, 5, 3, 4 }, 8)); //29
-																									 //{ 1,  5,  3, 4 }
+			//Console.WriteLine(PackBagpack(new int[] { 15, 10, 9, 5 }, new int[] { 1, 5, 3, 4 }, 8)); //29
+			//{ 1,  5,  3, 4 }
 
-			Console.WriteLine(PackBagpack(new int[] { 20, 5, 10, 40, 15, 25 }, new int[] { 1, 2, 3, 8, 7, 4 }, 10)); //60
+			Console.WriteLine(PackBagpack(new int[] { 20, 5, 10, 40, 15, 25 }, new int[] { 1, 2, 3, 8, 7, 6 }, 10)); //60
 																													 //{ 1,  2, 3,  8,  7,  4 }
 
 
