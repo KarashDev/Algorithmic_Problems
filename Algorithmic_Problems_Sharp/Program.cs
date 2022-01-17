@@ -1800,7 +1800,11 @@ namespace Algorithmic_Problems_Sharp
 
             Console.WriteLine(PackBagpack(new int[] { 20, 15, 5, 10, 40, 10, 15, 25, 40 }, new int[] { 1, 8, 2, 3, 8, 3, 7, 6, 21 }, 10)); //60
                                                                                                                                            //{ 1,  2, 3,  8,  7,  4 }
+            //scores:[ 4, 11, 3, 6, 2, 1 ]
+            //weights:[ 1, 1, 3, 3, 5, 4 ]
+            //capacity: 54
 
+            //Expected result: 43
 
 
 
