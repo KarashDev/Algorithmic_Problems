@@ -1803,11 +1803,83 @@ namespace Algorithmic_Problems_Sharp
                                                                                                                                            //scores:[ 4, 11, 3, 6, 2, 1 ]
                                                                                                                                            //weights:[ 1, 1, 3, 3, 5, 4 ]
                                                                                                                                            //capacity: 54
+//TODO не все тесты проходят (неизвестно что именно не так)
+            int GetFurthestNumber(List<int> cave)
+            {
+                // Нужен индекс того элемента, проходя с которого до элемента -1 потребуется больше всего steps
+                // steps++ это если следующий элемент массива отличается от текущего
+                // Необходимо делать в обе стороны; длинный путь только один
 
-            
-           
-            
-            
+                var currentSteps = 0;
+
+                var maxStepsFromLeft = 0;
+                var maxStepsFromRight = 0;
+
+                int indexOfSearchedNum = 0;
+
+                var indexOfStop = cave.IndexOf(-1);
+
+                // Пересчет с левой стороны
+                for (int i = 0; i <= indexOfStop; i++)
+                {
+                    currentSteps = 0;
+                    for (int j = i; j <= indexOfStop - 1; j++)
+                    {
+                        if (j != (j + 1))
+                        {
+                            currentSteps++;
+                            if (currentSteps > maxStepsFromLeft)
+                            {
+                                maxStepsFromLeft = currentSteps;
+                                indexOfSearchedNum = i;
+                            }
+                        }
+                    }
+                }
+
+                // Пересчет с правой стороны
+                for (int i = cave.Count - 1; i >= indexOfStop; i--)
+                {
+                    currentSteps = 0;
+                    for (int j = i; j >= indexOfStop + 1; j--)
+                    {
+                        if (j != (j - 1))
+                        {
+                            currentSteps++;
+
+                            if (currentSteps > maxStepsFromRight)
+                            {
+                                maxStepsFromRight = currentSteps;
+
+                                if (maxStepsFromRight > maxStepsFromLeft)
+                                {
+                                    indexOfSearchedNum = i;
+                                }
+                            }
+                        }
+                    }
+                }
+
+                return indexOfSearchedNum;
+            }
+
+            //Аргумент
+            //[1, -1, 1, 2]
+
+            //Ожидаемое значение
+            //3
+
+
+            //Дан массив пещерных ходов cave.Значения в массиве указывают номер пещеры, куда из текущей пещеры можно пройти.
+            //Например, cave[2, 2, 1] означает, что пещеры с индексом 0 и 1 пути ведут в пещеру с индексом 2.А из cave[2] можно попасть в cave[1].
+            //Определите индекс пещеры, из которой будет самый длинный путь до элемента массива со значением -1.
+            //Гарантируется, что максимально длинный путь только один.
+
+            Console.WriteLine(GetResult(new List<int> { 1, 2, -1 }));//0
+            Console.WriteLine(GetResult(new List<int> { 1, -1, 1, 2 }));//3
+            Console.WriteLine(GetResult(new List<int> { -1, 1 }));//1
+            //Console.WriteLine(GetResult(new List<int> { 1, -1 }));//1
+
 
 
 
