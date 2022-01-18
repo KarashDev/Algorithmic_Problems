@@ -1835,17 +1835,47 @@ namespace Tests_Sharp
         [Test]
         public void WhichAreIn()
         {
-            string[] inArray(string[] array1, string[] array2)
+            List<int> MaxSumSubarray(List<int> numb)
             {
+                // ѕеребор каждого числа
+                // — каждой итерацией забираем кусок с i до j в коллекцию currentNumChunk;
+                // ќбновл€ю сумму с каждого этого куска; если сумма больше максимальной - сохран€ю в в коллекцию numChunkWithMaxSum
+                // currentNumChunk и currentSum обнул€ть с обновлением i
 
+                if (numb.Count <= 1)
+                    return numb;
+
+                List<int> numChunkWithMaxSum = new List<int>();
+                List<int> currentNumChunk = new List<int>();
+
+                int currentSum = 0;
+                int maxSum = 0;
+
+                for (int i = 0; i < numb.Count; i++)
+                {
+                    currentSum = 0;
+                    currentNumChunk.Clear();
+
+                    for (int j = i; j < numb.Count; j++)
+                    {
+                        currentNumChunk.Add(numb[j]);
+                        currentSum += numb[j];
+
+                        if (currentSum > maxSum)
+                        {
+                            numChunkWithMaxSum = new List<int>(currentNumChunk);
+                            maxSum = currentSum;
+                        }
+                    }
+                }
+
+                return numChunkWithMaxSum;
             }
 
-
-            string[] a1 = new string[] { "arp", "live", "strong" };
-            string[] a2 = new string[] { "lively", "alive", "harp", "sharp", "armstrong" };
-            string[] r = new string[] { "arp", "live", "strong" };
-            Assert.AreEqual(r, inArray(a1, a2));
+            Assert.AreEqual(new List<int> { 2, 4, -5, 3, 3 }, MaxSumSubarray(new List<int> { 2, 4, -5, 3, 3, -7, 5, 1 }));
+            Assert.AreEqual(new List<int> { 4, 2, 8 }, MaxSumSubarray(new List<int> { 4, 2, 8, -5, 2 }));
         }
+
 
 
 
