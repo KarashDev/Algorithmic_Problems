@@ -1795,91 +1795,157 @@ namespace Algorithmic_Problems_Sharp
 
 
 
-            //Console.WriteLine(PackBagpack(new int[] { 15, 10, 9, 5 }, new int[] { 1, 5, 3, 4 }, 8)); //29
-            //{ 1,  5,  3, 4 }
+            ////Console.WriteLine(PackBagpack(new int[] { 15, 10, 9, 5 }, new int[] { 1, 5, 3, 4 }, 8)); //29
+            ////{ 1,  5,  3, 4 }
 
-            Console.WriteLine(PackBagpack(new int[] { 20, 15, 5, 10, 40, 10, 15, 25, 40 }, new int[] { 1, 8, 2, 3, 8, 3, 7, 6, 21 }, 10)); //60
-                                                                                                                                           //{ 1,  2, 3,  8,  7,  4 }
-                                                                                                                                           //scores:[ 4, 11, 3, 6, 2, 1 ]
-                                                                                                                                           //weights:[ 1, 1, 3, 3, 5, 4 ]
-                                                                                                                                           //capacity: 54
-//TODO не все тесты проходят (неизвестно что именно не так)
-            int GetFurthestNumber(List<int> cave)
+            //Console.WriteLine(PackBagpack(new int[] { 20, 15, 5, 10, 40, 10, 15, 25, 40 }, new int[] { 1, 8, 2, 3, 8, 3, 7, 6, 21 }, 10)); //60
+            //                                                                                                                               //{ 1,  2, 3,  8,  7,  4 }
+            //                                                                                                                               //scores:[ 4, 11, 3, 6, 2, 1 ]
+            //                                                                                                                               //weights:[ 1, 1, 3, 3, 5, 4 ]
+            //                                                                                                                               //capacity: 54
+            //TODO не все тесты проходят (неизвестно что именно не так)
+            //int GetFurthestNumber(List<int> cave)
+            //{
+            //    // Нужен индекс того элемента, проходя с которого до элемента -1 потребуется больше всего steps
+            //    // steps++ это если следующий элемент массива отличается от текущего
+            //    // Необходимо делать в обе стороны; длинный путь только один
+
+            //    var currentSteps = 0;
+
+            //    var maxStepsFromLeft = 0;
+            //    var maxStepsFromRight = 0;
+
+            //    int indexOfSearchedNum = 0;
+
+            //    var indexOfStop = cave.IndexOf(-1);
+
+            //    // Пересчет с левой стороны
+            //    for (int i = 0; i <= indexOfStop; i++)
+            //    {
+            //        currentSteps = 0;
+            //        for (int j = i; j <= indexOfStop - 1; j++)
+            //        {
+            //            if (j != (j + 1))
+            //            {
+            //                currentSteps++;
+            //                if (currentSteps > maxStepsFromLeft)
+            //                {
+            //                    maxStepsFromLeft = currentSteps;
+            //                    indexOfSearchedNum = i;
+            //                }
+            //            }
+            //        }
+            //    }
+
+            //    // Пересчет с правой стороны
+            //    for (int i = cave.Count - 1; i >= indexOfStop; i--)
+            //    {
+            //        currentSteps = 0;
+            //        for (int j = i; j >= indexOfStop + 1; j--)
+            //        {
+            //            if (j != (j - 1))
+            //            {
+            //                currentSteps++;
+
+            //                if (currentSteps > maxStepsFromRight)
+            //                {
+            //                    maxStepsFromRight = currentSteps;
+
+            //                    if (maxStepsFromRight > maxStepsFromLeft)
+            //                    {
+            //                        indexOfSearchedNum = i;
+            //                    }
+            //                }
+            //            }
+            //        }
+            //    }
+
+            //    return indexOfSearchedNum;
+            //}
+
+            ////Аргумент
+            ////[1, -1, 1, 2]
+
+            ////Ожидаемое значение
+            ////3
+
+
+            ////Дан массив пещерных ходов cave.Значения в массиве указывают номер пещеры, куда из текущей пещеры можно пройти.
+            ////Например, cave[2, 2, 1] означает, что пещеры с индексом 0 и 1 пути ведут в пещеру с индексом 2.А из cave[2] можно попасть в cave[1].
+            ////Определите индекс пещеры, из которой будет самый длинный путь до элемента массива со значением -1.
+            ////Гарантируется, что максимально длинный путь только один.
+
+            //Console.WriteLine(GetFurthestNumber(new List<int> { 1, 2, -1 }));//0
+            //Console.WriteLine(GetFurthestNumber(new List<int> { 1, -1, 1, 2 }));//3
+            //Console.WriteLine(GetFurthestNumber(new List<int> { -1, 1 }));//1
+            //                                                              //Console.WriteLine(GetResult(new List<int> { 1, -1 }));//1
+
+
+
+            //TODO не все тесты проходят (неизвестно что именно не так)
+            int GetDominantSymbolLength(string s, string symbol)
             {
-                // Нужен индекс того элемента, проходя с которого до элемента -1 потребуется больше всего steps
-                // steps++ это если следующий элемент массива отличается от текущего
-                // Необходимо делать в обе стороны; длинный путь только один
+                var я = "aaa bbb aaaabb aaab ab aaaa bb";
 
-                var currentSteps = 0;
+                if (String.IsNullOrEmpty(s))
+                    return 0;
 
-                var maxStepsFromLeft = 0;
-                var maxStepsFromRight = 0;
+                s = Regex.Replace(s, @"\s+", " ");
 
-                int indexOfSearchedNum = 0;
+                string finalString = "";
+                string partWithSymbol = "";
+                int symbolsCount = 0;
 
-                var indexOfStop = cave.IndexOf(-1);
+                List<string> allStrings = s.Split(" ").ToList();
 
-                // Пересчет с левой стороны
-                for (int i = 0; i <= indexOfStop; i++)
+                while (allStrings.Any())
                 {
-                    currentSteps = 0;
-                    for (int j = i; j <= indexOfStop - 1; j++)
+                    if (allStrings.Count >= 2)
                     {
-                        if (j != (j + 1))
-                        {
-                            currentSteps++;
-                            if (currentSteps > maxStepsFromLeft)
-                            {
-                                maxStepsFromLeft = currentSteps;
-                                indexOfSearchedNum = i;
-                            }
-                        }
+                        partWithSymbol = allStrings[0] + symbol + allStrings[1];
+                        allStrings.Remove(allStrings[0]);
+                        allStrings.Remove(allStrings[0]);
                     }
+                    else if (allStrings.Count == 1)
+                    {
+                        partWithSymbol = symbol + allStrings[0];
+                        allStrings.Remove(allStrings[0]);
+                    }
+
+                    var countA = 0;
+                    var countB = 0;
+                    foreach (char c in partWithSymbol)
+                    {
+                        if (c == 'a')
+                            countA++;
+                        else if (c == 'b')
+                            countB++;
+                    }
+
+                    if (countA > countB)
+                        partWithSymbol = new string(partWithSymbol.Select(c => c = 'a').ToArray());
+                    else if (countB > countA)
+                        partWithSymbol = new string(partWithSymbol.Select(c => c = 'b').ToArray());
+
+                    finalString += partWithSymbol;
                 }
 
-                // Пересчет с правой стороны
-                for (int i = cave.Count - 1; i >= indexOfStop; i--)
-                {
-                    currentSteps = 0;
-                    for (int j = i; j >= indexOfStop + 1; j--)
-                    {
-                        if (j != (j - 1))
-                        {
-                            currentSteps++;
+                symbolsCount = finalString.Count();
 
-                            if (currentSteps > maxStepsFromRight)
-                            {
-                                maxStepsFromRight = currentSteps;
-
-                                if (maxStepsFromRight > maxStepsFromLeft)
-                                {
-                                    indexOfSearchedNum = i;
-                                }
-                            }
-                        }
-                    }
-                }
-
-                return indexOfSearchedNum;
+                return symbolsCount;
             }
 
-            //Аргумент
-            //[1, -1, 1, 2]
 
-            //Ожидаемое значение
-            //3
+            //var s = "aaa bbb";
+            //var symbol = "a";
+            //Console.WriteLine(GetResult(s, symbol)); //7
 
+            var q = "bbbb cc aa";
+            var symbolq = "b";
+            Console.WriteLine(GetDominantSymbolLength(q, symbolq)); //10
 
-            //Дан массив пещерных ходов cave.Значения в массиве указывают номер пещеры, куда из текущей пещеры можно пройти.
-            //Например, cave[2, 2, 1] означает, что пещеры с индексом 0 и 1 пути ведут в пещеру с индексом 2.А из cave[2] можно попасть в cave[1].
-            //Определите индекс пещеры, из которой будет самый длинный путь до элемента массива со значением -1.
-            //Гарантируется, что максимально длинный путь только один.
-
-            Console.WriteLine(GetResult(new List<int> { 1, 2, -1 }));//0
-            Console.WriteLine(GetResult(new List<int> { 1, -1, 1, 2 }));//3
-            Console.WriteLine(GetResult(new List<int> { -1, 1 }));//1
-            //Console.WriteLine(GetResult(new List<int> { 1, -1 }));//1
-
+            //var stringarr = new char[] { 'a', 'c' };
+            //var z = new string(stringarr.Select(c => c = 'a').ToArray());
 
 
 
