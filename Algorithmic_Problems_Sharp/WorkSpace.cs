@@ -10,7 +10,7 @@ using System.IO;
 
 namespace Algorithmic_Problems_Sharp
 {
-    class Program
+    class WorkSpace
     {
         static void Main(string[] args)
         {
