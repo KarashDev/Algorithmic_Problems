@@ -1880,20 +1880,12 @@ namespace Tests_Sharp
 		[Test]
 		public void SumsOfParts()
 		{
-			int[] PartsSums(int[] ls)
+			// Решение ПОСЛЕ оптимизации (время отработки 940 ns)
+			int[] PartsSumsFast(int[] ls)
 			{
-
 				List<int> nums = new List<int>(ls);
 				List<int> outputList = new List<int>();
 
-				//// Решение ДО оптимизации
-				//while (nums.Any())
-				//{
-				//	outputList.Add(nums.Sum());
-				//	nums.RemoveAt(0);
-				//}
-
-				//Решение ПОСЛЕ оптимизации
 				bool isOperationFirst = true;
 				int firstFromNums = 0;
 
@@ -1920,10 +1912,26 @@ namespace Tests_Sharp
 				return outputList.ToArray();
 			}
 
-			Assert.AreEqual(new int[] { 20, 20, 19, 16, 10, 0 }, PartsSums(new int[] { 0, 1, 3, 6, 10 }));
-			Assert.AreEqual(new int[] { 21, 20, 18, 15, 11, 6, 0 }, PartsSums(new int[] { 1, 2, 3, 4, 5, 6 }));
+			// Решение ДО оптимизации (время отработки 1.640 ns)
+			int[] PartsSumsSlow(int[] ls)
+			{
+				List<int> nums = new List<int>(ls);
+				List<int> outputList = new List<int>();
+
+				while (nums.Any())
+				{
+					outputList.Add(nums.Sum());
+					nums.RemoveAt(0);
+				}
+
+				outputList.Add(0);
+				return outputList.ToArray();
+			}
+
+			Assert.AreEqual(new int[] { 20, 20, 19, 16, 10, 0 }, PartsSumsFast(new int[] { 0, 1, 3, 6, 10 }));
+			Assert.AreEqual(new int[] { 21, 20, 18, 15, 11, 6, 0 }, PartsSumsFast(new int[] { 1, 2, 3, 4, 5, 6 }));
 			Assert.AreEqual(new int[] { 10037855, 9293730, 9292795, 9292388, 9291934, 9291504, 9291414, 9291270, 2581057, 2580168, 2579358, 0 },
-				PartsSums(new int[] { 10037855, 9293730, 9292795, 9292388, 9291934, 9291504, 9291414, 9291270, 2581057, 2580168, 2579358, 0 }));
+				PartsSumsFast(new int[] { 10037855, 9293730, 9292795, 9292388, 9291934, 9291504, 9291414, 9291270, 2581057, 2580168, 2579358, 0 }));
 
 		}
 
