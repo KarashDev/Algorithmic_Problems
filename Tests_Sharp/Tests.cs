@@ -1935,13 +1935,43 @@ namespace Tests_Sharp
 
 		}
 
+        //[Test]
+        //public void Xxxxx()
+        //{
+        //    void(string data)
+        //    {
+
+        //    }
+
+        //    Assert.AreEqual(new int[] { 8, 64 }, Parse("iiisdoso"));
+        //    Assert.AreEqual(new int[] { 8, 64, 3600 }, Parse("iiisdosodddddiso"));
+        //}
+
+
+        [Test]
+        public void UpArrayKata()
+        {
+			int[] UpArray(int[] num)
+			{
+
+            }
+
+			var num1 = new int[] { 2, 3, 9 };
+			var newNum1 = new int[] { 2, 4, 0 };
+			Assert.AreEqual(newNum1, UpArray(num1));
+			
+			var num2 = new int[] { 4, 3, 2, 5 };
+			var newNum2 = new int[] { 4, 3, 2, 6 };
+			Assert.AreEqual(newNum2, UpArray(num2));
+
+
+			var num3 = new int[] { 0, 0, 0, 2, 3, 9, 0, 0 };
+			var newNum3 = new int[] { 0, 0, 0, 2, 3, 9, 0, 1 };
+			Assert.AreEqual(newNum3, UpArray(num3));
+		}
 
 
 
 
-
-
-
-
-	}
+    }
 }
