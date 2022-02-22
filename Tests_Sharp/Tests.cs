@@ -1953,8 +1953,38 @@ namespace Tests_Sharp
         {
 			int[] UpArray(int[] num)
 			{
+				// Исключить пустой массив, исключить массив с числами больше девяти (считает правильными числа 10 и 11)
+				// Пропускаются single-digit числа (ОДНОЗНАЧНЫЕ), 10 и 11 имеют один знак, нужна проверка на однозначность +
+				// проверка на большие числа
+				if (num == null || !num.Any() || num.Any(c => c.ToString().Length > 1 && c.ToString() != "10" && c.ToString() != "11")
+					|| num.Any(c => c < 0))
+					return null;
 
-            }
+				string numberStr = "";
+
+				foreach (int i in num)
+				{
+					numberStr += Convert.ToString(i);
+				}
+
+				var leadingZeroesInStr = numberStr.TakeWhile(c => c == '0');
+
+				numberStr = (Convert.ToInt64(numberStr) + 1).ToString();
+
+				if (leadingZeroesInStr.Any())
+				{
+					string zeroesStr = string.Join("", leadingZeroesInStr.ToArray());
+					numberStr = numberStr.Insert(0, zeroesStr);
+				}
+
+				var output = new List<int>();
+				foreach (char i in numberStr)
+				{
+					output.Add(Convert.ToInt32(Convert.ToString(i)));
+				}
+
+				return output.ToArray();
+			}
 
 			var num1 = new int[] { 2, 3, 9 };
 			var newNum1 = new int[] { 2, 4, 0 };
