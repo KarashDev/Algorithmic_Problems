@@ -13,8 +13,8 @@ namespace Benchmark
 	[RankColumn]
 	public class AlgosBenchmark
 	{
-		public readonly int[] arrCase1 = new int[] { 20, 20, 19, 16, 10, 0 };
-		public readonly int[] arrCase2 = new int[] { 21, 20, 18, 15, 11, 6, 0 };
+		private readonly int[] arrCase1 = new int[] { 20, 20, 19, 16, 10, 0 };
+		private readonly int[] arrCase2 = new int[] { 21, 20, 18, 15, 11, 6, 0 };
 
 		Tests tests = new Tests();
 
@@ -67,15 +67,15 @@ namespace Benchmark
 		[Benchmark]
 		public void TestPartsSumsSlow()
 		{
-			var testCaseSlow = PartsSumsSlow(arrCase1);
-			var testCaseFast = PartsSumsSlow(arrCase2);
+			var testCaseSlow1 = PartsSumsSlow(arrCase1);
+			var testCaseSlow2 = PartsSumsSlow(arrCase2);
 		}
 
 		[Benchmark]
 		public void TestPartsSumsFast()
 		{
-			var testCaseSlow = PartsSumsFast(arrCase1);
-			var testCaseFast = PartsSumsFast(arrCase2);
+			var testCaseFast1 = PartsSumsFast(arrCase1);
+			var testCaseFast2 = PartsSumsFast(arrCase2);
 		}
 
 

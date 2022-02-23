@@ -1935,30 +1935,48 @@ namespace Tests_Sharp
 
 		}
 
-        //[Test]
-        //public void Xxxxx()
-        //{
-        //    void(string data)
-        //    {
+		//[Test]
+		//public void Xxxxx()
+		//{
+		//    void(string data)
+		//    {
 
-        //    }
+		//    }
 
-        //    Assert.AreEqual(new int[] { 8, 64 }, Parse("iiisdoso"));
-        //    Assert.AreEqual(new int[] { 8, 64, 3600 }, Parse("iiisdosodddddiso"));
-        //}
+		//    Assert.AreEqual(new int[] { 8, 64 }, Parse("iiisdoso"));
+		//    Assert.AreEqual(new int[] { 8, 64, 3600 }, Parse("iiisdosodddddiso"));
+		//}
 
 
-        [Test]
-        public void UpArrayKata()
-        {
+		[Test]
+		public void UpArrayKata()
+		{
+			bool IsSingleDigitInteger(int num)
+			{
+				if (num == 0)
+					return true;
+
+				var numWithoutZeroes = num.ToString().Where(c => c != '0');
+
+				List<char> charsWithousZeroes = new List<char>(numWithoutZeroes);
+
+				if (charsWithousZeroes.Distinct().Count() != 1)
+					return false;
+
+				return true;
+			}
+
 			int[] UpArray(int[] num)
 			{
-				// Исключить пустой массив, исключить массив с числами больше девяти (считает правильными числа 10 и 11)
-				// Пропускаются single-digit числа (ОДНОЗНАЧНЫЕ), 10 и 11 имеют один знак, нужна проверка на однозначность +
-				// проверка на большие числа
 				if (num == null || !num.Any() || num.Any(c => c.ToString().Length > 1 && c.ToString() != "10" && c.ToString() != "11")
 					|| num.Any(c => c < 0))
 					return null;
+
+				foreach (var number in num)
+				{
+					if (!IsSingleDigitInteger(number))
+						return null;
+				}
 
 				string numberStr = "";
 
@@ -1969,7 +1987,7 @@ namespace Tests_Sharp
 
 				var leadingZeroesInStr = numberStr.TakeWhile(c => c == '0');
 
-				numberStr = (Convert.ToInt64(numberStr) + 1).ToString();
+				numberStr = (Convert.ToInt32(numberStr) + 1).ToString();
 
 				if (leadingZeroesInStr.Any())
 				{
@@ -1986,14 +2004,50 @@ namespace Tests_Sharp
 				return output.ToArray();
 			}
 
+			//// Более хорошее решение без лишних приведений:
+			//// Вариант 1:
+			//int[] UpArray(int[] num)
+			//{
+			//	if (num.Length == 0 || num.Any(a => a < 0 || a > 9))
+			//		return null;
+
+			//	for (var i = num.Length - 1; i >= 0; i--)
+			//	{
+			//		if (num[i] == 9)
+			//		{
+			//			num[i] = 0;
+			//		}
+			//		else
+			//		{
+			//			num[i]++;
+			//			return num;
+			//		}
+			//	}
+			//	return new[] { 1 }.Concat(num).ToArray();
+			//}
+
+			//// Вариант 2:
+			//public static int[] UpArray(int[] num)
+			//{
+			//	if (num.Count() == 0 || num.Any(x => x < 0 || x > 9)) return null;
+
+			//	for (int i = num.Length - 1; i >= 0; i--)
+			//	{
+			//		num[i] += 1;
+			//		if (num[i] < 10) return num;
+			//		else num[i] %= 10;
+			//	}
+
+			//	return new[] { 1 }.Concat(num).ToArray();
+			//}
+
 			var num1 = new int[] { 2, 3, 9 };
 			var newNum1 = new int[] { 2, 4, 0 };
 			Assert.AreEqual(newNum1, UpArray(num1));
-			
+
 			var num2 = new int[] { 4, 3, 2, 5 };
 			var newNum2 = new int[] { 4, 3, 2, 6 };
 			Assert.AreEqual(newNum2, UpArray(num2));
-
 
 			var num3 = new int[] { 0, 0, 0, 2, 3, 9, 0, 0 };
 			var newNum3 = new int[] { 0, 0, 0, 2, 3, 9, 0, 1 };
@@ -2003,5 +2057,5 @@ namespace Tests_Sharp
 
 
 
-    }
+	}
 }
