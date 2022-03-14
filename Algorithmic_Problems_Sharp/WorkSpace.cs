@@ -1972,80 +1972,13 @@ namespace Algorithmic_Problems_Sharp
             //}
 
 
-            long[] OddRow(int n)
-            {
-                // Кол-во цифр равно числу ввода
-                // Если ввод нечетный: умножаем его на себя, далее равномерно слева и справа добавляем числа на +2
-                // Если ввод четный: умножаем его на себя, делаем -1, далее слева и справа добавляем числа на +2, при 
-                // этом справа на одно число больше чем слева
-
-                int cnt = n;
-                long numForLeftPart = 0;
-                long numForRightPart = 0;
-
-                List<long> nums = new List<long>(n);
-                
-                if (n % 2 != 0)
-                {
-                    n *= n;
-                    nums.Add(n);
-
-                    numForLeftPart = n - 2;
-                    numForRightPart = n + 2;
-
-                    for (int i = 0; i < (cnt-1)/2; i++, numForLeftPart-=2)
-                    {
-                        nums.Insert(0, numForLeftPart);
-                    }
-
-                    for (int i = 0; i < (cnt-1)/2; i++, numForRightPart+=2)
-                    {
-                        nums.Add(numForRightPart);
-                    }
-
-                }
-                else if (n % 2 == 0)
-                {
-                    n = n * n - 1;
-                    nums.Add(n);
-
-                    numForLeftPart = n - 2;
-                    numForRightPart = n + 2;
-
-                    for (int i = 0; i < (cnt-1)/2; i++, numForLeftPart-=2)
-                    {
-                        nums.Insert(0, numForLeftPart);
-                    }
-
-                    for (int i = 0; i < (cnt-1)/2+1; i++, numForRightPart+=2)
-                    {
-                        nums.Add(numForRightPart);
-                    }
-                }
-
-                return nums.ToArray();
-            }
 
 
-            //			1
-            //		  3   5
-            // 	    7   9  11
-            //    13  15  17  19
-            //  21  23  25  27  29
-            //31  33  35  37  39  41
 
-            //odd_row(1)  ==  [1]
-            //odd_row(2)  ==  [3, 5]
-            //odd_row(3)  ==  [7, 9, 11]
-            //odd_row(4)  ==  [13, 15, 17, 19]
-            //odd_row(5)  ==  [21, 23, 25, 27, 29]
-            //odd_row(13) ==  [157, 159, 161, 163, 165, 167, 169, 171, 173, 175, 177, 179, 181]
 
-            var x = OddRow(6);
-            foreach (var item in x)
-            {
-                Console.Write(item + " ");
-            }
+
+
+
 
         }
     }

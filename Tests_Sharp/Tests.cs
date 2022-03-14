@@ -2042,17 +2042,6 @@ namespace Tests_Sharp
             Assert.AreEqual(newNum3, UpArray(num3));
         }
 
-        //[Test]
-        //public void Xxxxx()
-        //{
-        //    void(string data)
-        //    {
-
-        //    }
-
-        //    Assert.AreEqual(new int[] { 8, 64 }, Parse("iiisdoso"));
-        //    Assert.AreEqual(new int[] { 8, 64, 3600 }, Parse("iiisdosodddddiso"));
-        //}
 
         [Test]
         public void GetTriangleOddRow()
@@ -2117,10 +2106,40 @@ namespace Tests_Sharp
             Assert.AreEqual(OddRow(3), new long[] { 7, 9, 11 });
             Assert.AreEqual(OddRow(5), new long[] { 21, 23, 25, 27, 29 });
             Assert.AreEqual(OddRow(6), new long[] { 31, 33, 35, 37, 39, 41 });
-            Assert.AreEqual(OddRow(13), new long[]{ 157, 159, 161, 163, 165, 167, 169, 171, 173, 175, 177, 179, 181 });
-            Assert.AreEqual(OddRow(19), new long[]{343, 345, 347, 349, 351, 353, 355, 357, 359, 361, 363, 365, 367, 369, 371, 373, 375, 377, 379});
-
-
+            Assert.AreEqual(OddRow(13), new long[] { 157, 159, 161, 163, 165, 167, 169, 171, 173, 175, 177, 179, 181 });
+            Assert.AreEqual(OddRow(19), new long[] { 343, 345, 347, 349, 351, 353, 355, 357, 359, 361, 363, 365, 367, 369, 371, 373, 375, 377, 379 });
         }
+
+
+        [Test]
+        public void IsNiceArray()
+        {
+            bool isThereMatches(int[] arr, int n)
+            {
+                return arr.Any(i => n == i + 1 || n == i - 1);
+            }
+
+            bool IsNice(int[] arr)
+            {
+                if (arr == null || !arr.Any())
+                    return false;
+
+                if (arr.All(n => isThereMatches(arr, n)))
+                    return true;
+                else return false;
+            }
+
+            // Более лаконичное:
+            bool IsNice2(int[] arr) => arr.Any() && arr.All(n => arr.Contains(n + 1) || arr.Contains(n - 1));
+
+            Assert.AreEqual(true, new int[] { 2, 10, 9, 3 });
+            Assert.AreEqual(false, new int[] { 2, 10, 9, 5 });
+        }
+
+
+
+
+
+
     }
 }
