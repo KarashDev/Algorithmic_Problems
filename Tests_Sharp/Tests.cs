@@ -2137,6 +2137,31 @@ namespace Tests_Sharp
         }
 
 
+        [Test]
+        public void IsStrPangram()
+        {
+            // Громоздкая версия
+            bool IsPangram(string str)
+            {
+                char[] alphabetLetters = "abcdefghijklmnopqrstuvwxyz".ToCharArray();
+                char[] strLetters = str.ToLower().ToCharArray();
+
+                if (alphabetLetters.All(l => strLetters.Contains(l)))
+                    return true;
+                else return false;
+            }
+
+            // Сжатая версия
+            //char[] alphabetLetters = "abcdefghijklmnopqrstuvwxyz".ToCharArray();
+            bool IsPangram(string str) => "abcdefghijklmnopqrstuvwxyz".All(l => str.ToLower().ToCharArray().Contains(l));
+
+            Assert.AreEqual(true, IsPangram("The quick brown fox jumps over the lazy dog."));
+            Assert.AreEqual(false, IsPangram("The qick brown fox jmps over the lazy dog."));
+        }
+
+
+
+
 
 
 

@@ -1973,11 +1973,24 @@ namespace Algorithmic_Problems_Sharp
 
 
 
+            // Громоздкая версия
+            bool IsPangram(string str)
+            {
+                char[] alphabetLetters = "abcdefghijklmnopqrstuvwxyz".ToCharArray();
+                char[] strLetters = str.ToLower().ToCharArray();
+
+                if (alphabetLetters.All(l => strLetters.Contains(l)))
+                    return true;
+                else return false;
+            }
+
+            // Сжатая версия
+            //char[] alphabetLetters = "abcdefghijklmnopqrstuvwxyz".ToCharArray();
+            bool IsPangram(string str) => "abcdefghijklmnopqrstuvwxyz".All(l => str.ToLower().ToCharArray().Contains(l));
 
 
-
-
-
+            var x = "The quick brown fox jumps over the lazy dog.";
+            Console.WriteLine(IsPangram(x));
 
 
         }
