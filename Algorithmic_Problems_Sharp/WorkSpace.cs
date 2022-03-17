@@ -18,7 +18,7 @@ namespace Algorithmic_Problems_Sharp
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello Algos!");
+            //Console.WriteLine("Hello Algos!");
             // Задача:
             // Мое решение:
             // Хорошее решение:
@@ -1944,9 +1944,9 @@ namespace Algorithmic_Problems_Sharp
             //var symbol = "a";
             //Console.WriteLine(GetResult(s, symbol)); //7
 
-            var q = "bbbb cc aa";
-            var symbolq = "b";
-            Console.WriteLine(GetDominantSymbolLength(q, symbolq)); //10
+            //var q = "bbbb cc aa";
+            //var symbolq = "b";
+            //Console.WriteLine(GetDominantSymbolLength(q, symbolq)); //10
 
             //var stringarr = new char[] { 'a', 'c' };
             //var z = new string(stringarr.Select(c => c = 'a').ToArray());
@@ -1972,25 +1972,101 @@ namespace Algorithmic_Problems_Sharp
             //}
 
 
-
-            // Громоздкая версия
-            bool IsPangram(string str)
+            long FindSumOfDivisors(long num)
             {
-                char[] alphabetLetters = "abcdefghijklmnopqrstuvwxyz".ToCharArray();
-                char[] strLetters = str.ToLower().ToCharArray();
+                long sum = 0;
 
-                if (alphabetLetters.All(l => strLetters.Contains(l)))
-                    return true;
-                else return false;
+                for (int i = 1; i < num; i++)
+                {
+                    if (num % i == 0)
+                        sum += i;
+                }
+
+                return sum;
             }
 
-            // Сжатая версия
-            //char[] alphabetLetters = "abcdefghijklmnopqrstuvwxyz".ToCharArray();
-            bool IsPangram(string str) => "abcdefghijklmnopqrstuvwxyz".All(l => str.ToLower().ToCharArray().Contains(l));
+
+            string Buddy(long start, long limit)
+            {
+                // делители для n от 1 до n НЕ ВКЛЮЧАЯ n
+                // s - сумма всех делителей числа
+                // (n, m) are a pair of buddy if s(m) = n + 1 and s(n) = m + 1
+                // для n = 48, s = 76 = 75 + 1
+                // для n = 75, s = 49 = 48 + 1
+
+                // для A = 48, s = 76 = B + 1
+                // для B = 75, s = 49 = A + 1
+
+                // Найти первую пару (A, B) где A между числами start и limit включительно
+                // Число B НЕ ОБЯЗАТЕЛЬНО должен быть между start и limit; оно должно быть > A оно может иметь значение больше чем limit
+                // Вернуть "Nothing" если не найдено, если найдено строка "(A B)"
+
+                // Перебрать все числа от start до limit добавляя в словарь пару n-s только в случае если S > N
+                // Проверить каждую пару: взять s(A), он становится B + 1, найти для него его s(B), сверить s(B) c A + 1;
+                // подходит - забираем и выходим, не подходит - переходим к следующей паре
+
+                Dictionary<long?,long> numberToDivSum = new Dictionary<long?, long>();
+                long firstBuddy = 0, secondBuddy = 0;
+
+                for (long i = start; i <= limit; i++)
+                {
+                    numberToDivSum.Add(i, FindSumOfDivisors(i));
+                }
+
+                for (int i = 0; firstBuddy == 0 && secondBuddy == 0; i++)
+                {
+                    
+                }
 
 
-            var x = "The quick brown fox jumps over the lazy dog.";
-            Console.WriteLine(IsPangram(x));
+
+                for (int i = 35; i < numberToDivSum.Count; i++)
+                {
+                    var currentPair = numberToDivSum.ElementAt(i);
+
+                    var matchedPair = numberToDivSum.FirstOrDefault(pair => currentPair.Value == (pair.Key + 1));
+
+                    if (matchedPair.Key != null && currentPair.Key != matchedPair.Key)
+                    {
+                        if ((matchedPair.Value + 1) == currentPair.Key)
+                        {
+                            firstBuddy = (long)currentPair.Key;
+                            secondBuddy = (long)matchedPair.Key;
+                        }
+                    }
+                }
+
+                if (firstBuddy != 0 && secondBuddy != 0)
+                    return $"({firstBuddy} {secondBuddy})";
+                else return "Nothing";
+            }
+
+            //Console.WriteLine(FindSumOfDivisors(23));
+            //Console.WriteLine(FindSumOfDivisors());
+            Console.WriteLine(Buddy(10, 50));
+            //Console.WriteLine(Buddy(48, 50));
+            //Console.WriteLine(Buddy(1071625, 1103735));
+            //Console.WriteLine(Buddy(8983, 13355));
+
+            //for (int i = 10; i < 50; i++)
+            //{
+            //    Console.WriteLine(FindSumOfDivisors(i));
+            //}
+
+
+            //buddy(10, 50) returns "(48 75)"
+            //buddy(48, 50) returns "(48 75)"
+
+            //testing(1071625, 1103735, "(1081184 1331967)");
+            //testing(2382, 3679, "Nothing");
+            //testing(8983, 13355, "(9504 20735)");
+
+
+
+
+
+
+
 
 
         }
