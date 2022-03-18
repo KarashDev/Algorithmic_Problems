@@ -2137,26 +2137,147 @@ namespace Tests_Sharp
         }
 
 
-        [Test]
-        public void IsStrPangram()
-        {
-            // √ромоздка€ верси€
-            bool IsPangram(string str)
-            {
-                char[] alphabetLetters = "abcdefghijklmnopqrstuvwxyz".ToCharArray();
-                char[] strLetters = str.ToLower().ToCharArray();
+        //[Test]
+        //public void IsStrPangram()
+        //{
+        //    // √ромоздка€ верси€
+        //    bool IsPangram(string str)
+        //    {
+        //        char[] alphabetLetters = "abcdefghijklmnopqrstuvwxyz".ToCharArray();
+        //        char[] strLetters = str.ToLower().ToCharArray();
 
-                if (alphabetLetters.All(l => strLetters.Contains(l)))
-                    return true;
-                else return false;
+        //        if (alphabetLetters.All(l => strLetters.Contains(l)))
+        //            return true;
+        //        else return false;
+        //    }
+
+        //    // —жата€ верси€
+        //    //char[] alphabetLetters = "abcdefghijklmnopqrstuvwxyz".ToCharArray();
+        //    bool IsPangram(string str) => "abcdefghijklmnopqrstuvwxyz".All(l => str.ToLower().ToCharArray().Contains(l));
+
+        //    Assert.AreEqual(true, IsPangram("The quick brown fox jumps over the lazy dog."));
+        //    Assert.AreEqual(false, IsPangram("The qick brown fox jmps over the lazy dog."));
+        //}
+
+
+        [Test]
+        public void BuddyPairs()
+        {
+            long GetSumOfDivisors(long num)
+            {
+                //long sum = 0;
+
+                //for (int i = 1; i < num; ++i)
+                //{
+                //    if (num % i == 0)
+                //        sum += i;
+                //}
+
+                //return sum;
+
+                // ѕќ—Ћ≈ ќѕ“»ћ»«ј÷»»
+                // Final result of summation of divisors
+                long result = 0;
+
+                // find all divisors which divides 'num'
+                for (long i = 2; i <= Math.Sqrt(num); i++)
+                {
+
+                    // if 'i' is divisor of 'num'
+                    if (num % i == 0)
+                    {
+                        // if both divisors are same then
+                        // add it only once else add both
+                        if (i == (num / i))
+                            result += i;
+                        else
+                            result += (i + num / i);
+                    }
+                }
+
+                // Add 1 to the result as 1
+                // is also a divisor
+                return (result + 1);
             }
 
-            // —жата€ верси€
-            //char[] alphabetLetters = "abcdefghijklmnopqrstuvwxyz".ToCharArray();
-            bool IsPangram(string str) => "abcdefghijklmnopqrstuvwxyz".All(l => str.ToLower().ToCharArray().Contains(l));
 
-            Assert.AreEqual(true, IsPangram("The quick brown fox jumps over the lazy dog."));
-            Assert.AreEqual(false, IsPangram("The qick brown fox jmps over the lazy dog."));
+            string FindBuddyNum(long start, long limit)
+            {
+                // делители дл€ n от 1 до n Ќ≈ ¬ Ћё„јя n
+                // s - сумма всех делителей числа
+                // (n, m) are a pair of buddy if s(m) = n + 1 and s(n) = m + 1
+                // дл€ n = 48, s = 76 = 75 + 1
+                // дл€ n = 75, s = 49 = 48 + 1
+
+                // дл€ A = 48, s = 76 = B + 1
+                // дл€ B = 75, s = 49 = A + 1
+
+                // Ќайти первую пару (A, B) где A между числами start и limit включительно
+                // „исло B Ќ≈ ќЅя«ј“≈Ћ№Ќќ должен быть между start и limit; оно должно быть > A оно может иметь значение больше чем limit
+                // ¬ернуть "Nothing" если не найдено, если найдено строка "(A B)"
+
+                // ѕеребрать все числа от start до limit добавл€€ в словарь пару n-s только в случае если S > N
+                // ѕроверить каждую пару: вз€ть s(A)-1, он становитс€ B, найти дл€ него его s(B), сверить s(B)-1 c A;
+                // подходит - забираем и выходим, не подходит - переходим к следующей паре
+
+                // ƒќ ќѕ“»ћ»«ј÷»»
+                //=============================================================================
+                //Dictionary<long?, long> numberToDivSum = new Dictionary<long?, long>();
+                //long firstBuddy = 0, secondBuddy = 0;
+
+                //for (long i = start; i <= limit; i++)
+                //{
+                //    var sumOfDivForCurrentI = GetSumOfDivisors(i);
+
+                //    if (sumOfDivForCurrentI > i)
+                //        numberToDivSum.Add(i, GetSumOfDivisors(i));
+                //}
+
+                //for (int i = 0; i < numberToDivSum.Count; i++)
+                //{
+                //    var currentPair = numberToDivSum.ElementAt(i);
+
+                //    var supposedBuddy = currentPair.Value - 1;
+                //    var sumOfDivForSupposedBuddy = GetSumOfDivisors(supposedBuddy);
+
+                //    if (sumOfDivForSupposedBuddy - 1 == currentPair.Key)
+                //    {
+                //        firstBuddy = (long)currentPair.Key;
+                //        secondBuddy = (long)supposedBuddy;
+                //        break;
+                //    }
+                //}
+                //=============================================================================
+
+                // ѕќ—Ћ≈ ќѕ“»ћ»«ј÷»»
+                long firstBuddy = 0, secondBuddy = 0;
+
+                for (long i = start; i <= limit; i++)
+                {
+                    var sumOfDivForCurrentI = GetSumOfDivisors(i);
+
+                    if (sumOfDivForCurrentI > i)
+                    {
+                        var supposedBuddy = sumOfDivForCurrentI - 1;
+                        var sumOfDivForSupposedBuddy = GetSumOfDivisors(supposedBuddy);
+
+                        if (sumOfDivForSupposedBuddy - 1 == i)
+                        {
+                            firstBuddy = (long)i;
+                            secondBuddy = (long)supposedBuddy;
+                            break;
+                        }
+                    }
+                }
+
+                if (firstBuddy != 0 && secondBuddy != 0)
+                    return $"({firstBuddy} {secondBuddy})";
+                else return "Nothing";
+            }
+
+            Assert.AreEqual("(1081184 1331967)", FindBuddyNum(1071625, 1103735));
+            Assert.AreEqual("Nothing", FindBuddyNum(2382, 3679));
+            Assert.AreEqual("(9504 20735)", FindBuddyNum(8983, 13355));
         }
 
 
