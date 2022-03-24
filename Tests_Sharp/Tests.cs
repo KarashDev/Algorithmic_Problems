@@ -2137,29 +2137,6 @@ namespace Tests_Sharp
         }
 
 
-        //[Test]
-        //public void IsStrPangram()
-        //{
-        //    // Ãðîìîçäêàÿ âåðñèÿ
-        //    bool IsPangram(string str)
-        //    {
-        //        char[] alphabetLetters = "abcdefghijklmnopqrstuvwxyz".ToCharArray();
-        //        char[] strLetters = str.ToLower().ToCharArray();
-
-        //        if (alphabetLetters.All(l => strLetters.Contains(l)))
-        //            return true;
-        //        else return false;
-        //    }
-
-        //    // Ñæàòàÿ âåðñèÿ
-        //    //char[] alphabetLetters = "abcdefghijklmnopqrstuvwxyz".ToCharArray();
-        //    bool IsPangram(string str) => "abcdefghijklmnopqrstuvwxyz".All(l => str.ToLower().ToCharArray().Contains(l));
-
-        //    Assert.AreEqual(true, IsPangram("The quick brown fox jumps over the lazy dog."));
-        //    Assert.AreEqual(false, IsPangram("The qick brown fox jmps over the lazy dog."));
-        //}
-
-
         [Test]
         public void BuddyPairs()
         {
@@ -2279,6 +2256,73 @@ namespace Tests_Sharp
             Assert.AreEqual("Nothing", FindBuddyNum(2382, 3679));
             Assert.AreEqual("(9504 20735)", FindBuddyNum(8983, 13355));
         }
+
+
+        //[Test]
+        //public void IsStrPangram()
+        //{
+        //    // Ãðîìîçäêàÿ âåðñèÿ
+        //    bool IsPangram(string str)
+        //    {
+        //        char[] alphabetLetters = "abcdefghijklmnopqrstuvwxyz".ToCharArray();
+        //        char[] strLetters = str.ToLower().ToCharArray();
+
+        //        if (alphabetLetters.All(l => strLetters.Contains(l)))
+        //            return true;
+        //        else return false;
+        //    }
+
+        //    // Ñæàòàÿ âåðñèÿ
+        //    //char[] alphabetLetters = "abcdefghijklmnopqrstuvwxyz".ToCharArray();
+        //    bool IsPangram(string str) => "abcdefghijklmnopqrstuvwxyz".All(l => str.ToLower().ToCharArray().Contains(l));
+
+        //    Assert.AreEqual(true, IsPangram("The quick brown fox jumps over the lazy dog."));
+        //    Assert.AreEqual(false, IsPangram("The qick brown fox jmps over the lazy dog."));
+        //}
+
+
+        [Test]
+        public void CheckDateTimeDay()
+        {
+            // Ãðîìîçäêàÿ âåðñèÿ
+            bool IsCurrentDayInRange(DateTime dateTime)
+            {
+                //// ÏËÎÕÎÉ ÂÀÐÈÀÍÒ
+                //var currentDay = dateTime.ToString("dd", CultureInfo.InvariantCulture);
+
+                //if ((currentDay == "01" || currentDay == "02" || currentDay == "03" || currentDay == "04" || currentDay == "05"))
+                //    return true;
+                //else
+                //    return false;
+
+
+                //// ÂÀÐÈÀÍÒ Ñ ÑÓÙÍÎÑÒÜÞ - ÏÎÑÐÅÄÍÈÊÎÌ
+                //var year = dateTime.Year;
+                //var month = dateTime.Month;
+                //var day = dateTime.Day;
+
+                //var currentDateTime = new DateTime(year, month, day);
+
+                //if (currentDateTime.Day >= 01 && currentDateTime.Day <= 05)
+                //    return true;
+                //else
+                //    return false;
+
+
+                // ÂÀÐÈÀÍÒ ÁÅÇ ÑÓÙÍÎÑÒÅÉ - ÏÎÑÐÅÄÍÈÊÎÂ
+                if (dateTime.Day >= 01 && dateTime.Day <= 05)
+                    return true;
+                else
+                    return false;
+            }
+
+            Assert.AreEqual(true, IsCurrentDayInRange(new DateTime(DateTime.Now.Year, DateTime.Now.Month, 03)));
+            Assert.AreEqual(false, IsCurrentDayInRange(new DateTime(DateTime.Now.Year, DateTime.Now.Month, 12)));
+            Assert.AreEqual(false, IsCurrentDayInRange(new DateTime(DateTime.Now.Year, DateTime.Now.Month, 06)));
+        }
+
+
+
 
 
 
