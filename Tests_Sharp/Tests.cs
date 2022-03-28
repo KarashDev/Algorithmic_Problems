@@ -2258,29 +2258,6 @@ namespace Tests_Sharp
         }
 
 
-        //[Test]
-        //public void IsStrPangram()
-        //{
-        //    // Громоздкая версия
-        //    bool IsPangram(string str)
-        //    {
-        //        char[] alphabetLetters = "abcdefghijklmnopqrstuvwxyz".ToCharArray();
-        //        char[] strLetters = str.ToLower().ToCharArray();
-
-        //        if (alphabetLetters.All(l => strLetters.Contains(l)))
-        //            return true;
-        //        else return false;
-        //    }
-
-        //    // Сжатая версия
-        //    //char[] alphabetLetters = "abcdefghijklmnopqrstuvwxyz".ToCharArray();
-        //    bool IsPangram(string str) => "abcdefghijklmnopqrstuvwxyz".All(l => str.ToLower().ToCharArray().Contains(l));
-
-        //    Assert.AreEqual(true, IsPangram("The quick brown fox jumps over the lazy dog."));
-        //    Assert.AreEqual(false, IsPangram("The qick brown fox jmps over the lazy dog."));
-        //}
-
-
         [Test]
         public void CheckDateTimeDay()
         {
@@ -2321,6 +2298,53 @@ namespace Tests_Sharp
             Assert.AreEqual(false, IsCurrentDayInRange(new DateTime(DateTime.Now.Year, DateTime.Now.Month, 06)));
         }
 
+
+
+        //[Test]
+        //public void IsStrPangram()
+        //{
+        //    // Громоздкая версия
+        //    bool IsPangram(string str)
+        //    {
+        //        char[] alphabetLetters = "abcdefghijklmnopqrstuvwxyz".ToCharArray();
+        //        char[] strLetters = str.ToLower().ToCharArray();
+
+        //        if (alphabetLetters.All(l => strLetters.Contains(l)))
+        //            return true;
+        //        else return false;
+        //    }
+
+        //    // Сжатая версия
+        //    //char[] alphabetLetters = "abcdefghijklmnopqrstuvwxyz".ToCharArray();
+        //    bool IsPangram(string str) => "abcdefghijklmnopqrstuvwxyz".All(l => str.ToLower().ToCharArray().Contains(l));
+
+        //    Assert.AreEqual(true, IsPangram("The quick brown fox jumps over the lazy dog."));
+        //    Assert.AreEqual(false, IsPangram("The qick brown fox jmps over the lazy dog."));
+        //}
+
+
+        [Test]
+        public void ReversedArrOfSum()
+        {
+            long[] GetReversedArrOfSum(int[] l1, int[] l2)
+            {
+                Array.Reverse(l1); Array.Reverse(l2);
+
+                string l1Num = "", l2Num = "";
+                Array.ForEach(l1, l => l1Num += l);
+                Array.ForEach(l2, l => l2Num += l);
+
+                long sum = Convert.ToInt64(l1Num) + Convert.ToInt64(l2Num);
+                char[] sumInChars = sum.ToString().ToCharArray();
+
+                Array.Reverse(sumInChars);
+
+                return sumInChars.Select(c => (long)Char.GetNumericValue(c)).ToArray();
+            }
+
+            Assert.AreEqual(new int[] { 7, 0, 8 }, GetReversedArrOfSum(new int[] { 2, 4, 3 }, new int[] { 5, 6, 4 }));
+            Assert.AreEqual(new int[] { 8, 9, 9, 9, 0, 0, 0, 1 }, GetReversedArrOfSum(new int[] { 9, 9, 9, 9, 9, 9, 9 }, new int[] { 9, 9, 9, 9 }));
+        }
 
 
 

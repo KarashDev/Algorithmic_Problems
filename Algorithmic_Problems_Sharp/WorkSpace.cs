@@ -14,6 +14,19 @@ using BenchmarkDotNet.Running;
 
 namespace Algorithmic_Problems_Sharp
 {
+
+    public class ListNode
+    {
+        public int val;
+        public ListNode next;
+
+        public ListNode(int val = 0, ListNode next = null)
+        {
+            this.val = val;
+            this.next = next;
+        }
+    }
+
     class WorkSpace
     {
         static void Main(string[] args)
@@ -1983,7 +1996,7 @@ namespace Algorithmic_Problems_Sharp
                 //}
 
                 //return sum;
-               
+
                 // ПОСЛЕ ОПТИМИЗАЦИИ
                 // Final result of summation of divisors
                 long result = 0;
@@ -2016,6 +2029,41 @@ namespace Algorithmic_Problems_Sharp
 
 
 
+
+            long[] GetReversedArrOfSum(int[] l1, int[] l2)
+            {
+                Array.Reverse(l1); Array.Reverse(l2);
+
+                string l1Num = "", l2Num = "";
+                Array.ForEach(l1, l => l1Num += l);
+                Array.ForEach(l2, l => l2Num += l);
+
+                long sum = Convert.ToInt64(l1Num) + Convert.ToInt64(l2Num);
+                char[] sumInChars = sum.ToString().ToCharArray();
+
+                Array.Reverse(sumInChars);
+
+                return sumInChars.Select(c => (long)Char.GetNumericValue(c)).ToArray();
+            }
+
+
+            //Input: l1 = [2, 4, 3], l2 = [5, 6, 4]
+            //Output:[7,0,8]
+            //Explanation: 342 + 465 = 807.
+
+            //Console.WriteLine(AddTwoNumbers(new int[] { 2, 4, 3 }, new int[] { 5, 6, 4 }));
+            //Console.WriteLine(AddTwoNumbers(new int[] { 9, 9, 9, 9, 9, 9, 9 }, new int[] { 9, 9, 9, 9 }));
+
+            var x = GetReversedArrOfSum(new int[] { 2, 4, 3 }, new int[] { 5, 6, 4 });
+            var y = GetReversedArrOfSum(new int[] { 9, 9, 9, 9, 9, 9, 9 }, new int[] { 9, 9, 9, 9 });
+
+            foreach (var i in x)
+                Console.Write(i + " ");
+
+            Console.WriteLine();
+
+            foreach (var i in y)
+                Console.Write(i + " ");
 
 
 
