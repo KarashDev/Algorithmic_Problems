@@ -2024,46 +2024,46 @@ namespace Algorithmic_Problems_Sharp
 
 
 
-
-
-
-
-
-
-            long[] GetReversedArrOfSum(int[] l1, int[] l2)
+            int[] TwoSum(int[] nums, int target)
             {
-                Array.Reverse(l1); Array.Reverse(l2);
+                // Optimized version
+                int[] indeces = new int[2];
 
-                string l1Num = "", l2Num = "";
-                Array.ForEach(l1, l => l1Num += l);
-                Array.ForEach(l2, l => l2Num += l);
+                Dictionary<int, int> IndecesToNums = new Dictionary<int, int>();
 
-                long sum = Convert.ToInt64(l1Num) + Convert.ToInt64(l2Num);
-                char[] sumInChars = sum.ToString().ToCharArray();
+                for (int i = 0; i < nums.Length; i++)
+                {
+                    IndecesToNums.Add(i, nums[i]);
+                }
 
-                Array.Reverse(sumInChars);
+                for (int i = 0; i < nums.Length; i++)
+                {
+                    int remainder = target - nums[i];
+                    
+                    if (IndecesToNums.ContainsValue(remainder))
+                    {
+                        var indexOfReminder = IndecesToNums.FirstOrDefault(p => p.Value == remainder).Key;
+                        if (indexOfReminder != i)
+                        {
+                            indeces[0] = indexOfReminder;
+                            indeces[1] = i;
+                            break;
+                        }
+                    }
+                }
 
-                return sumInChars.Select(c => (long)Char.GetNumericValue(c)).ToArray();
+                return indeces;
             }
 
 
-            //Input: l1 = [2, 4, 3], l2 = [5, 6, 4]
-            //Output:[7,0,8]
-            //Explanation: 342 + 465 = 807.
+            //Input: nums = [2, 7, 11, 15], target = 9
+            //Output:[0,1]
+            //Explanation: Because nums[0] +nums[1] == 9, we return [0, 1].
 
-            //Console.WriteLine(AddTwoNumbers(new int[] { 2, 4, 3 }, new int[] { 5, 6, 4 }));
-            //Console.WriteLine(AddTwoNumbers(new int[] { 9, 9, 9, 9, 9, 9, 9 }, new int[] { 9, 9, 9, 9 }));
-
-            var x = GetReversedArrOfSum(new int[] { 2, 4, 3 }, new int[] { 5, 6, 4 });
-            var y = GetReversedArrOfSum(new int[] { 9, 9, 9, 9, 9, 9, 9 }, new int[] { 9, 9, 9, 9 });
-
-            foreach (var i in x)
-                Console.Write(i + " ");
-
+            Array.ForEach(TwoSum(new int[] { 2, 7, 11, 15 }, 9), i => Console.Write(i + " "));
             Console.WriteLine();
+            Array.ForEach(TwoSum(new int[] { 3, 2, 4 }, 6), i => Console.Write(i + " "));
 
-            foreach (var i in y)
-                Console.Write(i + " ");
 
 
 

@@ -2347,7 +2347,67 @@ namespace Tests_Sharp
         }
 
 
+        [Test]
+        public void FindFirstIndecesOfSumDigits()
+        {
+            int[] TwoSum(int[] nums, int target)
+            {
+                // Optimized version
+                int[] indeces = new int[2];
 
+                Dictionary<int, int> IndecesToNums = new Dictionary<int, int>();
+
+                for (int i = 0; i < nums.Length; i++)
+                {
+                    IndecesToNums.Add(i, nums[i]);
+                }
+
+                for (int i = 0; i < nums.Length; i++)
+                {
+                    int remainder = target - nums[i];
+
+                    if (IndecesToNums.ContainsValue(remainder))
+                    {
+                        var indexOfReminder = IndecesToNums.FirstOrDefault(p => p.Value == remainder).Key;
+                        if (indexOfReminder != i)
+                        {
+                            indeces[0] = indexOfReminder;
+                            indeces[1] = i;
+                            break;
+                        }
+                    }
+                }
+
+                return indeces;
+            }
+
+            Assert.AreEqual(new int[] { 1, 0 }, TwoSum(new int[] { 2, 7, 11, 15 }, 9));
+            Assert.AreEqual(new int[] { 2, 1 }, TwoSum(new int[] { 3, 2, 4 }, 6));
+        }
+
+
+
+        //[Test]
+        //public void IsStrPangram()
+        //{
+        //    // Громоздкая версия
+        //    bool IsPangram(string str)
+        //    {
+        //        char[] alphabetLetters = "abcdefghijklmnopqrstuvwxyz".ToCharArray();
+        //        char[] strLetters = str.ToLower().ToCharArray();
+
+        //        if (alphabetLetters.All(l => strLetters.Contains(l)))
+        //            return true;
+        //        else return false;
+        //    }
+
+        //    // Сжатая версия
+        //    //char[] alphabetLetters = "abcdefghijklmnopqrstuvwxyz".ToCharArray();
+        //    bool IsPangram(string str) => "abcdefghijklmnopqrstuvwxyz".All(l => str.ToLower().ToCharArray().Contains(l));
+
+        //    Assert.AreEqual(true, IsPangram("The quick brown fox jumps over the lazy dog."));
+        //    Assert.AreEqual(false, IsPangram("The qick brown fox jmps over the lazy dog."));
+        //}
 
 
 
