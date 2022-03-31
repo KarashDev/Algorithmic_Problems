@@ -1985,84 +1985,94 @@ namespace Algorithmic_Problems_Sharp
             //}
 
 
-            long GetSumOfDivisors(long num)
+            int Search(int[] nums, int target)
             {
-                //long sum = 0;
-
-                //for (int i = 1; i < num; ++i)
-                //{
-                //    if (num % i == 0)
-                //        sum += i;
-                //}
-
-                //return sum;
-
-                // ПОСЛЕ ОПТИМИЗАЦИИ
-                // Final result of summation of divisors
-                long result = 0;
-
-                // find all divisors which divides 'num'
-                for (long i = 2; i <= Math.Sqrt(num); i++)
+                if (!nums.Contains(target))
+                    return -1;
+                else
                 {
-
-                    // if 'i' is divisor of 'num'
-                    if (num % i == 0)
-                    {
-                        // if both divisors are same then
-                        // add it only once else add both
-                        if (i == (num / i))
-                            result += i;
-                        else
-                            result += (i + num / i);
-                    }
+                    var x = Array.BinarySearch(nums, target);
+                    return x;
                 }
-
-                // Add 1 to the result as 1
-                // is also a divisor
-                return (result + 1);
             }
 
 
+            //var left = 0;
+            //var right = array.Length - 1;
 
-            int[] TwoSum(int[] nums, int target)
+            //while (left != right)
+            //{
+            //    var middle = (left + right) / 2;
+            //    if (element <= array[middle])
+            //    {
+            //        right = middle;
+            //    }
+            //    else
+            //    {
+            //        left = middle + 1;
+            //    }
+            //}
+            //if (array[right] == element) return right;
+            //else return -1;
+
+
+
+
+
+            int[] arr = new int[] { -1, 0, 3, 5, 9, 12 }; //target = 9, output 4
+            Console.WriteLine(Search(arr, 9));
+
+
+            //================БИНАРНЫЙ ПОИСК=====================
+            //Представляет из себя поиск элемента В ОТСОРТИРОВАННОМ массиве методом сужения
+            //области поиска через разделение текущей области на 2 части, вплоть до "зажатия" 
+            //нужного элемента. Возвращает первое совпадение с левой стороны (со стороны убывания).
+            //Не работает с неотсортированными массивами, поскольку по логике "если меньше среднего - ищем слева" 
+            //мы уйдем влево даже если меньшее число на самом деле правее среднего
+            //Сложность: логарифмическая O(log n)
+
+            static int BinarySearch(int[] nums, int target)
             {
-                // Optimized version
-                int[] indeces = new int[2];
+                //1. Определить крайние точки (индексы) массива для определения есть ли что-либо между ними или искомое уже "зажато"
+                var left = 0;
+                var right = nums.Length - 1;
 
-                Dictionary<int, int> IndecesToNums = new Dictionary<int, int>();
-
-                for (int i = 0; i < nums.Length; i++)
+                //2. До тех пор пока левая и правая часть не равны (пока есть более одного значения)
+                while (left <= right)
                 {
-                    IndecesToNums.Add(i, nums[i]);
-                }
+                    //3. Находим средний индекс в текущем отрезке
+                    var middle = (left + right) / 2;
 
-                for (int i = 0; i < nums.Length; i++)
-                {
-                    int remainder = target - nums[i];
-                    
-                    if (IndecesToNums.ContainsValue(remainder))
+                    //4. Если искомое число не равно среднему числу в отрезке - определяем больше или меньше оно среднего
+                    //   Если меньше - текущее среднее число принимает роль правой границы отрезка
+                    //   Если больше - текущее среднее число принимает роль левой границы отрезка
+                    //   При этом граница сдвигается на +/-1, так как с самой границей(т.е. со средним ранее) уже было проведено сравнение
+                    if (target == nums[middle])
                     {
-                        var indexOfReminder = IndecesToNums.FirstOrDefault(p => p.Value == remainder).Key;
-                        if (indexOfReminder != i)
-                        {
-                            indeces[0] = indexOfReminder;
-                            indeces[1] = i;
-                            break;
-                        }
+                        return middle;
+                    }
+                    else if (target < nums[middle])
+                    {
+                        right = middle - 1;
+                    }
+                    else if (target > nums[middle])
+                    {
+                        left = middle + 1;
                     }
                 }
 
-                return indeces;
+                return -1;
             }
+            var array = new[] { -1, 0, 3, 5, 8, 9, 12 };
+            Console.WriteLine(BinarySearch(array, 9)); //4
 
 
-            //Input: nums = [2, 7, 11, 15], target = 9
-            //Output:[0,1]
-            //Explanation: Because nums[0] +nums[1] == 9, we return [0, 1].
 
-            Array.ForEach(TwoSum(new int[] { 2, 7, 11, 15 }, 9), i => Console.Write(i + " "));
-            Console.WriteLine();
-            Array.ForEach(TwoSum(new int[] { 3, 2, 4 }, 6), i => Console.Write(i + " "));
+
+
+
+
+
 
 
 

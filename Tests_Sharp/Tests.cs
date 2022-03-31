@@ -2386,6 +2386,46 @@ namespace Tests_Sharp
         }
 
 
+        [Test]
+        public void BinarySearchVariation()
+        {
+            static int BinarySearch(int[] nums, int target)
+            {
+                //1. Определить крайние точки (индексы) массива для определения есть ли что-либо между ними или искомое уже "зажато"
+                var left = 0;
+                var right = nums.Length - 1;
+
+                //2. До тех пор пока левая и правая часть не равны (пока есть более одного значения)
+                while (left <= right)
+                {
+                    //3. Находим средний индекс в текущем отрезке
+                    var middle = (left + right) / 2;
+
+                    //4. Если искомое число не равно среднему числу в отрезке - определяем больше или меньше оно среднего
+                    //   Если меньше - текущее среднее число принимает роль правой границы отрезка
+                    //   Если больше - текущее среднее число принимает роль левой границы отрезка
+                    //   При этом граница сдвигается на +/-1, так как с самой границей(т.е. со средним ранее) уже было проведено сравнение
+                    if (target == nums[middle])
+                    {
+                        return middle;
+                    }
+                    else if (target < nums[middle])
+                    {
+                        right = middle - 1;
+                    }
+                    else if (target > nums[middle])
+                    {
+                        left = middle + 1;
+                    }
+                }
+
+                return -1;
+            }
+            
+            var array = new[] { -1, 0, 3, 5, 8, 9, 12 };
+            Assert.AreEqual(4, BinarySearch(array, 9));
+        }
+
 
         //[Test]
         //public void IsStrPangram()
@@ -2408,9 +2448,6 @@ namespace Tests_Sharp
         //    Assert.AreEqual(true, IsPangram("The quick brown fox jumps over the lazy dog."));
         //    Assert.AreEqual(false, IsPangram("The qick brown fox jmps over the lazy dog."));
         //}
-
-
-
 
 
 
