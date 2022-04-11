@@ -15,17 +15,21 @@ using BenchmarkDotNet.Running;
 namespace Algorithmic_Problems_Sharp
 {
 
-    public class ListNode
-    {
-        public int val;
-        public ListNode next;
+    //public class ListNode
+    //{
+    //    public int val;
+    //    public ListNode next;
 
-        public ListNode(int val = 0, ListNode next = null)
-        {
-            this.val = val;
-            this.next = next;
-        }
-    }
+    //    public ListNode(int val = 0, ListNode next = null)
+    //    {
+    //        this.val = val;
+    //        this.next = next;
+    //    }
+    //}
+
+
+    /* The isBadVersion API is defined in the parent class VersionControl.
+      bool IsBadVersion(int version); */
 
     class WorkSpace
     {
@@ -2019,52 +2023,106 @@ namespace Algorithmic_Problems_Sharp
 
 
 
-            int[] arr = new int[] { -1, 0, 3, 5, 9, 12 }; //target = 9, output 4
-            Console.WriteLine(Search(arr, 9));
+            //int[] arr = new int[] { -1, 0, 3, 5, 9, 12 }; //target = 9, output 4
+            //Console.WriteLine(Search(arr, 9));
 
 
-            //================БИНАРНЫЙ ПОИСК=====================
-            //Представляет из себя поиск элемента В ОТСОРТИРОВАННОМ массиве методом сужения
-            //области поиска через разделение текущей области на 2 части, вплоть до "зажатия" 
-            //нужного элемента. Возвращает первое совпадение с левой стороны (со стороны убывания).
-            //Не работает с неотсортированными массивами, поскольку по логике "если меньше среднего - ищем слева" 
-            //мы уйдем влево даже если меньшее число на самом деле правее среднего
-            //Сложность: логарифмическая O(log n)
+            ////================БИНАРНЫЙ ПОИСК=====================
+            ////Представляет из себя поиск элемента В ОТСОРТИРОВАННОМ массиве методом сужения
+            ////области поиска через разделение текущей области на 2 части, вплоть до "зажатия" 
+            ////нужного элемента. Возвращает первое совпадение с левой стороны (со стороны убывания).
+            ////Не работает с неотсортированными массивами, поскольку по логике "если меньше среднего - ищем слева" 
+            ////мы уйдем влево даже если меньшее число на самом деле правее среднего
+            ////Сложность: логарифмическая O(log n)
 
-            static int BinarySearch(int[] nums, int target)
+            //static int BinarySearch(int[] nums, int target)
+            //{
+            //    //1. Определить крайние точки (индексы) массива для определения есть ли что-либо между ними или искомое уже "зажато"
+            //    var left = 0;
+            //    var right = nums.Length - 1;
+
+            //    //2. До тех пор пока левая и правая часть не равны (пока есть более одного значения)
+            //    while (left <= right)
+            //    {
+            //        //3. Находим средний индекс в текущем отрезке
+            //        var middle = (left + right) / 2;
+
+            //        //4. Если искомое число не равно среднему числу в отрезке - определяем больше или меньше оно среднего
+            //        //   Если меньше - текущее среднее число принимает роль правой границы отрезка
+            //        //   Если больше - текущее среднее число принимает роль левой границы отрезка
+            //        //   При этом граница сдвигается на +/-1, так как с самой границей(т.е. со средним ранее) уже было проведено сравнение
+            //        if (target == nums[middle])
+            //        {
+            //            return middle;
+            //        }
+            //        else if (target < nums[middle])
+            //        {
+            //            right = middle - 1;
+            //        }
+            //        else if (target > nums[middle])
+            //        {
+            //            left = middle + 1;
+            //        }
+            //    }
+
+            //    return -1;
+            //}
+            //var array = new[] { -1, 0, 3, 5, 8, 9, 12 };
+            //Console.WriteLine(BinarySearch(array, 9)); //4
+
+
+            //Dictionary<string, int> substrToLength = new Dictionary<string, int>();
+
+            int LengthOfLongestSubstring(string s)
             {
-                //1. Определить крайние точки (индексы) массива для определения есть ли что-либо между ними или искомое уже "зажато"
-                var left = 0;
-                var right = nums.Length - 1;
-
-                //2. До тех пор пока левая и правая часть не равны (пока есть более одного значения)
-                while (left <= right)
+                // Неоптимизированный но рабочий
+                bool IsAllCharsUnique(string s)
                 {
-                    //3. Находим средний индекс в текущем отрезке
-                    var middle = (left + right) / 2;
-
-                    //4. Если искомое число не равно среднему числу в отрезке - определяем больше или меньше оно среднего
-                    //   Если меньше - текущее среднее число принимает роль правой границы отрезка
-                    //   Если больше - текущее среднее число принимает роль левой границы отрезка
-                    //   При этом граница сдвигается на +/-1, так как с самой границей(т.е. со средним ранее) уже было проведено сравнение
-                    if (target == nums[middle])
-                    {
-                        return middle;
-                    }
-                    else if (target < nums[middle])
-                    {
-                        right = middle - 1;
-                    }
-                    else if (target > nums[middle])
-                    {
-                        left = middle + 1;
-                    }
+                    return s.Distinct().Count() == s.Length;
                 }
 
-                return -1;
+                if (string.IsNullOrEmpty(s))
+                    return 0;
+                else if (s.Length == 1)
+                    return s.Length;
+
+                var maxSubstring = "";
+
+                for (int i = 0; i < s.Length; i++)
+                {
+                    for (int j = s.Length - i; j > 0; j--)
+                    {
+                        var curSubstring = s.Substring(i, j);
+
+                        if (IsAllCharsUnique(curSubstring) && curSubstring.Length > maxSubstring.Length)
+                            maxSubstring = curSubstring;
+                    }
+                }
+                return maxSubstring.Length;
+
+
+                //// Оптимизированный (еще не изучен)
+                //int size = s.Length;
+                //int max = 1;
+                //if (size == 0)
+                //    return 0;
+
+                //for (int i = 0; i <size - 1; i++)
+                //{
+                //    for (int j = i + 1; j <= size - 1; j++)
+                //    {
+                //        string s1 = s.Substring(i, j-i);
+                //        string s2 = s.Substring(j, 1);
+
+                //        if (!s1.Contains(s2))
+                //            max = Math.Max(max, (j-i)+1);
+                //        else
+                //            break;
+                //    }
+                //}
+                //return max;
+
             }
-            var array = new[] { -1, 0, 3, 5, 8, 9, 12 };
-            Console.WriteLine(BinarySearch(array, 9)); //4
 
 
 
@@ -2072,6 +2130,13 @@ namespace Algorithmic_Problems_Sharp
 
 
 
+            Console.WriteLine(LengthOfLongestSubstring("abcabcbb")); //3
+            Console.WriteLine(LengthOfLongestSubstring("bbbbb")); //1
+            Console.WriteLine(LengthOfLongestSubstring("pwwkew")); //3
+            Console.WriteLine(LengthOfLongestSubstring(" ")); //1
+            Console.WriteLine(LengthOfLongestSubstring("au")); //2
+            Console.WriteLine(LengthOfLongestSubstring("dvdf")); //3
+            Console.WriteLine(LengthOfLongestSubstring("aabaab!bb")); //3
 
 
 

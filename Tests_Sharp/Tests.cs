@@ -2421,7 +2421,7 @@ namespace Tests_Sharp
 
                 return -1;
             }
-            
+
             var array = new[] { -1, 0, 3, 5, 8, 9, 12 };
             Assert.AreEqual(4, BinarySearch(array, 9));
         }
@@ -2448,6 +2448,119 @@ namespace Tests_Sharp
         //    Assert.AreEqual(true, IsPangram("The quick brown fox jumps over the lazy dog."));
         //    Assert.AreEqual(false, IsPangram("The qick brown fox jmps over the lazy dog."));
         //}
+
+
+        //[Test]
+        //public void IsStrPangram()
+        //{
+        //    // Громоздкая версия
+        //    bool IsPangram(string str)
+        //    {
+        //        char[] alphabetLetters = "abcdefghijklmnopqrstuvwxyz".ToCharArray();
+        //        char[] strLetters = str.ToLower().ToCharArray();
+
+        //        if (alphabetLetters.All(l => strLetters.Contains(l)))
+        //            return true;
+        //        else return false;
+        //    }
+
+        //    // Сжатая версия
+        //    //char[] alphabetLetters = "abcdefghijklmnopqrstuvwxyz".ToCharArray();
+        //    bool IsPangram(string str) => "abcdefghijklmnopqrstuvwxyz".All(l => str.ToLower().ToCharArray().Contains(l));
+
+        //    Assert.AreEqual(true, IsPangram("The quick brown fox jumps over the lazy dog."));
+        //    Assert.AreEqual(false, IsPangram("The qick brown fox jmps over the lazy dog."));
+        //}
+
+
+        //[Test]
+        //public void IsStrPangram()
+        //{
+        //    // Громоздкая версия
+        //    bool IsPangram(string str)
+        //    {
+        //        char[] alphabetLetters = "abcdefghijklmnopqrstuvwxyz".ToCharArray();
+        //        char[] strLetters = str.ToLower().ToCharArray();
+
+        //        if (alphabetLetters.All(l => strLetters.Contains(l)))
+        //            return true;
+        //        else return false;
+        //    }
+
+        //    // Сжатая версия
+        //    //char[] alphabetLetters = "abcdefghijklmnopqrstuvwxyz".ToCharArray();
+        //    bool IsPangram(string str) => "abcdefghijklmnopqrstuvwxyz".All(l => str.ToLower().ToCharArray().Contains(l));
+
+        //    Assert.AreEqual(true, IsPangram("The quick brown fox jumps over the lazy dog."));
+        //    Assert.AreEqual(false, IsPangram("The qick brown fox jmps over the lazy dog."));
+        //}
+
+
+        [Test]
+        public void LengthOfLongestUniqueSubstring()
+        {
+            int LengthOfLongestSubstring(string s)
+            {
+                // Неоптимизированный но рабочий
+                bool IsAllCharsUnique(string s)
+                {
+                    return s.Distinct().Count() == s.Length;
+                }
+
+                if (string.IsNullOrEmpty(s))
+                    return 0;
+                else if (s.Length == 1)
+                    return s.Length;
+
+                var maxSubstring = "";
+
+                for (int i = 0; i < s.Length; i++)
+                {
+                    for (int j = s.Length - i; j > 0; j--)
+                    {
+                        var curSubstring = s.Substring(i, j);
+
+                        if (IsAllCharsUnique(curSubstring) && curSubstring.Length > maxSubstring.Length)
+                            maxSubstring = curSubstring;
+                    }
+                }
+                return maxSubstring.Length;
+
+                //// Оптимизированный (еще не изучен)
+                //int size = s.Length;
+                //int max = 1;
+                //if (size == 0)
+                //    return 0;
+
+                //for (int i = 0; i <size - 1; i++)
+                //{
+                //    for (int j = i + 1; j <= size - 1; j++)
+                //    {
+                //        string s1 = s.Substring(i, j-i);
+                //        string s2 = s.Substring(j, 1);
+
+                //        if (!s1.Contains(s2))
+                //            max = Math.Max(max, (j-i)+1);
+                //        else
+                //            break;
+                //    }
+                //}
+                //return max;
+
+            }
+
+            Assert.AreEqual(3, LengthOfLongestSubstring("abcabcbb"));
+            Assert.AreEqual(1, LengthOfLongestSubstring("bbbbb"));
+            Assert.AreEqual(3, LengthOfLongestSubstring("pwwkew"));
+            Assert.AreEqual(1, LengthOfLongestSubstring(" "));
+            Assert.AreEqual(2, LengthOfLongestSubstring("au"));
+            Assert.AreEqual(3, LengthOfLongestSubstring("dvdf"));
+            Assert.AreEqual(3, LengthOfLongestSubstring("aabaab!bb"));
+        }
+
+
+
+
 
 
 
