@@ -2076,10 +2076,7 @@ namespace Algorithmic_Problems_Sharp
             int LengthOfLongestSubstring(string s)
             {
                 // Неоптимизированный но рабочий
-                bool IsAllCharsUnique(string s)
-                {
-                    return s.Distinct().Count() == s.Length;
-                }
+                bool IsAllCharsUnique(string s) => s.Distinct().Count() == s.Length;
 
                 if (string.IsNullOrEmpty(s))
                     return 0;
@@ -2107,7 +2104,7 @@ namespace Algorithmic_Problems_Sharp
                 //if (size == 0)
                 //    return 0;
 
-                //for (int i = 0; i <size - 1; i++)
+                //for (int i = 0; i < size - 1; i++)
                 //{
                 //    for (int j = i + 1; j <= size - 1; j++)
                 //    {
@@ -2125,18 +2122,46 @@ namespace Algorithmic_Problems_Sharp
             }
 
 
+            ////================СОРТИРОВКА ПУЗЫРЬКОМ=====================
+            ////Алгоритм сортирует массив от меньшего в большему. Проход по массиву совершается несколько раз,
+            ////на каждом этапе происходит перемещениев в конец массива самого большого из неотсортированных значений.
+            ////На первой итерации мы вытягиваем самое большое число в массиве и ставим его в правый предел
+            ////Далее движемся справа налево по массиву:
+            ////каждое число "всплывает" перемещаясь в правую сторону до тех пор, пока не упрется в число больше
+            ////Сложность: квадратичная O(n^2)
+            static void BubbleSort(int[] array)
+            {
+                ////1. Движемся по массиву справа налево, устанавливая границу:
+                //for (int i = array.Length - 1; i > 0; i--)
+                //    //2. Слева направо от (текущего числа + 1)  до границы. 
+                //    for (int j = 1; j <= i; j++)
+                //        //3. Если число левее текущего меньше текущего - меняем их местами
+                //        if (array[j - 1] > array[j])
+                //        {
+                //            int temp = array[j - 1];
+                //            array[j - 1] = array[j];
+                //            array[j] = temp;
+                //        }
+
+                for (int i = array.Length - 1; i > 0; i--)
+                {
+                    for (int j = 1; j <= i; j++)
+                    {
+                        if (array[j - 1] > array[j])
+                        (array[j - 1], array[j]) = (array[j], array[j - 1]);
+                        
+                    }
+                }
 
 
+            }
+            var array2 = new[] { 54, 24, 3, 7, 7, 5, 21, 6 };
+            BubbleSort(array2);
+            foreach (var item in array2)
+            {
+                Console.Write(item + " "); //3 5 6 7 7 21 24 54
+            }
 
-
-
-            Console.WriteLine(LengthOfLongestSubstring("abcabcbb")); //3
-            Console.WriteLine(LengthOfLongestSubstring("bbbbb")); //1
-            Console.WriteLine(LengthOfLongestSubstring("pwwkew")); //3
-            Console.WriteLine(LengthOfLongestSubstring(" ")); //1
-            Console.WriteLine(LengthOfLongestSubstring("au")); //2
-            Console.WriteLine(LengthOfLongestSubstring("dvdf")); //3
-            Console.WriteLine(LengthOfLongestSubstring("aabaab!bb")); //3
 
 
 
