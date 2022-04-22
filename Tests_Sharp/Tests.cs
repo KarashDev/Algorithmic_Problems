@@ -2450,51 +2450,6 @@ namespace Tests_Sharp
         //}
 
 
-        //[Test]
-        //public void IsStrPangram()
-        //{
-        //    // Громоздкая версия
-        //    bool IsPangram(string str)
-        //    {
-        //        char[] alphabetLetters = "abcdefghijklmnopqrstuvwxyz".ToCharArray();
-        //        char[] strLetters = str.ToLower().ToCharArray();
-
-        //        if (alphabetLetters.All(l => strLetters.Contains(l)))
-        //            return true;
-        //        else return false;
-        //    }
-
-        //    // Сжатая версия
-        //    //char[] alphabetLetters = "abcdefghijklmnopqrstuvwxyz".ToCharArray();
-        //    bool IsPangram(string str) => "abcdefghijklmnopqrstuvwxyz".All(l => str.ToLower().ToCharArray().Contains(l));
-
-        //    Assert.AreEqual(true, IsPangram("The quick brown fox jumps over the lazy dog."));
-        //    Assert.AreEqual(false, IsPangram("The qick brown fox jmps over the lazy dog."));
-        //}
-
-
-        //[Test]
-        //public void IsStrPangram()
-        //{
-        //    // Громоздкая версия
-        //    bool IsPangram(string str)
-        //    {
-        //        char[] alphabetLetters = "abcdefghijklmnopqrstuvwxyz".ToCharArray();
-        //        char[] strLetters = str.ToLower().ToCharArray();
-
-        //        if (alphabetLetters.All(l => strLetters.Contains(l)))
-        //            return true;
-        //        else return false;
-        //    }
-
-        //    // Сжатая версия
-        //    //char[] alphabetLetters = "abcdefghijklmnopqrstuvwxyz".ToCharArray();
-        //    bool IsPangram(string str) => "abcdefghijklmnopqrstuvwxyz".All(l => str.ToLower().ToCharArray().Contains(l));
-
-        //    Assert.AreEqual(true, IsPangram("The quick brown fox jumps over the lazy dog."));
-        //    Assert.AreEqual(false, IsPangram("The qick brown fox jmps over the lazy dog."));
-        //}
-
 
         [Test]
         public void LengthOfLongestUniqueSubstring()
@@ -2556,6 +2511,50 @@ namespace Tests_Sharp
             Assert.AreEqual(2, LengthOfLongestSubstring("au"));
             Assert.AreEqual(3, LengthOfLongestSubstring("dvdf"));
             Assert.AreEqual(3, LengthOfLongestSubstring("aabaab!bb"));
+        }
+
+
+
+        [Test]
+        public void StringPermutations()
+        {
+            List<string> SinglePermutations(string s)
+            {
+                List<string> variations = new List<string>();
+                var chars = s.ToCharArray();
+
+                GetPer(chars, 0, chars.Length - 1);
+
+                void GetPer(char[] list, int start, int end)
+                {
+                    if (start == end)
+                    {
+                        if (!variations.Contains(new string(list)))
+                            variations.Add(new string(list));
+                    }
+                    else
+                        for (int i = start; i <= end; i++)
+                        {
+                            (list[start], list[i]) = (list[i], list[start]);
+                            GetPer(list, start + 1, end);
+                            (list[start], list[i]) = (list[i], list[start]);
+                        }
+                }
+
+                return variations;
+            }
+
+            Assert.AreEqual(new List<string>
+            {
+                "sadi", "said", "sdai", "sdia","sida","siad", "asdi",
+                "asid","adsi","adis","aids","aisd","dasi","dais","dsai",
+                "dsia","disa", "dias", "iads", "iasd","idas", "idsa","isda", "isad",
+            }, SinglePermutations("sadi"));
+
+            Assert.AreEqual(new List<string>
+            {
+               "aabb", "abab", "abba", "baab", "baba","bbaa",
+            }, SinglePermutations("aabb"));
         }
 
 

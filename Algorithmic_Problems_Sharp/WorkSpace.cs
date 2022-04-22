@@ -2148,12 +2148,9 @@ namespace Algorithmic_Problems_Sharp
                     for (int j = 1; j <= i; j++)
                     {
                         if (array[j - 1] > array[j])
-                        (array[j - 1], array[j]) = (array[j], array[j - 1]);
-                        
+                            (array[j - 1], array[j]) = (array[j], array[j - 1]);
                     }
                 }
-
-
             }
             var array2 = new[] { 54, 24, 3, 7, 7, 5, 21, 6 };
             BubbleSort(array2);
@@ -2161,6 +2158,15 @@ namespace Algorithmic_Problems_Sharp
             {
                 Console.Write(item + " "); //3 5 6 7 7 21 24 54
             }
+
+
+
+
+
+
+
+
+
 
 
 
