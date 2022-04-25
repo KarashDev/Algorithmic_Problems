@@ -1,4 +1,4 @@
-using NUnit.Framework;
+п»їusing NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -18,7 +18,7 @@ namespace Tests_Sharp
                 //return string.Join(" ", text.ToLower().Where(c => char.IsLetter(c))
                 //.Select(c => "abcdefghijklmnopqrstuvwxyz".IndexOf(c) + 1)
                 //.ToArray());
-                //или
+                //РёР»Рё
                 return string.Join(" ", text.ToLower().Where(c => char.IsLetter(c)).Select(c => c - 'a' + 1));
             }
 
@@ -80,7 +80,7 @@ namespace Tests_Sharp
         {
             bool XO(string input)
             {
-                // Мое решение:
+                // РњРѕРµ СЂРµС€РµРЅРёРµ:
                 var inputStr = input.ToLower();
                 var cntX = 0;
                 var cntY = 0;
@@ -95,7 +95,7 @@ namespace Tests_Sharp
                     return true;
                 else return false;
 
-                // Хорошее решение:
+                // РҐРѕСЂРѕС€РµРµ СЂРµС€РµРЅРёРµ:
                 return input.ToLower().Count(c => c == 'x') == input.ToLower().Count(c => c == 'o');
             }
             Assert.AreEqual(true, XO("xo"));
@@ -116,8 +116,8 @@ namespace Tests_Sharp
                 {
                     if (Char.IsUpper(inputString[i]) && i != 0)
                     {
-                        // Если после вставки пробела не сместить i на символ вправо, программа
-                        // будет бесконечно вставлять пробел перед выбранной буквой
+                        // Р•СЃР»Рё РїРѕСЃР»Рµ РІСЃС‚Р°РІРєРё РїСЂРѕР±РµР»Р° РЅРµ СЃРјРµСЃС‚РёС‚СЊ i РЅР° СЃРёРјРІРѕР» РІРїСЂР°РІРѕ, РїСЂРѕРіСЂР°РјРјР°
+                        // Р±СѓРґРµС‚ Р±РµСЃРєРѕРЅРµС‡РЅРѕ РІСЃС‚Р°РІР»СЏС‚СЊ РїСЂРѕР±РµР» РїРµСЂРµРґ РІС‹Р±СЂР°РЅРЅРѕР№ Р±СѓРєРІРѕР№
                         inputString = inputString.Insert(i, " ");
                         i++;
                     }
@@ -138,7 +138,7 @@ namespace Tests_Sharp
         {
             int[] MoveZeroes(int[] arr)
             {
-                // Мое решение:
+                // РњРѕРµ СЂРµС€РµРЅРёРµ:
                 List<int> newList = new List<int>();
                 int howMuchZeroes = 0;
                 for (int i = 0; i < arr.Length; i++)
@@ -154,11 +154,11 @@ namespace Tests_Sharp
                 }
                 return newList.ToArray();
 
-                // Хорошее решение:
+                // РҐРѕСЂРѕС€РµРµ СЂРµС€РµРЅРёРµ:
                 return arr.OrderBy(x => x == 0).ToArray();
 
-                // Примечание: если бы нужно было вставить нули в начало List,
-                // нужно было бы использовать List.Insert(0, num)
+                // РџСЂРёРјРµС‡Р°РЅРёРµ: РµСЃР»Рё Р±С‹ РЅСѓР¶РЅРѕ Р±С‹Р»Рѕ РІСЃС‚Р°РІРёС‚СЊ РЅСѓР»Рё РІ РЅР°С‡Р°Р»Рѕ List,
+                // РЅСѓР¶РЅРѕ Р±С‹Р»Рѕ Р±С‹ РёСЃРїРѕР»СЊР·РѕРІР°С‚СЊ List.Insert(0, num)
             }
 
             Assert.AreEqual(new int[] { 1, 2, 1, 1, 3, 1, 0, 0, 0, 0 }, MoveZeroes(new int[] { 1, 2, 0, 1, 0, 1, 0, 3, 0, 1 }));
@@ -237,15 +237,15 @@ namespace Tests_Sharp
         }
 
 
-        // Задача на оптимизацию: установить, является ли входящее число простым. Сложность алгоритма 
-        // должна быть меньше чем O(n) и меньше чем O(n/2)
+        // Р—Р°РґР°С‡Р° РЅР° РѕРїС‚РёРјРёР·Р°С†РёСЋ: СѓСЃС‚Р°РЅРѕРІРёС‚СЊ, СЏРІР»СЏРµС‚СЃСЏ Р»Рё РІС…РѕРґСЏС‰РµРµ С‡РёСЃР»Рѕ РїСЂРѕСЃС‚С‹Рј. РЎР»РѕР¶РЅРѕСЃС‚СЊ Р°Р»РіРѕСЂРёС‚РјР° 
+        // РґРѕР»Р¶РЅР° Р±С‹С‚СЊ РјРµРЅСЊС€Рµ С‡РµРј O(n) Рё РјРµРЅСЊС€Рµ С‡РµРј O(n/2)
         [Test]
         public void IsNumberPrime()
         {
             bool IsPrime(int n)
             {
-                //// Оптимизация №1: увеличиваем шаг перечисления в 2 раза, разделив вход на два цикла 
-                //// в зависимости от четности/нечетности входящего числа
+                //// РћРїС‚РёРјРёР·Р°С†РёСЏ в„–1: СѓРІРµР»РёС‡РёРІР°РµРј С€Р°Рі РїРµСЂРµС‡РёСЃР»РµРЅРёСЏ РІ 2 СЂР°Р·Р°, СЂР°Р·РґРµР»РёРІ РІС…РѕРґ РЅР° РґРІР° С†РёРєР»Р° 
+                //// РІ Р·Р°РІРёСЃРёРјРѕСЃС‚Рё РѕС‚ С‡РµС‚РЅРѕСЃС‚Рё/РЅРµС‡РµС‚РЅРѕСЃС‚Рё РІС…РѕРґСЏС‰РµРіРѕ С‡РёСЃР»Р°
                 //if (n <= 0 || n == 1)
                 //    return false;
                 //else if (n % 2 == 0)
@@ -271,9 +271,9 @@ namespace Tests_Sharp
                 //return false;
 
 
-                // Оптимизация №2: пересчет ведем не до самого числа, а до корня этого числа; так мы
-                // сильно уменьшаем число (и количество итераций), но при этом его проверяемые свойства 
-                // не меняются; в догонку можно округлить корень до целого числа
+                // РћРїС‚РёРјРёР·Р°С†РёСЏ в„–2: РїРµСЂРµСЃС‡РµС‚ РІРµРґРµРј РЅРµ РґРѕ СЃР°РјРѕРіРѕ С‡РёСЃР»Р°, Р° РґРѕ РєРѕСЂРЅСЏ СЌС‚РѕРіРѕ С‡РёСЃР»Р°; С‚Р°Рє РјС‹
+                // СЃРёР»СЊРЅРѕ СѓРјРµРЅСЊС€Р°РµРј С‡РёСЃР»Рѕ (Рё РєРѕР»РёС‡РµСЃС‚РІРѕ РёС‚РµСЂР°С†РёР№), РЅРѕ РїСЂРё СЌС‚РѕРј РµРіРѕ РїСЂРѕРІРµСЂСЏРµРјС‹Рµ СЃРІРѕР№СЃС‚РІР° 
+                // РЅРµ РјРµРЅСЏСЋС‚СЃСЏ; РІ РґРѕРіРѕРЅРєСѓ РјРѕР¶РЅРѕ РѕРєСЂСѓРіР»РёС‚СЊ РєРѕСЂРµРЅСЊ РґРѕ С†РµР»РѕРіРѕ С‡РёСЃР»Р°
                 if (n <= 0 || n == 1 || n % 2 == 0 && n != 2)
                     return false;
 
@@ -318,7 +318,7 @@ namespace Tests_Sharp
                 }
                 return inputCollection;
 
-                //// Дополнительное неплохое решение:
+                //// Р”РѕРїРѕР»РЅРёС‚РµР»СЊРЅРѕРµ РЅРµРїР»РѕС…РѕРµ СЂРµС€РµРЅРёРµ:
                 //T previous = default(T);
                 //foreach (T current in iterable)
                 //{
@@ -368,7 +368,7 @@ namespace Tests_Sharp
 
                 return encryptedStr;
 
-                // ПОЛЕЗНО:
+                // РџРћР›Р•Р—РќРћ:
                 //while (n != 0)
                 //{
                 //	text = string.Concat(text.Where((c, i) => i % 2 == 1).Concat(text.Where((c, i) => i % 2 == 0)));
@@ -421,7 +421,7 @@ namespace Tests_Sharp
 
                 return String.Join("", finalSymbols.ToArray());
 
-                // ПОЛЕЗНО:
+                // РџРћР›Р•Р—РќРћ:
                 //while (n != 0)
                 //{
                 //	string leftPart = string.Concat(text.Take(text.Length/2));
@@ -470,7 +470,7 @@ namespace Tests_Sharp
         }
 
 
-        // TODO не завершено
+        // TODO РЅРµ Р·Р°РІРµСЂС€РµРЅРѕ
         //      [Test]
         //      public void Permutations()
         //      {
@@ -683,7 +683,7 @@ namespace Tests_Sharp
                         nums.Add(array[i][subArrLength - 1]);
 
                         array[i] = array[i].Take(subArrLength - 1).ToArray();
-                        //ИЛИ
+                        //РР›Р
                         //Array.Resize(ref array[i], subArrLength - 1);
                     }
 
@@ -701,7 +701,7 @@ namespace Tests_Sharp
                         nums.Add(array[i][0]);
 
                         array[i] = array[i].Skip(1).ToArray();
-                        //ИЛИ
+                        //РР›Р
                         //array[i] = array[i].Where(val => val != array[i][0]).ToArray();
                     }
 
@@ -761,7 +761,7 @@ namespace Tests_Sharp
         }
 
 
-        // TODO на сайте не проходят часть решений; тестовые кейсы неизвестны
+        // TODO РЅР° СЃР°Р№С‚Рµ РЅРµ РїСЂРѕС…РѕРґСЏС‚ С‡Р°СЃС‚СЊ СЂРµС€РµРЅРёР№; С‚РµСЃС‚РѕРІС‹Рµ РєРµР№СЃС‹ РЅРµРёР·РІРµСЃС‚РЅС‹
         [Test]
         public void DirReduction()
         {
@@ -839,11 +839,11 @@ namespace Tests_Sharp
 
             string listSquared(long m, long n)
             {
-                // В рендже m-n найти каждое число, у которого сумма всех его делителей возведенных в квадрат
-                // сама является целочисленным квадратом
-                // Вывести string в виде [[x, y], [x, y]], где x - найденное число; y - сумма квадратов делителей этого числа
+                // Р’ СЂРµРЅРґР¶Рµ m-n РЅР°Р№С‚Рё РєР°Р¶РґРѕРµ С‡РёСЃР»Рѕ, Сѓ РєРѕС‚РѕСЂРѕРіРѕ СЃСѓРјРјР° РІСЃРµС… РµРіРѕ РґРµР»РёС‚РµР»РµР№ РІРѕР·РІРµРґРµРЅРЅС‹С… РІ РєРІР°РґСЂР°С‚
+                // СЃР°РјР° СЏРІР»СЏРµС‚СЃСЏ С†РµР»РѕС‡РёСЃР»РµРЅРЅС‹Рј РєРІР°РґСЂР°С‚РѕРј
+                // Р’С‹РІРµСЃС‚Рё string РІ РІРёРґРµ [[x, y], [x, y]], РіРґРµ x - РЅР°Р№РґРµРЅРЅРѕРµ С‡РёСЃР»Рѕ; y - СЃСѓРјРјР° РєРІР°РґСЂР°С‚РѕРІ РґРµР»РёС‚РµР»РµР№ СЌС‚РѕРіРѕ С‡РёСЃР»Р°
 
-                // Найти все делители; возвести их в квадрат; сложить их; результат проверить на целочисленный корень
+                // РќР°Р№С‚Рё РІСЃРµ РґРµР»РёС‚РµР»Рё; РІРѕР·РІРµСЃС‚Рё РёС… РІ РєРІР°РґСЂР°С‚; СЃР»РѕР¶РёС‚СЊ РёС…; СЂРµР·СѓР»СЊС‚Р°С‚ РїСЂРѕРІРµСЂРёС‚СЊ РЅР° С†РµР»РѕС‡РёСЃР»РµРЅРЅС‹Р№ РєРѕСЂРµРЅСЊ
 
                 List<long> divisors = new List<long>();
                 List<double> divisorsSquared = new List<double>();
@@ -1024,9 +1024,9 @@ namespace Tests_Sharp
 
                 for (int i = digits.Count - 1; i >= 0; i--)
                 {
-                    // Останавливать нужно именно цикл j, поскольку даже после перестановки и сортировки
-                    // могут оказаться числа в рейндже j которые при этом меньше чем i; и эти числа снова перестановятся,
-                    // из-за чего выходное число будет НЕ первым меньшим числом 
+                    // РћСЃС‚Р°РЅР°РІР»РёРІР°С‚СЊ РЅСѓР¶РЅРѕ РёРјРµРЅРЅРѕ С†РёРєР» j, РїРѕСЃРєРѕР»СЊРєСѓ РґР°Р¶Рµ РїРѕСЃР»Рµ РїРµСЂРµСЃС‚Р°РЅРѕРІРєРё Рё СЃРѕСЂС‚РёСЂРѕРІРєРё
+                    // РјРѕРіСѓС‚ РѕРєР°Р·Р°С‚СЊСЃСЏ С‡РёСЃР»Р° РІ СЂРµР№РЅРґР¶Рµ j РєРѕС‚РѕСЂС‹Рµ РїСЂРё СЌС‚РѕРј РјРµРЅСЊС€Рµ С‡РµРј i; Рё СЌС‚Рё С‡РёСЃР»Р° СЃРЅРѕРІР° РїРµСЂРµСЃС‚Р°РЅРѕРІСЏС‚СЃСЏ,
+                    // РёР·-Р·Р° С‡РµРіРѕ РІС‹С…РѕРґРЅРѕРµ С‡РёСЃР»Рѕ Р±СѓРґРµС‚ РќР• РїРµСЂРІС‹Рј РјРµРЅСЊС€РёРј С‡РёСЃР»РѕРј 
                     for (int j = digits.Count - 1; j > i && !isFirstObjectFound; j--)
                     {
                         if (digits[j] < digits[i])
@@ -1165,12 +1165,12 @@ namespace Tests_Sharp
 
                 var matchedNumsCount = matchedNums.Count;
 
-                // Ближайшее число к нужному нам (X) находим путем сортировки по ключу и последующего "вынимания" самого первого числа
-                // с отсортированного списка. Сортировка производится по минимальной разнице между X (средним арифметическим) и любым 
-                // другим числом из нашей коллекции.
+                // Р‘Р»РёР¶Р°Р№С€РµРµ С‡РёСЃР»Рѕ Рє РЅСѓР¶РЅРѕРјСѓ РЅР°Рј (X) РЅР°С…РѕРґРёРј РїСѓС‚РµРј СЃРѕСЂС‚РёСЂРѕРІРєРё РїРѕ РєР»СЋС‡Сѓ Рё РїРѕСЃР»РµРґСѓСЋС‰РµРіРѕ "РІС‹РЅРёРјР°РЅРёСЏ" СЃР°РјРѕРіРѕ РїРµСЂРІРѕРіРѕ С‡РёСЃР»Р°
+                // СЃ РѕС‚СЃРѕСЂС‚РёСЂРѕРІР°РЅРЅРѕРіРѕ СЃРїРёСЃРєР°. РЎРѕСЂС‚РёСЂРѕРІРєР° РїСЂРѕРёР·РІРѕРґРёС‚СЃСЏ РїРѕ РјРёРЅРёРјР°Р»СЊРЅРѕР№ СЂР°Р·РЅРёС†Рµ РјРµР¶РґСѓ X (СЃСЂРµРґРЅРёРј Р°СЂРёС„РјРµС‚РёС‡РµСЃРєРёРј) Рё Р»СЋР±С‹Рј 
+                // РґСЂСѓРіРёРј С‡РёСЃР»РѕРј РёР· РЅР°С€РµР№ РєРѕР»Р»РµРєС†РёРё.
                 var matchedNumsMean = matchedNums.Sum() / matchedNums.Count;
                 var closestNumToMean = matchedNums.OrderBy(item => Math.Abs(matchedNumsMean - item)).First();
-                //ИЛИ
+                //РР›Р
                 //var closestNumToMean = matchedNums.Aggregate((x, y) => Math.Abs(x-matchedNumsMean) < Math.Abs(y-matchedNumsMean) ? x : y);
 
                 var matchedNumsSum = matchedNums.Sum();
@@ -1198,7 +1198,7 @@ namespace Tests_Sharp
                 //BigInteger numA = BigInteger.Parse(a);
                 //BigInteger numB = BigInteger.Parse(b);
 
-                //ИЛИ без проверки на пустые строки (значения останутся пустыми, если парсинг не удастся)
+                //РР›Р Р±РµР· РїСЂРѕРІРµСЂРєРё РЅР° РїСѓСЃС‚С‹Рµ СЃС‚СЂРѕРєРё (Р·РЅР°С‡РµРЅРёСЏ РѕСЃС‚Р°РЅСѓС‚СЃСЏ РїСѓСЃС‚С‹РјРё, РµСЃР»Рё РїР°СЂСЃРёРЅРі РЅРµ СѓРґР°СЃС‚СЃСЏ)
                 BigInteger numA;
                 BigInteger numB;
                 BigInteger.TryParse(a, out numA);
@@ -1222,7 +1222,7 @@ namespace Tests_Sharp
                 for (int i = 1; i <= num; i++)
                 {
                     factorial *= i;
-                    //ИЛИ
+                    //РР›Р
                     //factorial = BigInteger.Multiply(i, factorial);
                 }
 
@@ -1246,7 +1246,7 @@ namespace Tests_Sharp
         //    Assert.AreEqual(new int[] { 8, 64, 3600 }, Parse("iiisdosodddddiso"));
         //}
 
-        ////TODO не знаю как решать. ссылка: https://www.codewars.com/kata/56f4ff45af5b1f8cd100067d/train/csharp
+        ////TODO РЅРµ Р·РЅР°СЋ РєР°Рє СЂРµС€Р°С‚СЊ. СЃСЃС‹Р»РєР°: https://www.codewars.com/kata/56f4ff45af5b1f8cd100067d/train/csharp
         //[Test]
         //public void Dinglemouse()
         //{
@@ -1275,9 +1275,9 @@ namespace Tests_Sharp
         //            int numToReplace = entryNum;
         //            bool isFirstReplaceInCluster = false;
 
-        //            // Если замена самая первая - необходимо проверять окружающие числа 
-        //            // не на newValue а на самого себя (array[y, x]).
-        //            // Если замена НЕ первая - необходимо проверять окружающие числа на newValue (на уже замененное число)
+        //            // Р•СЃР»Рё Р·Р°РјРµРЅР° СЃР°РјР°СЏ РїРµСЂРІР°СЏ - РЅРµРѕР±С…РѕРґРёРјРѕ РїСЂРѕРІРµСЂСЏС‚СЊ РѕРєСЂСѓР¶Р°СЋС‰РёРµ С‡РёСЃР»Р° 
+        //            // РЅРµ РЅР° newValue Р° РЅР° СЃР°РјРѕРіРѕ СЃРµР±СЏ (array[y, x]).
+        //            // Р•СЃР»Рё Р·Р°РјРµРЅР° РќР• РїРµСЂРІР°СЏ - РЅРµРѕР±С…РѕРґРёРјРѕ РїСЂРѕРІРµСЂСЏС‚СЊ РѕРєСЂСѓР¶Р°СЋС‰РёРµ С‡РёСЃР»Р° РЅР° newValue (РЅР° СѓР¶Рµ Р·Р°РјРµРЅРµРЅРЅРѕРµ С‡РёСЃР»Рѕ)
 
         //            if (i == y && j == x)
         //            {
@@ -1287,7 +1287,7 @@ namespace Tests_Sharp
         //            if (!isFirstReplaceInCluster)
         //                numToReplace = newValue;
 
-        //            // Верхний левый угол
+        //            // Р’РµСЂС…РЅРёР№ Р»РµРІС‹Р№ СѓРіРѕР»
         //            if (i == 0 && j == 0)
         //            {
         //                if (array[i + 1, j] == numToReplace || array[i, j + 1] == numToReplace || isFirstReplaceInCluster)
@@ -1295,7 +1295,7 @@ namespace Tests_Sharp
         //                    array[i, j] = newValue;
         //                }
         //            }
-        //            // Верхний правый угол
+        //            // Р’РµСЂС…РЅРёР№ РїСЂР°РІС‹Р№ СѓРіРѕР»
         //            else if (i == 0 && j == width - 1)
         //            {
         //                if (array[i + 1, j] == numToReplace || array[i, j - 1] == numToReplace || isFirstReplaceInCluster)
@@ -1303,7 +1303,7 @@ namespace Tests_Sharp
         //                    array[i, j] = newValue;
         //                }
         //            }
-        //            // Нижний левый угол
+        //            // РќРёР¶РЅРёР№ Р»РµРІС‹Р№ СѓРіРѕР»
         //            else if (i == height - 1 && j == 0)
         //            {
         //                if (array[i - 1, j] == numToReplace || array[i, j + 1] == numToReplace || isFirstReplaceInCluster)
@@ -1311,7 +1311,7 @@ namespace Tests_Sharp
         //                    array[i, j] = newValue;
         //                }
         //            }
-        //            // Нижний правый угол
+        //            // РќРёР¶РЅРёР№ РїСЂР°РІС‹Р№ СѓРіРѕР»
         //            else if (i == height - 1 && j == width - 1)
         //            {
         //                if (array[i - 1, j] == numToReplace || array[i, j - 1] == numToReplace || isFirstReplaceInCluster)
@@ -1319,7 +1319,7 @@ namespace Tests_Sharp
         //                    array[i, j] = newValue;
         //                }
         //            }
-        //            // Из самого верхнего массива кроме углов
+        //            // РР· СЃР°РјРѕРіРѕ РІРµСЂС…РЅРµРіРѕ РјР°СЃСЃРёРІР° РєСЂРѕРјРµ СѓРіР»РѕРІ
         //            else if (i == 0)
         //            {
         //                if (array[i + 1, j] == numToReplace || array[i, j + 1] == numToReplace || array[i, j - 1] == numToReplace
@@ -1328,7 +1328,7 @@ namespace Tests_Sharp
         //                    array[i, j] = newValue;
         //                }
         //            }
-        //            // Из самого левого массива кроме углов
+        //            // РР· СЃР°РјРѕРіРѕ Р»РµРІРѕРіРѕ РјР°СЃСЃРёРІР° РєСЂРѕРјРµ СѓРіР»РѕРІ
         //            else if (j == 0)
         //            {
         //                if (array[i - 1, j] == numToReplace || array[i + 1, j] == numToReplace || array[i, j + 1] == numToReplace
@@ -1337,7 +1337,7 @@ namespace Tests_Sharp
         //                    array[i, j] = newValue;
         //                }
         //            }
-        //            // Из самого нижнего массива кроме углов
+        //            // РР· СЃР°РјРѕРіРѕ РЅРёР¶РЅРµРіРѕ РјР°СЃСЃРёРІР° РєСЂРѕРјРµ СѓРіР»РѕРІ
         //            else if (i == height - 1)
         //            {
         //                if (array[i - 1, j] == numToReplace || array[i, j + 1] == numToReplace || array[i, j - 1] == numToReplace
@@ -1346,7 +1346,7 @@ namespace Tests_Sharp
         //                    array[i, j] = newValue;
         //                }
         //            }
-        //            // Из самого правого массива кроме углов
+        //            // РР· СЃР°РјРѕРіРѕ РїСЂР°РІРѕРіРѕ РјР°СЃСЃРёРІР° РєСЂРѕРјРµ СѓРіР»РѕРІ
         //            else if (j == width - 1)
         //            {
         //                if (array[i - 1, j] == numToReplace || array[i + 1, j] == numToReplace || array[i, j - 1] == numToReplace
@@ -1355,7 +1355,7 @@ namespace Tests_Sharp
         //                    array[i, j] = newValue;
         //                }
         //            }
-        //            // Откуда угодно кроме углов и крайних массивов
+        //            // РћС‚РєСѓРґР° СѓРіРѕРґРЅРѕ РєСЂРѕРјРµ СѓРіР»РѕРІ Рё РєСЂР°Р№РЅРёС… РјР°СЃСЃРёРІРѕРІ
         //            else
         //            {
         //                if (array[i - 1, j] == numToReplace || array[i + 1, j] == numToReplace || array[i, j - 1] == numToReplace
@@ -1374,7 +1374,7 @@ namespace Tests_Sharp
 
         //        int entryNum = default;
 
-        //        // Запись в переменную числа, которое нужно заменять
+        //        // Р—Р°РїРёСЃСЊ РІ РїРµСЂРµРјРµРЅРЅСѓСЋ С‡РёСЃР»Р°, РєРѕС‚РѕСЂРѕРµ РЅСѓР¶РЅРѕ Р·Р°РјРµРЅСЏС‚СЊ
         //        try
         //        {
         //            entryNum = array[y, x];
@@ -1459,7 +1459,7 @@ namespace Tests_Sharp
 
         //    CollectionAssert.AreEqual(expected, FloodFill(actual, 0, 1, 4));
 
-        //    //// Более правильные варианты
+        //    //// Р‘РѕР»РµРµ РїСЂР°РІРёР»СЊРЅС‹Рµ РІР°СЂРёР°РЅС‚С‹
         //    //public static int[,] FloodFill(int[,] array, int x, int y, int newValue)
         //    //{
         //    //    var areaValue = array[x, y];
@@ -1553,7 +1553,7 @@ namespace Tests_Sharp
         //}
 
 
-        // TODO решение не принимается компилятором на сайте, здесь работает нормально
+        // TODO СЂРµС€РµРЅРёРµ РЅРµ РїСЂРёРЅРёРјР°РµС‚СЃСЏ РєРѕРјРїРёР»СЏС‚РѕСЂРѕРј РЅР° СЃР°Р№С‚Рµ, Р·РґРµСЃСЊ СЂР°Р±РѕС‚Р°РµС‚ РЅРѕСЂРјР°Р»СЊРЅРѕ
         [Test]
         public void SamePrimeFactors()
         {
@@ -1608,10 +1608,10 @@ namespace Tests_Sharp
 
             int[] SameFactRev(int nMax)
             {
-                // 1. Пересчет с проверкой на палиндром: если палиндром - не рассматриваем
-                // 2. Находим для числа по факторизации; в список 1, сортируем его
-                // 3. Переворачиваем число, повторяем 2. внося в список 2 
-                // 4. Сверяем список 1 и 2, если совпал - добавляем число в финальный массив
+                // 1. РџРµСЂРµСЃС‡РµС‚ СЃ РїСЂРѕРІРµСЂРєРѕР№ РЅР° РїР°Р»РёРЅРґСЂРѕРј: РµСЃР»Рё РїР°Р»РёРЅРґСЂРѕРј - РЅРµ СЂР°СЃСЃРјР°С‚СЂРёРІР°РµРј
+                // 2. РќР°С…РѕРґРёРј РґР»СЏ С‡РёСЃР»Р° РїРѕ С„Р°РєС‚РѕСЂРёР·Р°С†РёРё; РІ СЃРїРёСЃРѕРє 1, СЃРѕСЂС‚РёСЂСѓРµРј РµРіРѕ
+                // 3. РџРµСЂРµРІРѕСЂР°С‡РёРІР°РµРј С‡РёСЃР»Рѕ, РїРѕРІС‚РѕСЂСЏРµРј 2. РІРЅРѕСЃСЏ РІ СЃРїРёСЃРѕРє 2 
+                // 4. РЎРІРµСЂСЏРµРј СЃРїРёСЃРѕРє 1 Рё 2, РµСЃР»Рё СЃРѕРІРїР°Р» - РґРѕР±Р°РІР»СЏРµРј С‡РёСЃР»Рѕ РІ С„РёРЅР°Р»СЊРЅС‹Р№ РјР°СЃСЃРёРІ
 
                 List<int> output = new List<int>();
 
@@ -1664,7 +1664,7 @@ namespace Tests_Sharp
         //    {
         //        var pr =new string[]{"Baby","Mommy","Daddy","Grandma","Grandpa","Let's go hunt"}; var song ="";
         //        for(int i=0;i<=5;i++){var doo=", doo doo doo doo doo doo";var s=" shark";for(int j=1;j<=4;j++){
-        //        if(j==4){doo="!";}if(i==5){s="";if(j==4){s="!\nRun away,…";}}
+        //        if(j==4){doo="!";}if(i==5){s="";if(j==4){s="!\nRun away,вЂ¦";}}
         //        song+=$"{pr[i]}{s}{doo}\n";}}return song;
         //    }
 
@@ -1693,7 +1693,7 @@ namespace Tests_Sharp
         //        "Let's go hunt, doo doo doo doo doo doo",
         //        "Let's go hunt, doo doo doo doo doo doo",
         //        "Let's go hunt!",
-        //        "Run away,…",
+        //        "Run away,вЂ¦",
         //        ""
         //    }), BabySharkLyrics());
 
@@ -1753,11 +1753,11 @@ namespace Tests_Sharp
                     }
                 }
 
-                //АЛГОРИТМ ВСЕГО 2 ШАГА:
-                //1. СОРТИРОВКА ПО УБЫВАНИЮ
-                //2. РАЗБИВ МАССИВ ПО ПАРАМ, ПРОСТО ПЕРЕСТАВИТЬ ЧИСЛА В КАЖДОЙ ПАРЕ МЕСТАМИ: КАЖДОЕ МЕНЬШЕЕ ВСТАНЕТ ПЕРЕД КАЖДЫМ БОЛЬШИМ
+                //РђР›Р“РћР РРўРњ Р’РЎР•Р“Рћ 2 РЁРђР“Рђ:
+                //1. РЎРћР РўРР РћР’РљРђ РџРћ РЈР‘Р«Р’РђРќРР®
+                //2. Р РђР—Р‘РР’ РњРђРЎРЎРР’ РџРћ РџРђР РђРњ, РџР РћРЎРўРћ РџР•Р Р•РЎРўРђР’РРўР¬ Р§РРЎР›Рђ Р’ РљРђР–Р”РћР™ РџРђР Р• РњР•РЎРўРђРњР: РљРђР–Р”РћР• РњР•РќР¬РЁР•Р• Р’РЎРўРђРќР•Рў РџР•Р Р•Р” РљРђР–Р”Р«Рњ Р‘РћР›Р¬РЁРРњ
 
-                //Нормальное решение
+                //РќРѕСЂРјР°Р»СЊРЅРѕРµ СЂРµС€РµРЅРёРµ
                 Array.Sort(arr);
 
                 for (int x = 1; x < arr.Length; x += 2)
@@ -1766,7 +1766,7 @@ namespace Tests_Sharp
                 }
             }
 
-            //Тестов нет
+            //РўРµСЃС‚РѕРІ РЅРµС‚
         }
 
         //[Test]
@@ -1826,10 +1826,10 @@ namespace Tests_Sharp
         {
             List<int> MaxSumSubarray(List<int> numb)
             {
-                // Перебор каждого числа
-                // С каждой итерацией забираем кусок с i до j в коллекцию currentNumChunk;
-                // Обновляю сумму с каждого этого куска; если сумма больше максимальной - сохраняю в в коллекцию numChunkWithMaxSum
-                // currentNumChunk и currentSum обнулять с обновлением i
+                // РџРµСЂРµР±РѕСЂ РєР°Р¶РґРѕРіРѕ С‡РёСЃР»Р°
+                // РЎ РєР°Р¶РґРѕР№ РёС‚РµСЂР°С†РёРµР№ Р·Р°Р±РёСЂР°РµРј РєСѓСЃРѕРє СЃ i РґРѕ j РІ РєРѕР»Р»РµРєС†РёСЋ currentNumChunk;
+                // РћР±РЅРѕРІР»СЏСЋ СЃСѓРјРјСѓ СЃ РєР°Р¶РґРѕРіРѕ СЌС‚РѕРіРѕ РєСѓСЃРєР°; РµСЃР»Рё СЃСѓРјРјР° Р±РѕР»СЊС€Рµ РјР°РєСЃРёРјР°Р»СЊРЅРѕР№ - СЃРѕС…СЂР°РЅСЏСЋ РІ РІ РєРѕР»Р»РµРєС†РёСЋ numChunkWithMaxSum
+                // currentNumChunk Рё currentSum РѕР±РЅСѓР»СЏС‚СЊ СЃ РѕР±РЅРѕРІР»РµРЅРёРµРј i
 
                 if (numb.Count <= 1)
                     return numb;
@@ -1880,7 +1880,7 @@ namespace Tests_Sharp
         [Test]
         public void SumsOfParts()
         {
-            // Решение ПОСЛЕ оптимизации (время отработки 940 ns)
+            // Р РµС€РµРЅРёРµ РџРћРЎР›Р• РѕРїС‚РёРјРёР·Р°С†РёРё (РІСЂРµРјСЏ РѕС‚СЂР°Р±РѕС‚РєРё 940 ns)
             int[] PartsSumsFast(int[] ls)
             {
                 List<int> nums = new List<int>(ls);
@@ -1912,7 +1912,7 @@ namespace Tests_Sharp
                 return outputList.ToArray();
             }
 
-            // Решение ДО оптимизации (время отработки 1.640 ns)
+            // Р РµС€РµРЅРёРµ Р”Рћ РѕРїС‚РёРјРёР·Р°С†РёРё (РІСЂРµРјСЏ РѕС‚СЂР°Р±РѕС‚РєРё 1.640 ns)
             int[] PartsSumsSlow(int[] ls)
             {
                 List<int> nums = new List<int>(ls);
@@ -1992,8 +1992,8 @@ namespace Tests_Sharp
                 return output.ToArray();
             }
 
-            //// Более хорошее решение без лишних приведений:
-            //// Вариант 1:
+            //// Р‘РѕР»РµРµ С…РѕСЂРѕС€РµРµ СЂРµС€РµРЅРёРµ Р±РµР· Р»РёС€РЅРёС… РїСЂРёРІРµРґРµРЅРёР№:
+            //// Р’Р°СЂРёР°РЅС‚ 1:
             //int[] UpArray(int[] num)
             //{
             //	if (num.Length == 0 || num.Any(a => a < 0 || a > 9))
@@ -2014,7 +2014,7 @@ namespace Tests_Sharp
             //	return new[] { 1 }.Concat(num).ToArray();
             //}
 
-            //// Вариант 2:
+            //// Р’Р°СЂРёР°РЅС‚ 2:
             //public static int[] UpArray(int[] num)
             //{
             //	if (num.Count() == 0 || num.Any(x => x < 0 || x > 9)) return null;
@@ -2129,7 +2129,7 @@ namespace Tests_Sharp
                 else return false;
             }
 
-            // Более лаконичное:
+            // Р‘РѕР»РµРµ Р»Р°РєРѕРЅРёС‡РЅРѕРµ:
             bool IsNice2(int[] arr) => arr.Any() && arr.All(n => arr.Contains(n + 1) || arr.Contains(n - 1));
 
             Assert.AreEqual(true, new int[] { 2, 10, 9, 3 });
@@ -2152,7 +2152,7 @@ namespace Tests_Sharp
 
                 //return sum;
 
-                // ПОСЛЕ ОПТИМИЗАЦИИ
+                // РџРћРЎР›Р• РћРџРўРРњРР—РђР¦РР
                 // Final result of summation of divisors
                 long result = 0;
 
@@ -2180,24 +2180,24 @@ namespace Tests_Sharp
 
             string FindBuddyNum(long start, long limit)
             {
-                // делители для n от 1 до n НЕ ВКЛЮЧАЯ n
-                // s - сумма всех делителей числа
+                // РґРµР»РёС‚РµР»Рё РґР»СЏ n РѕС‚ 1 РґРѕ n РќР• Р’РљР›Р®Р§РђРЇ n
+                // s - СЃСѓРјРјР° РІСЃРµС… РґРµР»РёС‚РµР»РµР№ С‡РёСЃР»Р°
                 // (n, m) are a pair of buddy if s(m) = n + 1 and s(n) = m + 1
-                // для n = 48, s = 76 = 75 + 1
-                // для n = 75, s = 49 = 48 + 1
+                // РґР»СЏ n = 48, s = 76 = 75 + 1
+                // РґР»СЏ n = 75, s = 49 = 48 + 1
 
-                // для A = 48, s = 76 = B + 1
-                // для B = 75, s = 49 = A + 1
+                // РґР»СЏ A = 48, s = 76 = B + 1
+                // РґР»СЏ B = 75, s = 49 = A + 1
 
-                // Найти первую пару (A, B) где A между числами start и limit включительно
-                // Число B НЕ ОБЯЗАТЕЛЬНО должен быть между start и limit; оно должно быть > A оно может иметь значение больше чем limit
-                // Вернуть "Nothing" если не найдено, если найдено строка "(A B)"
+                // РќР°Р№С‚Рё РїРµСЂРІСѓСЋ РїР°СЂСѓ (A, B) РіРґРµ A РјРµР¶РґСѓ С‡РёСЃР»Р°РјРё start Рё limit РІРєР»СЋС‡РёС‚РµР»СЊРЅРѕ
+                // Р§РёСЃР»Рѕ B РќР• РћР‘РЇР—РђРўР•Р›Р¬РќРћ РґРѕР»Р¶РµРЅ Р±С‹С‚СЊ РјРµР¶РґСѓ start Рё limit; РѕРЅРѕ РґРѕР»Р¶РЅРѕ Р±С‹С‚СЊ > A РѕРЅРѕ РјРѕР¶РµС‚ РёРјРµС‚СЊ Р·РЅР°С‡РµРЅРёРµ Р±РѕР»СЊС€Рµ С‡РµРј limit
+                // Р’РµСЂРЅСѓС‚СЊ "Nothing" РµСЃР»Рё РЅРµ РЅР°Р№РґРµРЅРѕ, РµСЃР»Рё РЅР°Р№РґРµРЅРѕ СЃС‚СЂРѕРєР° "(A B)"
 
-                // Перебрать все числа от start до limit добавляя в словарь пару n-s только в случае если S > N
-                // Проверить каждую пару: взять s(A)-1, он становится B, найти для него его s(B), сверить s(B)-1 c A;
-                // подходит - забираем и выходим, не подходит - переходим к следующей паре
+                // РџРµСЂРµР±СЂР°С‚СЊ РІСЃРµ С‡РёСЃР»Р° РѕС‚ start РґРѕ limit РґРѕР±Р°РІР»СЏСЏ РІ СЃР»РѕРІР°СЂСЊ РїР°СЂСѓ n-s С‚РѕР»СЊРєРѕ РІ СЃР»СѓС‡Р°Рµ РµСЃР»Рё S > N
+                // РџСЂРѕРІРµСЂРёС‚СЊ РєР°Р¶РґСѓСЋ РїР°СЂСѓ: РІР·СЏС‚СЊ s(A)-1, РѕРЅ СЃС‚Р°РЅРѕРІРёС‚СЃСЏ B, РЅР°Р№С‚Рё РґР»СЏ РЅРµРіРѕ РµРіРѕ s(B), СЃРІРµСЂРёС‚СЊ s(B)-1 c A;
+                // РїРѕРґС…РѕРґРёС‚ - Р·Р°Р±РёСЂР°РµРј Рё РІС‹С…РѕРґРёРј, РЅРµ РїРѕРґС…РѕРґРёС‚ - РїРµСЂРµС…РѕРґРёРј Рє СЃР»РµРґСѓСЋС‰РµР№ РїР°СЂРµ
 
-                // ДО ОПТИМИЗАЦИИ
+                // Р”Рћ РћРџРўРРњРР—РђР¦РР
                 //=============================================================================
                 //Dictionary<long?, long> numberToDivSum = new Dictionary<long?, long>();
                 //long firstBuddy = 0, secondBuddy = 0;
@@ -2226,7 +2226,7 @@ namespace Tests_Sharp
                 //}
                 //=============================================================================
 
-                // ПОСЛЕ ОПТИМИЗАЦИИ
+                // РџРћРЎР›Р• РћРџРўРРњРР—РђР¦РР
                 long firstBuddy = 0, secondBuddy = 0;
 
                 for (long i = start; i <= limit; i++)
@@ -2261,10 +2261,10 @@ namespace Tests_Sharp
         [Test]
         public void CheckDateTimeDay()
         {
-            // Громоздкая версия
+            // Р“СЂРѕРјРѕР·РґРєР°СЏ РІРµСЂСЃРёСЏ
             bool IsCurrentDayInRange(DateTime dateTime)
             {
-                //// ПЛОХОЙ ВАРИАНТ
+                //// РџР›РћРҐРћР™ Р’РђР РРђРќРў
                 //var currentDay = dateTime.ToString("dd", CultureInfo.InvariantCulture);
 
                 //if ((currentDay == "01" || currentDay == "02" || currentDay == "03" || currentDay == "04" || currentDay == "05"))
@@ -2273,7 +2273,7 @@ namespace Tests_Sharp
                 //    return false;
 
 
-                //// ВАРИАНТ С СУЩНОСТЬЮ - ПОСРЕДНИКОМ
+                //// Р’РђР РРђРќРў РЎ РЎРЈР©РќРћРЎРўР¬Р® - РџРћРЎР Р•Р”РќРРљРћРњ
                 //var year = dateTime.Year;
                 //var month = dateTime.Month;
                 //var day = dateTime.Day;
@@ -2286,7 +2286,7 @@ namespace Tests_Sharp
                 //    return false;
 
 
-                // ВАРИАНТ БЕЗ СУЩНОСТЕЙ - ПОСРЕДНИКОВ
+                // Р’РђР РРђРќРў Р‘Р•Р— РЎРЈР©РќРћРЎРўР•Р™ - РџРћРЎР Р•Р”РќРРљРћР’
                 if (dateTime.Day >= 01 && dateTime.Day <= 05)
                     return true;
                 else
@@ -2303,7 +2303,7 @@ namespace Tests_Sharp
         //[Test]
         //public void IsStrPangram()
         //{
-        //    // Громоздкая версия
+        //    // Р“СЂРѕРјРѕР·РґРєР°СЏ РІРµСЂСЃРёСЏ
         //    bool IsPangram(string str)
         //    {
         //        char[] alphabetLetters = "abcdefghijklmnopqrstuvwxyz".ToCharArray();
@@ -2314,7 +2314,7 @@ namespace Tests_Sharp
         //        else return false;
         //    }
 
-        //    // Сжатая версия
+        //    // РЎР¶Р°С‚Р°СЏ РІРµСЂСЃРёСЏ
         //    //char[] alphabetLetters = "abcdefghijklmnopqrstuvwxyz".ToCharArray();
         //    bool IsPangram(string str) => "abcdefghijklmnopqrstuvwxyz".All(l => str.ToLower().ToCharArray().Contains(l));
 
@@ -2391,20 +2391,20 @@ namespace Tests_Sharp
         {
             static int BinarySearch(int[] nums, int target)
             {
-                //1. Определить крайние точки (индексы) массива для определения есть ли что-либо между ними или искомое уже "зажато"
+                //1. РћРїСЂРµРґРµР»РёС‚СЊ РєСЂР°Р№РЅРёРµ С‚РѕС‡РєРё (РёРЅРґРµРєСЃС‹) РјР°СЃСЃРёРІР° РґР»СЏ РѕРїСЂРµРґРµР»РµРЅРёСЏ РµСЃС‚СЊ Р»Рё С‡С‚Рѕ-Р»РёР±Рѕ РјРµР¶РґСѓ РЅРёРјРё РёР»Рё РёСЃРєРѕРјРѕРµ СѓР¶Рµ "Р·Р°Р¶Р°С‚Рѕ"
                 var left = 0;
                 var right = nums.Length - 1;
 
-                //2. До тех пор пока левая и правая часть не равны (пока есть более одного значения)
+                //2. Р”Рѕ С‚РµС… РїРѕСЂ РїРѕРєР° Р»РµРІР°СЏ Рё РїСЂР°РІР°СЏ С‡Р°СЃС‚СЊ РЅРµ СЂР°РІРЅС‹ (РїРѕРєР° РµСЃС‚СЊ Р±РѕР»РµРµ РѕРґРЅРѕРіРѕ Р·РЅР°С‡РµРЅРёСЏ)
                 while (left <= right)
                 {
-                    //3. Находим средний индекс в текущем отрезке
+                    //3. РќР°С…РѕРґРёРј СЃСЂРµРґРЅРёР№ РёРЅРґРµРєСЃ РІ С‚РµРєСѓС‰РµРј РѕС‚СЂРµР·РєРµ
                     var middle = (left + right) / 2;
 
-                    //4. Если искомое число не равно среднему числу в отрезке - определяем больше или меньше оно среднего
-                    //   Если меньше - текущее среднее число принимает роль правой границы отрезка
-                    //   Если больше - текущее среднее число принимает роль левой границы отрезка
-                    //   При этом граница сдвигается на +/-1, так как с самой границей(т.е. со средним ранее) уже было проведено сравнение
+                    //4. Р•СЃР»Рё РёСЃРєРѕРјРѕРµ С‡РёСЃР»Рѕ РЅРµ СЂР°РІРЅРѕ СЃСЂРµРґРЅРµРјСѓ С‡РёСЃР»Сѓ РІ РѕС‚СЂРµР·РєРµ - РѕРїСЂРµРґРµР»СЏРµРј Р±РѕР»СЊС€Рµ РёР»Рё РјРµРЅСЊС€Рµ РѕРЅРѕ СЃСЂРµРґРЅРµРіРѕ
+                    //   Р•СЃР»Рё РјРµРЅСЊС€Рµ - С‚РµРєСѓС‰РµРµ СЃСЂРµРґРЅРµРµ С‡РёСЃР»Рѕ РїСЂРёРЅРёРјР°РµС‚ СЂРѕР»СЊ РїСЂР°РІРѕР№ РіСЂР°РЅРёС†С‹ РѕС‚СЂРµР·РєР°
+                    //   Р•СЃР»Рё Р±РѕР»СЊС€Рµ - С‚РµРєСѓС‰РµРµ СЃСЂРµРґРЅРµРµ С‡РёСЃР»Рѕ РїСЂРёРЅРёРјР°РµС‚ СЂРѕР»СЊ Р»РµРІРѕР№ РіСЂР°РЅРёС†С‹ РѕС‚СЂРµР·РєР°
+                    //   РџСЂРё СЌС‚РѕРј РіСЂР°РЅРёС†Р° СЃРґРІРёРіР°РµС‚СЃСЏ РЅР° +/-1, С‚Р°Рє РєР°Рє СЃ СЃР°РјРѕР№ РіСЂР°РЅРёС†РµР№(С‚.Рµ. СЃРѕ СЃСЂРµРґРЅРёРј СЂР°РЅРµРµ) СѓР¶Рµ Р±С‹Р»Рѕ РїСЂРѕРІРµРґРµРЅРѕ СЃСЂР°РІРЅРµРЅРёРµ
                     if (target == nums[middle])
                     {
                         return middle;
@@ -2430,7 +2430,7 @@ namespace Tests_Sharp
         //[Test]
         //public void IsStrPangram()
         //{
-        //    // Громоздкая версия
+        //    // Р“СЂРѕРјРѕР·РґРєР°СЏ РІРµСЂСЃРёСЏ
         //    bool IsPangram(string str)
         //    {
         //        char[] alphabetLetters = "abcdefghijklmnopqrstuvwxyz".ToCharArray();
@@ -2441,7 +2441,7 @@ namespace Tests_Sharp
         //        else return false;
         //    }
 
-        //    // Сжатая версия
+        //    // РЎР¶Р°С‚Р°СЏ РІРµСЂСЃРёСЏ
         //    //char[] alphabetLetters = "abcdefghijklmnopqrstuvwxyz".ToCharArray();
         //    bool IsPangram(string str) => "abcdefghijklmnopqrstuvwxyz".All(l => str.ToLower().ToCharArray().Contains(l));
 
@@ -2456,7 +2456,7 @@ namespace Tests_Sharp
         {
             int LengthOfLongestSubstring(string s)
             {
-                // Неоптимизированный но рабочий
+                // РќРµРѕРїС‚РёРјРёР·РёСЂРѕРІР°РЅРЅС‹Р№ РЅРѕ СЂР°Р±РѕС‡РёР№
                 bool IsAllCharsUnique(string s)
                 {
                     return s.Distinct().Count() == s.Length;
@@ -2481,7 +2481,7 @@ namespace Tests_Sharp
                 }
                 return maxSubstring.Length;
 
-                //// Оптимизированный (еще не изучен)
+                //// РћРїС‚РёРјРёР·РёСЂРѕРІР°РЅРЅС‹Р№ (РµС‰Рµ РЅРµ РёР·СѓС‡РµРЅ)
                 //int size = s.Length;
                 //int max = 1;
                 //if (size == 0)
@@ -2518,6 +2518,21 @@ namespace Tests_Sharp
         [Test]
         public void StringPermutations()
         {
+            //perm(ab) в†’
+            //a + perm(b) в†’ ab
+            //b + perm(a) в†’ ba
+
+            //perm(abc) в†’
+            //a + perm(bc) в†’ abc, acb
+            //b + perm(ac) в†’ bac, bca
+            //c + perm(ab) в†’ cab, cba
+
+            //perm(sagi) в†’
+            //s + perm(agi) в†’ agi, aig, gia, gai, iag, iga (a + perm(gi), g + perm(ai), i + perm(ag))
+            //a + perm(sgi) в†’ sgi, sig, gis, gsi, isg, igs (s + perm(gi), g + perm(si), i + perm(gi))
+            //g + perm(sai) в†’ sai, sia, ais, asi, isa, ias (s + perm(ai), a + perm(si), i + perm(sa))
+            //i + perm(sag) в†’ sag, sga, ags, asg, gsa, gas (s + perm(ag), a + perm(sg), g + perm(sa))
+
             List<string> SinglePermutations(string s)
             {
                 List<string> variations = new List<string>();
