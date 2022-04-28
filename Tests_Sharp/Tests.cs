@@ -2632,6 +2632,25 @@ namespace Tests_Sharp
                     Array.Sort(chars, i, chars.Length - i);
 
                     return Convert.ToInt64(new string(chars));
+
+
+                    //// Еще вариант
+                    //public static long NextBiggerNumber(long n)
+                    //{
+                    //    String str = GetNumbers(n);
+                    //    for (long i = n+1; i <= long.Parse(str); i++)
+                    //    {
+                    //        if (GetNumbers(n)==GetNumbers(i))
+                    //        {
+                    //            return i;
+                    //        }
+                    //    }
+                    //    return -1;
+                    //}
+                    //public static string GetNumbers(long number)
+                    //{
+                    //    return string.Join("", number.ToString().ToCharArray().OrderByDescending(x => x));
+                    //}
                 }
             }
 
