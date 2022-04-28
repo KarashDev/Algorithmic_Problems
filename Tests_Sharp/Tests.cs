@@ -2427,30 +2427,6 @@ namespace Tests_Sharp
         }
 
 
-        //[Test]
-        //public void IsStrPangram()
-        //{
-        //    // Громоздкая версия
-        //    bool IsPangram(string str)
-        //    {
-        //        char[] alphabetLetters = "abcdefghijklmnopqrstuvwxyz".ToCharArray();
-        //        char[] strLetters = str.ToLower().ToCharArray();
-
-        //        if (alphabetLetters.All(l => strLetters.Contains(l)))
-        //            return true;
-        //        else return false;
-        //    }
-
-        //    // Сжатая версия
-        //    //char[] alphabetLetters = "abcdefghijklmnopqrstuvwxyz".ToCharArray();
-        //    bool IsPangram(string str) => "abcdefghijklmnopqrstuvwxyz".All(l => str.ToLower().ToCharArray().Contains(l));
-
-        //    Assert.AreEqual(true, IsPangram("The quick brown fox jumps over the lazy dog."));
-        //    Assert.AreEqual(false, IsPangram("The qick brown fox jmps over the lazy dog."));
-        //}
-
-
-
         [Test]
         public void LengthOfLongestUniqueSubstring()
         {
@@ -2571,6 +2547,133 @@ namespace Tests_Sharp
                "aabb", "abab", "abba", "baab", "baba","bbaa",
             }, SinglePermutations("aabb"));
         }
+
+
+        [Test]
+        public void FindNextBiggerNumber()
+        {
+            long NextBiggerNumber(long n)
+            {
+                // === Решение основанное на нахождении всех перестановок символов в строке. Работает,
+                // но ОЧЕНЬ медленно, так как перед поиском нужного варианта сначала вычисляются ВСЕ варианты.
+                // Пытался написать оптимизированный вариант, останавливающий поиск при нахождении первого варианта 
+                // больше искомого, но такой алгоритм не работает для всех случаев + слишком сложный. Проще взять
+                // за основу принципиально другой алгоритм, чем пытаться переделать под задачу алгоритм перестановок
+
+                //List<long> variations = new List<long>();
+                //var chars = n.ToString().ToCharArray();
+
+                //GetPer(chars, 0, chars.Length - 1);
+
+                //void GetPer(char[] list, int start, int end)
+                //{
+                //    if (start == end)
+                //    {
+                //        if (!variations.Contains(Convert.ToInt64(new string(chars))))
+                //            variations.Add(Convert.ToInt64(new string(chars)));
+                //    }
+                //    else
+                //        for (int i = start; i <= end; i++)
+                //        {
+                //            (list[start], list[i]) = (list[i], list[start]);
+                //            GetPer(list, start + 1, end);
+                //            (list[start], list[i]) = (list[i], list[start]);
+                //        }
+                //}
+
+                //return variations.OrderBy(num => num).ToList().FirstOrDefault(num => num > n);
+
+                // === Хорошее решение через отдельный алгоритм
+                void Swap(char[] ar, int i, int j)
+                {
+                    char temp = ar[i];
+                    ar[i] = ar[j];
+                    ar[j] = temp;
+                }
+
+                var chars = n.ToString().ToCharArray();
+
+                int i;
+
+                // Обнаружить первое число, которое меньше правого соседа
+                for (i = chars.Length - 1; i > 0; i--)
+                {
+                    if (chars[i] > chars[i - 1])
+                    {
+                        break;
+                    }
+                }
+
+                // Если такое число не найдено - это значит что массив отсортирован 
+                // по убыванию. Для него нельзя найти число больше текущего
+                if (i == 0)
+                {
+                    return -1;
+                }
+                else
+                {
+                    int x = chars[i - 1], minForI = i;
+
+                    // В правой части от числа i нужно найти первое число, больше чем i
+                    // число назовем minForI
+                    for (int j = i + 1; j < chars.Length; j++)
+                    {
+                        if (chars[j] > x && chars[j] < chars[minForI])
+                        {
+                            minForI = j;
+                        }
+                    }
+
+                    // i нужно поменять местами с найденным числом
+                    Swap(chars, i - 1, minForI);
+
+                    // Отсортировать кусок от i до конца массива
+                    // по возрастанию
+                    Array.Sort(chars, i, chars.Length - i);
+
+                    return Convert.ToInt64(new string(chars));
+                }
+            }
+
+            Assert.AreEqual(21, NextBiggerNumber(12));
+            Assert.AreEqual(414, NextBiggerNumber(144));
+            Assert.AreEqual(531, NextBiggerNumber(513));
+            Assert.AreEqual(2071, NextBiggerNumber(2017));
+            Assert.AreEqual(-1, NextBiggerNumber(531));
+            Assert.AreEqual(-1, NextBiggerNumber(111));
+            Assert.AreEqual(13404, NextBiggerNumber(13044));
+            Assert.AreEqual(1234567908, NextBiggerNumber(1234567890));
+            Assert.AreEqual(536479, NextBiggerNumber(534976));
+        }
+
+
+        //[Test]
+        //public void IsStrPangram()
+        //{
+        //    // Громоздкая версия
+        //    bool IsPangram(string str)
+        //    {
+        //        char[] alphabetLetters = "abcdefghijklmnopqrstuvwxyz".ToCharArray();
+        //        char[] strLetters = str.ToLower().ToCharArray();
+
+        //        if (alphabetLetters.All(l => strLetters.Contains(l)))
+        //            return true;
+        //        else return false;
+        //    }
+
+        //    // Сжатая версия
+        //    //char[] alphabetLetters = "abcdefghijklmnopqrstuvwxyz".ToCharArray();
+        //    bool IsPangram(string str) => "abcdefghijklmnopqrstuvwxyz".All(l => str.ToLower().ToCharArray().Contains(l));
+
+        //    Assert.AreEqual(true, IsPangram("The quick brown fox jumps over the lazy dog."));
+        //    Assert.AreEqual(false, IsPangram("The qick brown fox jmps over the lazy dog."));
+        //}
+
+
+
+
+
+
 
 
 
