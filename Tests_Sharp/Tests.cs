@@ -2665,6 +2665,40 @@ namespace Tests_Sharp
             Assert.AreEqual(536479, NextBiggerNumber(534976));
         }
 
+        [Test]
+        public void HighAndLowNumbers()
+        {
+            string HighAndLow(string numbers)
+            {
+                var nums = numbers.Split(' ').Select(c => Convert.ToInt32(c));
+                return new string(nums.Max() + " " + nums.Min());
+            }
+
+            Assert.AreEqual("42 -9", HighAndLow("8 3 -5 42 -1 0 0 -9 4 7 4 -4"));
+            Assert.AreEqual("3 1", HighAndLow("1 2 3"));
+        }
+
+        [Test]
+        public void NarcissisticNumbers()
+        {
+            bool IsNarcissistic(int value)
+            {
+                var digits = value.ToString().Select(c => char.GetNumericValue(c)).ToArray();
+                var sum = 0d;
+
+                foreach (var digit in digits)
+                {
+                    var z = Math.Pow(digit, digits.Length);
+                    sum += z;
+                }
+
+                return value == sum;
+            }
+
+            Assert.AreEqual(true, IsNarcissistic(153));
+            Assert.AreEqual(false, IsNarcissistic(1652));
+        }
+
 
         //[Test]
         //public void IsStrPangram()
@@ -2687,8 +2721,6 @@ namespace Tests_Sharp
         //    Assert.AreEqual(true, IsPangram("The quick brown fox jumps over the lazy dog."));
         //    Assert.AreEqual(false, IsPangram("The qick brown fox jmps over the lazy dog."));
         //}
-
-
 
 
 
