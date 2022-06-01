@@ -2688,8 +2688,7 @@ namespace Tests_Sharp
 
                 foreach (var digit in digits)
                 {
-                    var z = Math.Pow(digit, digits.Length);
-                    sum += z;
+                    sum += Math.Pow(digit, digits.Length);
                 }
 
                 return value == sum;
@@ -2699,6 +2698,45 @@ namespace Tests_Sharp
             Assert.AreEqual(false, IsNarcissistic(1652));
         }
 
+
+        [Test]
+        public void FindTheParityOutlier()
+        {
+            int Find(int[] integers)
+            {
+                var firstThree = integers.Take(3);
+                bool isArrayEven = firstThree.Where(n => n % 2 == 0).Count() > firstThree.Where(n => n % 2 != 0).Count();
+                int outlier = -1;
+
+                if (isArrayEven)
+                    outlier = integers.FirstOrDefault(n => n % 2 != 0);
+                else
+                    outlier = integers.FirstOrDefault(n => n % 2 == 0);
+
+                return outlier;
+            }
+
+            Assert.AreEqual(11, Find(new int[] { 2, 4, 0, 100, 4, 11, 2602, 36 }));
+            Assert.AreEqual(160, Find(new int[] { 160, 3, 1719, 19, 11, 13, -21 }));
+        }
+
+        [Test]
+        public void GetUnique()
+        {
+            int GetUniqueNumber(IEnumerable<int> numbers)
+            {
+                // Нельзя через Distinct: он уберет дубликаты но дублирующийся экземпляр оставит
+                // Когда надо убрать все дубликаты, нужна группировка по количеству объектов:
+                // Создаем группы по всем числам, получается 2 группы с ключами 11 и 14 => среди групп ищем ту,
+                // где количество чисел == 1 => возвращаем ключ этой группы (который является самим числом)
+
+                return numbers.GroupBy(i => i).Where(g => g.Count() == 1).Select(g => g.Key).FirstOrDefault();
+            }
+
+            Assert.AreEqual(2, GetUniqueNumber(new int[] { 1, 1, 1, 2, 1, 1 }));
+            //Assert.AreEqual(0.55, GetUniqueNumber(new int[] { 0, 0, 0.55, 0, 0 }));
+            Assert.AreEqual(14, GetUniqueNumber(new int[] { 11, 11, 14, 11, 11 }));
+        }
 
         //[Test]
         //public void IsStrPangram()
@@ -2721,10 +2759,6 @@ namespace Tests_Sharp
         //    Assert.AreEqual(true, IsPangram("The quick brown fox jumps over the lazy dog."));
         //    Assert.AreEqual(false, IsPangram("The qick brown fox jmps over the lazy dog."));
         //}
-
-
-
-
 
 
 

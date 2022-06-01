@@ -22,7 +22,6 @@ namespace Algorithmic_Problems_Sharp
         {
 
 
-
         }
     }
 }
