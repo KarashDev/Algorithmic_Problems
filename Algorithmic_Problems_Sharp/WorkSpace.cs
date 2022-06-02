@@ -20,8 +20,26 @@ namespace Algorithmic_Problems_Sharp
 
         static void Main(string[] args)
         {
+            
+            int DuplicateCount(string str)
+            {
+                return str.ToLower().GroupBy(i => i).Where(c => c.Count() > 1).Count();
+            }
+
+            Console.WriteLine(DuplicateCount("Indivisibilities"));
+
+            Assert.AreEqual(0, DuplicateCount(""));
+            Assert.AreEqual(0, DuplicateCount("abcde"));
+            Assert.AreEqual(2, DuplicateCount("aabbcde"));
+            Assert.AreEqual(2, DuplicateCount("aabBcde"), "should ignore case");
+            Assert.AreEqual(1, DuplicateCount("Indivisibility"));
+            Assert.AreEqual(2, DuplicateCount("Indivisibilities"), "characters may not be adjacent");
 
 
         }
+
+
+
+
     }
 }

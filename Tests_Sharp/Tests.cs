@@ -2738,6 +2738,22 @@ namespace Tests_Sharp
             Assert.AreEqual(14, GetUniqueNumber(new int[] { 11, 11, 14, 11, 11 }));
         }
 
+        [Test]
+        public void DuplicateCharsCount()
+        {
+            int DuplicateCount(string str)
+            {
+                return str.ToLower().GroupBy(i => i).Where(c => c.Count() > 1).Count();
+            }
+
+            Assert.AreEqual(0, DuplicateCount(""));
+            Assert.AreEqual(0, DuplicateCount("abcde"));
+            Assert.AreEqual(2, DuplicateCount("aabbcde"));
+            Assert.AreEqual(2, DuplicateCount("aabBcde"), "should ignore case");
+            Assert.AreEqual(1, DuplicateCount("Indivisibility"));
+            Assert.AreEqual(2, DuplicateCount("Indivisibilities"), "characters may not be adjacent");
+        }
+
         //[Test]
         //public void IsStrPangram()
         //{
@@ -2759,8 +2775,6 @@ namespace Tests_Sharp
         //    Assert.AreEqual(true, IsPangram("The quick brown fox jumps over the lazy dog."));
         //    Assert.AreEqual(false, IsPangram("The qick brown fox jmps over the lazy dog."));
         //}
-
-
 
 
 
