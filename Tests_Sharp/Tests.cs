@@ -2754,6 +2754,89 @@ namespace Tests_Sharp
             Assert.AreEqual(2, DuplicateCount("Indivisibilities"), "characters may not be adjacent");
         }
 
+        [Test]
+        public void TopWordsOccurrences()
+        {
+            // По неизвестной причине компилятор сайта не принимает решение на случайных кейсах, в угадайку играть тоже не стану
+            List<string> Top3(string s)
+            {
+                var words = s.ToLower().Split(new char[] { ' ', ',', '\n' });
+
+                for (int i = 0; i < words.Length; i++)
+                {
+                    foreach (var symbol in words[i])
+                    {
+                        if (!char.IsLetter(symbol) && symbol != '\'')
+                            words[i] = words[i].Replace(symbol.ToString(), String.Empty);
+                        else if (!char.IsLetter(symbol) && symbol == '\'')
+                        {
+                            if (!words[i].StartsWith('\'') && !words[i].EndsWith('\'')
+                                && words[i][words[i].Length - 2] != '\'')
+                            {
+                                words[i] = words[i].Replace(symbol.ToString(), String.Empty);
+                            }
+                            else if (symbol == '\'' && words[i].All(c => c == '\''))
+                                return new List<string>();
+                        }
+                    }
+                }
+
+                var mostFrequentWords = words.GroupBy(w => w).OrderByDescending(w => w.Count()).Select(g => g.Key).ToList();
+
+                var output = mostFrequentWords.Where(w => !string.IsNullOrEmpty(w)).ToList();
+
+                if (output.Any())
+                    if (output.Count() >= 3)
+                        return output.Take(3).ToList();
+                    else return output;
+                else
+                    return new List<string>();
+            }
+
+            Assert.AreEqual(new List<string> { "e", "d", "a" }, Top3("a a a  b  c c  d d d d  e e e e e"));
+            Assert.AreEqual(new List<string> { "e", "ddd", "aa" }, Top3("e e e e DDD ddd DdD: ddd ddd aa aA Aa, bb cc cC e e e"));
+            Assert.AreEqual(new List<string> { "won't", "wont" }, Top3("  //wont won't won't "));
+            Assert.AreEqual(new List<string> { "e" }, Top3("  , e   .. "));
+            Assert.AreEqual(new List<string> { }, Top3("  ...  "));
+            Assert.AreEqual(new List<string> { }, Top3("  '  "));
+            Assert.AreEqual(new List<string> { }, Top3("  '''  "));
+            Assert.AreEqual(new List<string> { "a", "of", "on" }, Top3(
+                string.Join("\n", new string[]{"In a village of La Mancha, the name of which I have no desire to call to",
+                  "mind, there lived not long since one of those gentlemen that keep a lance",
+                  "in the lance-rack, an old buckler, a lean hack, and a greyhound for",
+                  "coursing. An olla of rather more beef than mutton, a salad on most",
+                  "nights, scraps on Saturdays, lentils on Fridays, and a pigeon or so extra",
+                  "on Sundays, made away with three-quarters of his income." })));
+
+        }
+
+
+        [Test]
+        public void TrailingZerosInFactorial()
+        {
+            // Алгоритм: количество нулей в конце факториала можно определить, разбив факториал
+            // на его простые множители, и среди них посчитав количество цифр 5
+            // Trailing 0s in n! = Count of 5s in prime factors of n!
+            //      = floor(n/5) + floor(n/25) + floor(n/125) + ....
+            int TrailingZeros(int n)
+            {
+                if (n < 0)
+                    return -1;
+
+                int cnt = 0;
+
+                for (int i = 5; n / i >= 1; i *= 5)
+                    cnt += n / i;
+
+                return cnt;
+            }
+
+            Assert.AreEqual(1, TrailingZeros(5));
+            Assert.AreEqual(6, TrailingZeros(25));
+            Assert.AreEqual(131, TrailingZeros(531));
+        }
+
+
         //[Test]
         //public void IsStrPangram()
         //{
