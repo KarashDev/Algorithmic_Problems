@@ -2881,6 +2881,12 @@ namespace Tests_Sharp
                 return squaredDiffs.Average();
             }
 
+            //// АЛЬТЕРНАТИВА 
+            //double Solution(int[] firstArray, int[] secondArray)
+            //{
+            //    return firstArray.Zip(secondArray, (f, s) => Math.Pow(s - f, 2)).Average();
+            //}
+
             Assert.AreEqual(9, Solution(new int[] { 1, 2, 3 }, new int[] { 4, 5, 6 }));
             Assert.AreEqual(16.5, Solution(new int[] { 10, 20, 10, 2 }, new int[] { 10, 25, 5, -2 }));
             Assert.AreEqual(1, Solution(new int[] { 0, -1 }, new int[] { -1, 0 }));

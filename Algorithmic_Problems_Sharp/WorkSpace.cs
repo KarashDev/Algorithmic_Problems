@@ -132,6 +132,13 @@ namespace Algorithmic_Problems_Sharp
                 return squaredDiffs.Average();
             }
 
+
+            //// АЛЬТЕРНАТИВА 
+            //double Solution(int[] firstArray, int[] secondArray)
+            //{
+            //    return firstArray.Zip(secondArray, (f, s) => Math.Pow(s - f, 2)).Average();
+            //}
+
             //[1, 2, 3], [4, 5, 6]               -->   9   because(9 + 9 + 9) / 3
             //[10, 20, 10, 2], [10, 25, 5, -2]   -->  16.5 because(0 + 25 + 25 + 16) / 4
             //[-1, 0], [0, -1]                   -->   1   because(1 + 1) / 2
@@ -139,6 +146,16 @@ namespace Algorithmic_Problems_Sharp
             Console.WriteLine(Solution(new int[] { 10, 20, 10, 2 }, new int[] { 10, 25, 5, -2 }));
             Console.WriteLine(Solution(new int[] { 0, -1 }, new int[] { -1, 0 }));
 
+
+            var arr1 = new int[] { 5, 2, 1 };
+            var arr2 = new int[] { 4, 2, 3 };
+
+            var arr3 = arr1.Zip(arr2, (n1, n2) => n1 - n2);
+            foreach (var num in arr3)
+            {
+                Console.WriteLine();
+                Console.WriteLine(num);
+            }
 
         }
     }
