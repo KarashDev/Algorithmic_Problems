@@ -20,66 +20,100 @@ namespace Algorithmic_Problems_Sharp
 
         static void Main(string[] args)
         {
-            //var colors = new string[] { "brown", "grey", "black", "red" };
-            //var x = colors.Max(c => c.Length);
-            //var z = colors.Count(c => c.Length > 3);
-            //var y = colors.Count(c => c.Contains('e'));
+            ////var colors = new string[] { "brown", "grey", "black", "red" };
+            ////var x = colors.Max(c => c.Length);
+            ////var z = colors.Count(c => c.Length > 3);
+            ////var y = colors.Count(c => c.Contains('e'));
 
 
-            //Console.WriteLine(x);
-            //Console.WriteLine(z);
-            //Console.WriteLine(y);
+            ////Console.WriteLine(x);
+            ////Console.WriteLine(z);
+            ////Console.WriteLine(y);
 
 
-            //// Найти самое длинное слово содержащее хотя бы одну букву "e"
-            //var words = new string[] { "brown", "grey", "black", "red", "redmond", "error", "adbcdtrdgqsfd", "advantage" };
-            //var target = words.Aggregate((target, i) => i.Length > target.Length && i.Contains('e') ? target = i : target);
-            //Console.WriteLine(target);
+            ////// Найти самое длинное слово содержащее хотя бы одну букву "e"
+            ////var words = new string[] { "brown", "grey", "black", "red", "redmond", "error", "adbcdtrdgqsfd", "advantage" };
+            ////var target = words.Aggregate((target, i) => i.Length > target.Length && i.Contains('e') ? target = i : target);
+            ////Console.WriteLine(target);
 
-            //Console.WriteLine(new string(words[0].ToCharArray().Reverse().ToArray()));
+            ////Console.WriteLine(new string(words[0].ToCharArray().Reverse().ToArray()));
 
-            string GetName(string str)
+            //string GetName(string str)
+            //{
+            //    // Не написано: greetingStr если не перед именем - имя не надо выводить
+            //    var names = new List<string>() { "Rod", "Stewart", "Carter", "Dixon", "Marshall", "Smith", "Walker" };
+            //    var greetingStr = new List<string> { "Im", "I'm", "I am", "My name is" };
+
+            //    if (greetingStr.Any(gr => str.ToLower().Contains(gr.ToLower())) && names.Any(n => str.ToLower().Contains(n.ToLower())))
+            //    {
+            //        var foundNames = names.Where(n => str.ToLower().Contains(n.ToLower()));
+            //        var outputName = "";
+
+            //        foreach (var name in foundNames)
+            //        {
+            //            outputName += name + " ";
+            //        }
+            //        return outputName;
+            //    }
+
+            //    return null;
+            //}
+
+
+            //string[] lines = {
+            //"Hi, I'm Carter",
+            //"My name is rod Stewart",
+            //"Nice to meet you, im dixon...",
+            //"I am smith walker it's nice to meet you",
+            //"i'm Carter Stewart Smith, how are you doing?",
+            //"There's no name here",
+            //"Hi I'm late for an interview",
+            //"I am a retail manager",
+            //"Im Dixon marshall and I have a question.",
+            //"Where is Rod Stewart and his dog?",
+            //"Hi my name is Dixon Walker, where can I buy these shoes?",
+            //"I am hungry but I want to see Marshall first."
+            //};
+
+            //foreach (string s in lines)
+            //{
+            //    Console.WriteLine(string.Format("{0} => {1}", s, GetName(s)));
+            //}
+
+
+
+            bool Scramble(string str1, string str2)
             {
-                // Не написано: greetingStr если не перед именем - имя не надо выводить
-                var names = new List<string>() { "Rod", "Stewart", "Carter", "Dixon", "Marshall", "Smith", "Walker" };
-                var greetingStr = new List<string> { "Im", "I'm", "I am", "My name is" };
-
-                if (greetingStr.Any(gr => str.ToLower().Contains(gr.ToLower())) && names.Any(n => str.ToLower().Contains(n.ToLower())))
+                var matches = 0;
+                
+                foreach(var ch in str2)
                 {
-                    var foundNames = names.Where(n => str.ToLower().Contains(n.ToLower()));
-                    var outputName = "";
-
-                    foreach (var name in foundNames)
+                    if (str1.Contains(ch))
                     {
-                        outputName += name + " ";
+                        matches++;
+                        str1 = str1.Remove(str1.IndexOf(ch), 1);
                     }
-                    return outputName;
+                    else return false;
                 }
 
-                return null;
+                return str2.Length == matches;
             }
 
+            Console.WriteLine(Scramble("rkqodlw", "world")); //true
+            Console.WriteLine(Scramble("cedewaraaossoqqyt", "codewars"));//true
+            Console.WriteLine(Scramble("katas", "steak"));//false
+            Console.WriteLine(Scramble("scriptjavx", "javascript"));//false
 
-            string[] lines = {
-            "Hi, I'm Carter",
-            "My name is rod Stewart",
-            "Nice to meet you, im dixon...",
-            "I am smith walker it's nice to meet you",
-            "i'm Carter Stewart Smith, how are you doing?",
-            "There's no name here",
-            "Hi I'm late for an interview",
-            "I am a retail manager",
-            "Im Dixon marshall and I have a question.",
-            "Where is Rod Stewart and his dog?",
-            "Hi my name is Dixon Walker, where can I buy these shoes?",
-            "I am hungry but I want to see Marshall first."
-            };
 
-            foreach (string s in lines)
-            {
-                Console.WriteLine(string.Format("{0} => {1}", s, GetName(s)));
-            }
+            //"scriptjavx", "javascript"
+            //"scriptavx", "javascript"1
+            //"scriptvx", "javascript" 2
+            //"scriptvx", "javascript" 3
 
+            //"scriptavx", "javascript"
+            //"scriptavx", "javascript"
+            //"scriptavx", "javascript"
+            //"scriptavx", "javascript"
 
 
 

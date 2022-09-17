@@ -2837,6 +2837,30 @@ namespace Tests_Sharp
         }
 
 
+        [Test]
+        bool Scramble(string str1, string str2)
+        {
+            var matches = 0;
+
+            foreach (var ch in str2)
+            {
+                if (str1.Contains(ch))
+                {
+                    matches++;
+                    str1 = str1.Remove(str1.IndexOf(ch), 1);
+                }
+                else return false;
+            }
+
+            return str2.Length == matches;
+
+            Assert.AreEqual(true, Scramble("rkqodlw", "world"));
+            Assert.AreEqual(true, Scramble("cedewaraaossoqqyt", "codewars"));
+            Assert.AreEqual(false, Scramble("katas", "steak"));
+            Assert.AreEqual(false, Scramble("scriptjavx", "javascript"));
+        }
+
+
         //[Test]
         //public void IsStrPangram()
         //{
@@ -2858,8 +2882,6 @@ namespace Tests_Sharp
         //    Assert.AreEqual(true, IsPangram("The quick brown fox jumps over the lazy dog."));
         //    Assert.AreEqual(false, IsPangram("The qick brown fox jmps over the lazy dog."));
         //}
-
-
 
 
 
