@@ -2861,6 +2861,32 @@ namespace Tests_Sharp
         }
 
 
+        [Test]
+        public void MeanSquareError()
+        {
+
+            double Solution(int[] firstArray, int[] secondArray)
+            {
+                // Разница каждой пары чисел по одному индексу - в массив 
+                // Каждое такое значение разницы в массиве возвести в квадрат
+                // Найти среднее значение для всех получившихся чисел в массиве
+                List<double> squaredDiffs = new List<double>();
+
+                for (int i = 0; i < firstArray.Length; i++)
+                {
+                    var rowDiff = (double)Math.Abs(firstArray[i] - secondArray[i]);
+                    squaredDiffs.Add(Math.Pow(rowDiff, 2));
+                }
+
+                return squaredDiffs.Average();
+            }
+
+            Assert.AreEqual(9, Solution(new int[] { 1, 2, 3 }, new int[] { 4, 5, 6 }));
+            Assert.AreEqual(16.5, Solution(new int[] { 10, 20, 10, 2 }, new int[] { 10, 25, 5, -2 }));
+            Assert.AreEqual(1, Solution(new int[] { 0, -1 }, new int[] { -1, 0 }));
+        }
+
+
         //[Test]
         //public void IsStrPangram()
         //{
@@ -2882,9 +2908,6 @@ namespace Tests_Sharp
         //    Assert.AreEqual(true, IsPangram("The quick brown fox jumps over the lazy dog."));
         //    Assert.AreEqual(false, IsPangram("The qick brown fox jmps over the lazy dog."));
         //}
-
-
-
 
 
 

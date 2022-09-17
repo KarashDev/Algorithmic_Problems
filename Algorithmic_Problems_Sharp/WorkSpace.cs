@@ -82,40 +82,62 @@ namespace Algorithmic_Problems_Sharp
 
 
 
-            bool Scramble(string str1, string str2)
+            //bool Scramble(string str1, string str2)
+            //{
+            //    var matches = 0;
+
+            //    foreach(var ch in str2)
+            //    {
+            //        if (str1.Contains(ch))
+            //        {
+            //            matches++;
+            //            str1 = str1.Remove(str1.IndexOf(ch), 1);
+            //        }
+            //        else return false;
+            //    }
+
+            //    return str2.Length == matches;
+            //}
+
+            //Console.WriteLine(Scramble("rkqodlw", "world")); //true
+            //Console.WriteLine(Scramble("cedewaraaossoqqyt", "codewars"));//true
+            //Console.WriteLine(Scramble("katas", "steak"));//false
+            //Console.WriteLine(Scramble("scriptjavx", "javascript"));//false
+
+
+            ////"scriptjavx", "javascript"
+            ////"scriptavx", "javascript"1
+            ////"scriptvx", "javascript" 2
+            ////"scriptvx", "javascript" 3
+
+            ////"scriptavx", "javascript"
+            ////"scriptavx", "javascript"
+            ////"scriptavx", "javascript"
+            ////"scriptavx", "javascript"
+
+
+            double Solution(int[] firstArray, int[] secondArray)
             {
-                var matches = 0;
-                
-                foreach(var ch in str2)
+                // Разница каждой пары чисел по одному индексу - в массив 
+                // Каждое такое значение разницы в массиве возвести в квадрат
+                // Найти среднее значение для всех получившихся чисел в массиве
+                List<double> squaredDiffs = new List<double>();
+
+                for (int i = 0; i < firstArray.Length; i++)
                 {
-                    if (str1.Contains(ch))
-                    {
-                        matches++;
-                        str1 = str1.Remove(str1.IndexOf(ch), 1);
-                    }
-                    else return false;
+                    var rowDiff = (double)Math.Abs(firstArray[i] - secondArray[i]);
+                    squaredDiffs.Add(Math.Pow(rowDiff, 2));
                 }
 
-                return str2.Length == matches;
+                return squaredDiffs.Average();
             }
 
-            Console.WriteLine(Scramble("rkqodlw", "world")); //true
-            Console.WriteLine(Scramble("cedewaraaossoqqyt", "codewars"));//true
-            Console.WriteLine(Scramble("katas", "steak"));//false
-            Console.WriteLine(Scramble("scriptjavx", "javascript"));//false
-
-
-            //"scriptjavx", "javascript"
-            //"scriptavx", "javascript"1
-            //"scriptvx", "javascript" 2
-            //"scriptvx", "javascript" 3
-
-            //"scriptavx", "javascript"
-            //"scriptavx", "javascript"
-            //"scriptavx", "javascript"
-            //"scriptavx", "javascript"
-
-
+            //[1, 2, 3], [4, 5, 6]               -->   9   because(9 + 9 + 9) / 3
+            //[10, 20, 10, 2], [10, 25, 5, -2]   -->  16.5 because(0 + 25 + 25 + 16) / 4
+            //[-1, 0], [0, -1]                   -->   1   because(1 + 1) / 2
+            Console.WriteLine(Solution(new int[] { 1, 2, 3 }, new int[] { 4, 5, 6 }));
+            Console.WriteLine(Solution(new int[] { 10, 20, 10, 2 }, new int[] { 10, 25, 5, -2 }));
+            Console.WriteLine(Solution(new int[] { 0, -1 }, new int[] { -1, 0 }));
 
 
         }
