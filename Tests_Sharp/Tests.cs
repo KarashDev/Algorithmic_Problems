@@ -2894,7 +2894,39 @@ namespace Tests_Sharp
 
 
         [Test]
-        public void IsStrPangram()
+        public void GetCommon()
+        {
+            List<T> GetCommonDigits<T>(List<T> list1, List<T> list2)
+            {
+                List<T> output = new List<T>();
+
+                foreach (var num1 in list2)
+                {
+                    foreach (var num2 in list1)
+                    {
+                        if (num2.Equals(num1) && !output.Contains(num1))
+                            output.Add(num2);
+                    }
+                }
+
+                return output;
+
+                // Альтернатива 
+                //return list2.Intersect(list1).ToList();
+            }
+
+            Assert.AreEqual(new List<int> { 1, 3, 2, 4 }, 
+                GetCommonDigits(new List<int> { 1, 2, 3, 4, 7, 2, 4 }, new List<int> { 1, 3, 2, 4, 4, 5, 6, 2, 9 }));
+            
+            Assert.AreEqual(new List<char> { '1', '2', '3', '4' }, 
+                GetCommonDigits(new List<char> { '1', '4', '3', '2', '7', '2', '4' }, new List<char> { '1', '2', '3', '4', '4', '5', '6', '2', '9' }));
+           
+            Assert.AreEqual(new List<int> { 1, 2 }, GetCommonDigits(new List<int> { 2, 1 }, new List<int> { 1, 2 }));
+        }
+
+
+        [Test]
+        public void ModifyEvenOnes()
         {
             // Добавить ко всем элементам на четных индексах приписку "even"
             string[] ModifyEvenIndexes(string[] strings)
@@ -2905,6 +2937,8 @@ namespace Tests_Sharp
 
             Assert.AreEqual(new string[] { "a even", "b", "c even", "d" }, ModifyEvenIndexes(new string[] { "a", "b", "c", "d" }));
         }
+
+
 
 
 
