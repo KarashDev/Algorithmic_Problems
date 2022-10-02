@@ -116,46 +116,77 @@ namespace Algorithmic_Problems_Sharp
             ////"scriptavx", "javascript"
 
 
-            double Solution(int[] firstArray, int[] secondArray)
-            {
-                // Разница каждой пары чисел по одному индексу - в массив 
-                // Каждое такое значение разницы в массиве возвести в квадрат
-                // Найти среднее значение для всех получившихся чисел в массиве
-                List<double> squaredDiffs = new List<double>();
-
-                for (int i = 0; i < firstArray.Length; i++)
-                {
-                    var rowDiff = (double)Math.Abs(firstArray[i] - secondArray[i]);
-                    squaredDiffs.Add(Math.Pow(rowDiff, 2));
-                }
-
-                return squaredDiffs.Average();
-            }
-
-
-            //// АЛЬТЕРНАТИВА 
             //double Solution(int[] firstArray, int[] secondArray)
             //{
-            //    return firstArray.Zip(secondArray, (f, s) => Math.Pow(s - f, 2)).Average();
+            //    // Разница каждой пары чисел по одному индексу - в массив 
+            //    // Каждое такое значение разницы в массиве возвести в квадрат
+            //    // Найти среднее значение для всех получившихся чисел в массиве
+            //    List<double> squaredDiffs = new List<double>();
+
+            //    for (int i = 0; i < firstArray.Length; i++)
+            //    {
+            //        var rowDiff = (double)Math.Abs(firstArray[i] - secondArray[i]);
+            //        squaredDiffs.Add(Math.Pow(rowDiff, 2));
+            //    }
+
+            //    return squaredDiffs.Average();
             //}
 
-            //[1, 2, 3], [4, 5, 6]               -->   9   because(9 + 9 + 9) / 3
-            //[10, 20, 10, 2], [10, 25, 5, -2]   -->  16.5 because(0 + 25 + 25 + 16) / 4
-            //[-1, 0], [0, -1]                   -->   1   because(1 + 1) / 2
-            Console.WriteLine(Solution(new int[] { 1, 2, 3 }, new int[] { 4, 5, 6 }));
-            Console.WriteLine(Solution(new int[] { 10, 20, 10, 2 }, new int[] { 10, 25, 5, -2 }));
-            Console.WriteLine(Solution(new int[] { 0, -1 }, new int[] { -1, 0 }));
+
+            ////// АЛЬТЕРНАТИВА 
+            ////double Solution(int[] firstArray, int[] secondArray)
+            ////{
+            ////    return firstArray.Zip(secondArray, (f, s) => Math.Pow(s - f, 2)).Average();
+            ////}
+
+            ////[1, 2, 3], [4, 5, 6]               -->   9   because(9 + 9 + 9) / 3
+            ////[10, 20, 10, 2], [10, 25, 5, -2]   -->  16.5 because(0 + 25 + 25 + 16) / 4
+            ////[-1, 0], [0, -1]                   -->   1   because(1 + 1) / 2
+            //Console.WriteLine(Solution(new int[] { 1, 2, 3 }, new int[] { 4, 5, 6 }));
+            //Console.WriteLine(Solution(new int[] { 10, 20, 10, 2 }, new int[] { 10, 25, 5, -2 }));
+            //Console.WriteLine(Solution(new int[] { 0, -1 }, new int[] { -1, 0 }));
 
 
-            var arr1 = new int[] { 5, 2, 1 };
-            var arr2 = new int[] { 4, 2, 3 };
+            //var arr1 = new int[] { 5, 2, 1 };
+            //var arr2 = new int[] { 4, 2, 3 };
 
-            var arr3 = arr1.Zip(arr2, (n1, n2) => n1 - n2);
-            foreach (var num in arr3)
+            //var arr3 = arr1.Zip(arr2, (n1, n2) => n1 - n2);
+            //foreach (var num in arr3)
+            //{
+            //    Console.WriteLine();
+            //    Console.WriteLine(num);
+            //}
+
+
+
+
+            //#nullable enable
+            //            string GetUpperText(string? text)
+            //            {
+            //                return text.ToUpper();
+            //            }
+
+            //            string? arg = null;
+
+
+            //            Console.WriteLine(GetUpperText(arg));
+
+
+            string[] ModifyEvenIndexes(string[] strings)
             {
-                Console.WriteLine();
-                Console.WriteLine(num);
+                var output = strings.Select(s => Array.IndexOf(strings, s) % 2 == 0 ? s += " even" : s);
+                return output.ToArray();
             }
+
+            var output = ModifyEvenIndexes(new string[] { "a", "b", "c", "d" });
+
+            foreach (var str in output)
+            {
+                Console.WriteLine(str);
+            }
+
+
+
 
         }
     }

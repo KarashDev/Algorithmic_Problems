@@ -2893,6 +2893,21 @@ namespace Tests_Sharp
         }
 
 
+        [Test]
+        public void IsStrPangram()
+        {
+            // Добавить ко всем элементам на четных индексах приписку "even"
+            string[] ModifyEvenIndexes(string[] strings)
+            {
+                var output = strings.Select(s => Array.IndexOf(strings, s) % 2 == 0 ? s += " even" : s);
+                return output.ToArray();
+            }
+
+            Assert.AreEqual(new string[] { "a even", "b", "c even", "d" }, ModifyEvenIndexes(new string[] { "a", "b", "c", "d" }));
+        }
+
+
+
         //[Test]
         //public void IsStrPangram()
         //{
@@ -2914,8 +2929,6 @@ namespace Tests_Sharp
         //    Assert.AreEqual(true, IsPangram("The quick brown fox jumps over the lazy dog."));
         //    Assert.AreEqual(false, IsPangram("The qick brown fox jmps over the lazy dog."));
         //}
-
-
 
 
 
