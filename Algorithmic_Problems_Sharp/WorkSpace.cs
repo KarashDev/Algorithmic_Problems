@@ -15,6 +15,7 @@ using System.Collections.Immutable;
 using Microsoft.VisualBasic;
 using CommandLine.Text;
 using Microsoft.Diagnostics.Tracing.Parsers.JSDumpHeap;
+using System.Management;
 
 namespace Algorithmic_Problems_Sharp
 {
@@ -176,60 +177,7 @@ namespace Algorithmic_Problems_Sharp
             //Console.WriteLine(FindNearestNumber(new int[] { 1000, -1000 }, 0));
             Console.WriteLine(FindNearestNumber(new int[] { -1000, -1000 }, 0));
 
-            ///////////////////////////////////////////////////////////////////////////////
-            //Petrov Petr 3 3 3
-            //Dzeranov Iosif 5 5 5
-            //Guev Timur 5 5 5
 
-            //Dzeranov Iosif
-            //Guev Timur
-            //Petrov Petr
-
-
-
-            //Markov Valeriy 1 1 1
-            //Ivanov Ivan 2 2 2
-
-            //Ivanov Ivan
-            //Markov Valeriy
-
-        
-            var inputCount = Convert.ToInt32(Console.ReadLine());
-            List<Student> studentDatas = new List<Student>(inputCount); 
-
-            for (int i = 0; i < inputCount; i++)
-            {
-                var input = Console.ReadLine();
-                
-                var studentScoresChars = input.Where(c => char.IsDigit(c)).ToArray();
-                var studentScores = Array.ConvertAll(studentScoresChars, c => char.GetNumericValue(c));
-
-                var studentNameChars = input.Where(c => !char.IsDigit(c)).ToArray();
-                var studentName = string.Join("", studentNameChars).Trim();
-
-                studentDatas.Add(new Student { Name = studentName, Scores = studentScores });
-            }
-
-            studentDatas = studentDatas.OrderByDescending(s => s.AverageScore).ToList();
-
-            foreach (var student in studentDatas)
-            {
-                Console.WriteLine(student.Name);
-            }
-
-
-
-
-
-
-        }
-
-        class Student
-        {
-            public string Name { get; set; }
-            public double[] Scores { get; set; }
-            public double AverageScore { get => Scores.Average(); }
-        }
 
 
     }

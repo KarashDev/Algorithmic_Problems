@@ -2915,12 +2915,12 @@ namespace Tests_Sharp
                 //return list2.Intersect(list1).ToList();
             }
 
-            Assert.AreEqual(new List<int> { 1, 3, 2, 4 }, 
+            Assert.AreEqual(new List<int> { 1, 3, 2, 4 },
                 GetCommonDigits(new List<int> { 1, 2, 3, 4, 7, 2, 4 }, new List<int> { 1, 3, 2, 4, 4, 5, 6, 2, 9 }));
-            
-            Assert.AreEqual(new List<char> { '1', '2', '3', '4' }, 
+
+            Assert.AreEqual(new List<char> { '1', '2', '3', '4' },
                 GetCommonDigits(new List<char> { '1', '4', '3', '2', '7', '2', '4' }, new List<char> { '1', '2', '3', '4', '4', '5', '6', '2', '9' }));
-           
+
             Assert.AreEqual(new List<int> { 1, 2 }, GetCommonDigits(new List<int> { 2, 1 }, new List<int> { 1, 2 }));
         }
 
@@ -2939,6 +2939,97 @@ namespace Tests_Sharp
         }
 
 
+        //class Student
+        //{
+        //    public string Name { get; set; }
+        //    public double[] Scores { get; set; }
+        //    public double AverageScore { get => Scores.Average(); }
+        //}
+        [Test]
+        public void GetNames1()
+        {
+            string[] GetNamesWithTopScores(string[] input)
+            {
+                List<Student> studentDatas = new List<Student>(input.Length);
+
+                for (int i = 0; i < input.Length; i++)
+                {
+                    var studentScoresChars = input[i].Where(c => char.IsDigit(c)).ToArray();
+                    var studentScores = Array.ConvertAll(studentScoresChars, c => char.GetNumericValue(c));
+
+                    var studentNameChars = input[i].Where(c => !char.IsDigit(c)).ToArray();
+                    var studentName = string.Join("", studentNameChars).Trim();
+
+                    studentDatas.Add(new Student { Name = studentName, Scores = studentScores });
+                }
+
+                studentDatas = studentDatas.OrderByDescending(s => s.AverageScore).ToList();
+
+                var studentNames = studentDatas.Select(s => s.Name).ToArray();
+                return studentNames;
+            }
+
+            Assert.AreEqual(new string[] { "Dzeranov Iosif", "Guev Timur", "Petrov Petr" },
+                GetNamesWithTopScores(new string[] { "Petrov Petr 3 3 3", "Dzeranov Iosif 5 5 5", "Guev Timur 5 5 5" }));
+            
+            Assert.AreEqual(new string[] { "Ivanov Ivan", "Markov Valeriy" },
+                GetNamesWithTopScores(new string[] { "Markov Valeriy 1 1 1", "Ivanov Ivan 2 2 2" }));
+        }
+
+
+        class Student
+        {
+            public string Name { get; set; }
+            public double Score { get; set; }
+        }
+
+        [Test]
+        public void GetNames2()
+        {
+            string[] Get3NamesWithTopScore(string[] input)
+            {
+                List<Student> studentDatas = new List<Student>(input.Length);
+
+
+                for (int i = 0; i < input.Length; i++)
+                {
+                    double scoreDouble = 0;
+                    var studentScore = input[i].Split(" ").Where(s => double.TryParse(s, out scoreDouble));
+                    var studentName = string.Join(" ", input[i].Split(" ").Where(s => !double.TryParse(s, out scoreDouble)));
+
+                    studentDatas.Add(new Student { Name = studentName, Score = scoreDouble });
+                }
+
+                studentDatas = BubbleSortFirstThree(studentDatas);
+
+                return studentDatas.Select(s => s.Name).ToArray();
+            }
+            
+            List<Student> BubbleSortFirstThree(List<Student> studentDatas)
+            {
+                for (int i = 0; i < 4; i++)
+                {
+                    for (int j = studentDatas.Count - 1; j > i; j--)
+                    {
+                        if (studentDatas[j - 1].Score < studentDatas[j].Score)
+                            (studentDatas[j], studentDatas[j - 1]) = (studentDatas[j - 1], studentDatas[j]);
+                    }
+                }
+
+                if (studentDatas.Count > 3)
+                    return studentDatas.Take(3).ToList();
+                else
+                    return studentDatas;
+            }
+
+            Assert.AreEqual(new string[] { "Petrov Petr", "Dzeranov4 Iosif", "Guev Timur" },
+                Get3NamesWithTopScore(new string[] { "Petrov Petr 100", "Petrov2 Petr 61", "Dzeranov Iosif 60", "Guev Timur 98",
+                "Dzeranov2 Iosif 50", "Dzeranov3 Iosif 51", "Dzeranov4 Iosif 99", "Dzeranov5 Iosif 10",
+                "Dzeranov6 Iosif 30", "Dzeranov7 Iosif 40" }));
+
+            Assert.AreEqual(new string[] { "Petrov2 Petr", "Dzeranov Iosif", "Guev Timur"},
+                Get3NamesWithTopScore(new string[] { "Markov Valeriy 1 1 1", "Ivanov Ivan 2 2 2" }));
+        }
 
 
 
