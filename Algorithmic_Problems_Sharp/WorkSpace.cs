@@ -25,13 +25,10 @@ namespace Algorithmic_Problems_Sharp
         static void Main(string[] args)
         {
 
-            // Найти первое повторяющееся в массиве число
-            ////var arrWithoutRepeats = arr.FirstOrDefault(n => (arr.Count(n) > 1));
+          
 
 
-            // Вывести повторяемые в массиве числа
-            //var arr = new[] { 1, 2, 3, 1, 4, 7, 4 };
-            //var repeatedNumbers = arr.GroupBy(n => n).Where(n => n.Count() > 1).Select(n => n.Key).ToList(); // 1, 4
+         
         }
     }
 }
