@@ -2939,6 +2939,18 @@ namespace Tests_Sharp
         }
 
 
+        [Test]
+        public void RepeatedNumbers()
+        {
+            // Вывести повторяемые в массиве числа
+            int[] FindRepeatedNumbers(int[] arr)
+            {
+                var repeatedNumbers = arr.GroupBy(n => n).Where(n => n.Count() > 1).Select(n => n.Key).ToArray();
+                return repeatedNumbers;
+            }
+
+            Assert.AreEqual(new[] { 1, 4 }, FindRepeatedNumbers(new[] { 1, 2, 3, 1, 4, 7, 4 }));
+        }
 
 
 
@@ -2963,6 +2975,7 @@ namespace Tests_Sharp
         //    Assert.AreEqual(true, IsPangram("The quick brown fox jumps over the lazy dog."));
         //    Assert.AreEqual(false, IsPangram("The qick brown fox jmps over the lazy dog."));
         //}
+
 
 
 
