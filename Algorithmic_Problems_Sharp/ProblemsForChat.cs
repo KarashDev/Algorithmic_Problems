@@ -63,7 +63,11 @@ namespace Algorithmic_Problems_Sharp
         //}
 
 
+
         //// Задача 4
+        ////Для каждой строки массива: если у строки четный индекс - к этой строке приписывается "marked"; 
+        ////если у строки нечетный индекс - она становится пустой. При выводе увидим только строки четных индексов с припиской "marked".
+        
         //string[] strings = new string[] { "a", "b", "c", "d", "e", "f", "g" };
         //var output = strings.Select(s => Array.IndexOf(strings, s) % 2 == 0 ? s += " marked" : "");
 
