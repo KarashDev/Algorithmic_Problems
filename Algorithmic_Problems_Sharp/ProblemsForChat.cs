@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using static Algorithmic_Problems_Sharp.WorkSpace;
 
 namespace Algorithmic_Problems_Sharp
 {
@@ -67,7 +68,7 @@ namespace Algorithmic_Problems_Sharp
         //// Задача 4
         ////Для каждой строки массива: если у строки четный индекс - к этой строке приписывается "marked"; 
         ////если у строки нечетный индекс - она становится пустой. При выводе увидим только строки четных индексов с припиской "marked".
-        
+
         //string[] strings = new string[] { "a", "b", "c", "d", "e", "f", "g" };
         //var output = strings.Select(s => Array.IndexOf(strings, s) % 2 == 0 ? s += " marked" : "");
 
@@ -80,8 +81,61 @@ namespace Algorithmic_Problems_Sharp
         //"a marked  c marked  e marked  g marked"
         //"a c e g"
         //"b marked  d marked  f marked"
+        //Показать результат
 
 
+
+        //// Задача 5
+        //// Создается объект A, однако внутри он содержит члены класса B
+        //// Вопрос со звездочкой: что выведется, если убрать модификаторы virtual, override и sealed?
+        //A class!
+        //B class!
+        //Ошибка компиляции
+        //Ошибка рантайма
+        //Показать результат
+        //class WorkSpace
+        //{
+        //    class A
+        //    {
+        //        internal virtual void DoWork()
+        //        {
+        //            Console.WriteLine("A class!");
+        //        }
+        //    }
+
+        //    class B : A
+        //    {
+        //        internal sealed override void DoWork()
+        //        {
+        //            Console.WriteLine("B class!");
+        //        }
+        //    }
+
+        //    static async Task Main(string[] args)
+        //    {
+        //        A a = new B();
+        //        a.DoWork();
+        //    }
+        //}
+
+
+
+        //// Задача 6
+        //// Каков результат выполнения данного downcast?
+        //Будет System.InvalidCastException во время рантайма, т.к.приводится такой Person, который не содержит в себе конкретного Student, и при этом приведение прописано без использования слова AS.
+        
+        // Null
+        // Not null
+        // Ошибка компиляции 
+        // Ошибка рантайма 
+        // Посмотреть результат
+
+        //public class Person { }
+        //public class Student : Person { }
+
+        //Student student = (Student)new Person();
+
+        //Console.WriteLine(student == null ? "Null" : "Not null");
 
 
     }
