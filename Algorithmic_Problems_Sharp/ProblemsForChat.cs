@@ -123,7 +123,7 @@ namespace Algorithmic_Problems_Sharp
         //// Задача 6
         //// Каков результат выполнения данного downcast?
         //Будет System.InvalidCastException во время рантайма, т.к.приводится такой Person, который не содержит в себе конкретного Student, и при этом приведение прописано без использования слова AS.
-        
+
         // Null
         // Not null
         // Ошибка компиляции 
@@ -136,6 +136,28 @@ namespace Algorithmic_Problems_Sharp
         //Student student = (Student)new Person();
 
         //Console.WriteLine(student == null ? "Null" : "Not null");
+
+
+
+        //// Задача 7
+        ///// Что происходит в данном коде?
+        //// При добавлении в список объекты упаковываются в object и помещаются в кучу; при приведении к int распаковываются и помещаются в стэк.
+
+        // Только boxing
+        // Только unboxing
+        // Boxing, затем unboxing 
+        // Unboxing, затем boxing
+        // Посмотреть результат
+
+        //var x = 25;
+        //var y = 35;
+
+        //List<object> digits = new List<object>() { x, y };
+
+        //var result = (int)digits[0] + (int)digits[1];
+
+
+        //// Задача 8
 
 
     }

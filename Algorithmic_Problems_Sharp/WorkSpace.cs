@@ -24,6 +24,7 @@ using System.ComponentModel;
 using System.Threading.Tasks;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.Diagnostics.Tracing.Parsers.Clr;
+using System.Runtime.InteropServices;
 
 namespace Algorithmic_Problems_Sharp
 {
@@ -31,36 +32,16 @@ namespace Algorithmic_Problems_Sharp
     class WorkSpace
     {
 
-        public interface IExample { }
-        public struct MyStruct : IExample { }
-        
-
         static void Main(string[] args)
         {
-
-            // Что происходит в данном коде?
-            // Только boxing
-            // Только unboxing
-            // Boxing, затем unboxing 
-            // Unboxing, затем boxing
-            // Посмотреть результат
-            var x = 25;
-            var y = 35;
-
-            List<object> digits = new List<object>() { x, y };
-
-            var result = (int)digits[0] + (int)digits[1];
+            
 
 
-            List<IExample> examples = new List<IExample>();
 
-            var myStruct = new MyStruct();
-            examples.Add(myStruct);
-
-            var meNewStruct = (MyStruct)examples[0];
 
         }
 
 
     }
+
 }
