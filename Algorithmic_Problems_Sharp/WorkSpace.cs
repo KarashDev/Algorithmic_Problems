@@ -31,13 +31,13 @@ namespace Algorithmic_Problems_Sharp
 #pragma warning disable 
     class WorkSpace
     {
+      
 
         static void Main(string[] args)
         {
-            
+           
 
-
-
+            //след задача: IComparer  
 
         }
 
