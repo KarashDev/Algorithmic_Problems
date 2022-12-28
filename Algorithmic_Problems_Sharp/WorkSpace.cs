@@ -33,7 +33,7 @@ namespace Algorithmic_Problems_Sharp
     class WorkSpace
     {
 
-      
+
 
         static void Main(string[] args)
         {
@@ -67,20 +67,12 @@ namespace Algorithmic_Problems_Sharp
             // Будет(x++ + x) = (1++ + x) = (1 + x) = (1 + 2) = 3, x = 2
 
 
-            //void Method(ref int refArgument)
-            //{
-            //    refArgument += 10;
-            //}
-           
-            //int number = 1;
-            //Method(ref number);
-            
-            //Console.WriteLine(number);
-
 
 
 
             
+
+
         }
 
 
