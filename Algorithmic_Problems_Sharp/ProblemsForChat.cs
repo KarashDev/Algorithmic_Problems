@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using static Algorithmic_Problems_Sharp.WorkSpace;
 
 namespace Algorithmic_Problems_Sharp
@@ -221,7 +223,7 @@ namespace Algorithmic_Problems_Sharp
 
         //// Задача 11
         //// Каков результат выполнения программы?
-        
+
         //// Для Nullable DateTime значение по умолчанию будет null, в отличии от DateTime. В dateTime присваивается null, далее оператор
         //// null-объединения ставит в result значение, указанное справа от оператора.
 
@@ -237,6 +239,57 @@ namespace Algorithmic_Problems_Sharp
         //var result = dateTime ?? DateTime.Today;
 
         //Console.WriteLine(result);
+
+
+
+
+
+
+        //// Задача 12
+        //// Каков результат выполнения программы?
+
+        ////Статическое поле хранит информацию, общую для любых связанных с полем экземпляров. Информация становится актуальной 
+        ////и для тех экземпляров, что были созданы до присвоения значения статическому полю.
+
+        //// Лицей №4
+        //// Пустая строка 
+        //// null 
+        //// Ошибка компиляции
+        //// Ошибка времени выполнения 
+        //class WorkSpace
+        //{
+        //    class School
+        //    {
+        //        public string Name;
+        //        public School(string name) 
+        //        {
+        //            this.Name = name;
+        //        }
+        //    }
+
+        //    class Person
+        //    {
+        //        public static School school;
+
+        //        public string Name { get; set; }
+        //        public int Age { get; set; }
+
+        //        public string GetSchoolInfo() => school.Name;
+
+        //    }
+
+        //    static void Main(string[] args)
+        //    {
+        //        Person person1 = new Person();
+        //        Person.school = new School("Лицей №4");
+        //        Person person2 = new Person();
+
+        //        Console.WriteLine(person1.GetSchoolInfo());
+        //    }
+        //}
+
+
+
 
 
     }
