@@ -186,6 +186,7 @@ namespace Algorithmic_Problems_Sharp
         //// 1  a  2  b  c
         //// Ошибка компиляции
         //// Ошибка рантайма 
+        //// Посмотреть ответ
 
         //object[] arr = new object[] {'a', 1, 'b', 2, 'c' };
 
@@ -207,6 +208,7 @@ namespace Algorithmic_Problems_Sharp
         // 0, 0
         // Ошибка компиляции
         // Ошибка времени выполнения 
+        // Посмотреть ответ
 
         //void Method(out int num1, out int num2)
         //{
@@ -232,6 +234,7 @@ namespace Algorithmic_Problems_Sharp
         //// null 
         //// Ошибка компиляции
         //// Ошибка времени выполнения 
+        //// Посмотреть ответ
 
 
         //DateTime? dateTime = default;
@@ -256,6 +259,7 @@ namespace Algorithmic_Problems_Sharp
         //// null 
         //// Ошибка компиляции
         //// Ошибка времени выполнения 
+        //// Посмотреть ответ
         //class WorkSpace
         //{
         //    class School
